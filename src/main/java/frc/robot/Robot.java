@@ -118,8 +118,8 @@ public class Robot extends TimedRobot {
 
 	public static /*I*/Grasper grasper;
 	
-	BaseMotorController grasperLeft;
-	BaseMotorController grasperRight;
+	BaseMotorController shooterLeft;
+	BaseMotorController shooterRight;
 	
 	public static /*I*/Hinge hingeControl;
 	
@@ -128,6 +128,8 @@ public class Robot extends TimedRobot {
 	// pneumatic devices
 	
 	Compressor compressor; // the compressor's lifecycle needs to be the same as the robot
+
+	public static VomitShooter vomitShooter;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -207,8 +209,8 @@ public class Robot extends TimedRobot {
 		elevator = new WPI_TalonSRX(Ports.CAN.ELEVATOR);
 		habElevator = new WPI_TalonSRX(Ports.CAN.HAB_ELEVATOR);
 
-		grasperLeft = COMPETITION_BOT_CONFIG?new WPI_VictorSPX(Ports.CAN.GRASPER_LEFT):new WPI_TalonSRX(Ports.CAN.GRASPER_LEFT);
-		grasperRight = COMPETITION_BOT_CONFIG?new WPI_VictorSPX(Ports.CAN.GRASPER_RIGHT):new WPI_TalonSRX(Ports.CAN.GRASPER_RIGHT);
+		shooterLeft = COMPETITION_BOT_CONFIG?new WPI_VictorSPX(Ports.CAN.GRASPER_LEFT):new WPI_TalonSRX(Ports.CAN.GRASPER_LEFT);
+		shooterRight = COMPETITION_BOT_CONFIG?new WPI_VictorSPX(Ports.CAN.GRASPER_RIGHT):new WPI_TalonSRX(Ports.CAN.GRASPER_RIGHT);
 
 		hinge = new WPI_TalonSRX(Ports.CAN.HINGE);
 
@@ -217,13 +219,12 @@ public class Robot extends TimedRobot {
 		hingeControl = new Hinge(hinge, this);
 		
 
-		grasper = new Grasper(grasperLeft, grasperRight, sonar, this);
-
 		// pneumatic devices
 
 		compressor = new Compressor();
 		compressor.checkCompressor();
-    
+
+		vomitShooter = new VomitShooter(shooterLeft, shooterRight, this);    
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
