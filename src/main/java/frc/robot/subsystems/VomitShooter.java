@@ -13,6 +13,8 @@ import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import frc.robot.Robot;
+import frc.robot.commands.VomitShooterStop;
+
 
 //import frc.robot.interfaces.*;
 //import frc.robot.commands.*;
@@ -39,7 +41,7 @@ shooterRight.setInverted(false);
 }
 
 public void initDefaultCommand() {
-
+    setDefaultCommand(new VomitShooterStop());
 }
 
 public void revBeforeFire() {

@@ -121,9 +121,10 @@ public class OI {
 		
 
 		gamepadRT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RT);
-	
+		gamepadRT.whenPressed(new ShooterPusherUp());
 
 		gamepadLT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LT);
+		gamepadLT.whenPressed(new VomitShooterRevBeforeFire());
 	
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
