@@ -398,8 +398,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Range to target", sonar.getRangeInInches());
 		SmartDashboard.putNumber("Sonar Voltage", sonar.getVoltage()); 
 		
-		SmartDashboard.putBoolean("Grasper IsGrasping?", grasper.isGrasping());
-		SmartDashboard.putBoolean("Grasper IsReleasing?", grasper.isReleasing());
+		//SmartDashboard.putBoolean("Grasper IsGrasping?", grasper.isGrasping());
+		//SmartDashboard.putBoolean("Grasper IsReleasing?", grasper.isReleasing());
 		
 		SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
 		SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	
