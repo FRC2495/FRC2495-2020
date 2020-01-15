@@ -14,7 +14,8 @@ import frc.robot.subsystems.ShooterPusher.Position;
  * Add your docs here.
  */
 public class ShooterPusherDown extends InstantCommand {
-	public ShooterPusherDown() {
+
+	public ShooterPusherDown() { //true is up, false is down
 		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
@@ -24,8 +25,10 @@ public class ShooterPusherDown extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		System.out.println("HookSwitchDown: initialize");
+		System.out.println("ShooterPusherDown: initialize ");
 		Robot.shooterPusher.setPosition(Position.DOWN);
+
+		
 	}
 
 }

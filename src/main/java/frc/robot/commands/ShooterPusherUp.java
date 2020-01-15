@@ -23,7 +23,7 @@ public class ShooterPusherUp extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		System.out.println("ShooterPusherDown: initialize");
+		System.out.println("ShooterPusherUp: initialize");
 		Robot.shooterPusher.setPosition(Position.UP);
 	}
 
