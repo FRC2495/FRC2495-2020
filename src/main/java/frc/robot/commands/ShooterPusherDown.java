@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.ShooterPusher.Position;
+
 /**
  * Add your docs here.
  */
 public class ShooterPusherDown extends InstantCommand {
 
 	public ShooterPusherDown() { //true is up, false is down
-		super();
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.shooterPusher);
@@ -27,8 +27,6 @@ public class ShooterPusherDown extends InstantCommand {
 	protected void initialize() {
 		System.out.println("ShooterPusherDown: initialize ");
 		Robot.shooterPusher.setPosition(Position.DOWN);
-
-		
 	}
 
 }

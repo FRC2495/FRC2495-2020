@@ -33,9 +33,10 @@ public class VomitShooterShooterPusherFireSequence extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 
-        requires(Robot.vomitShooter);
-        addSequential(new VomitShooterRevBeforeFire());
-        addSequential(new WaitCommand(2));
-        addSequential(new ShooterPusherFireSequence());
+		requires(Robot.vomitShooter); // acquires reference to vomit shooter so that its default command is not called prematurely
+		
+        addSequential(new VomitShooterRevBeforeFire()); // starts vomit shooter 
+        addSequential(new WaitCommand(2)); // waits two secs
+        addSequential(new ShooterPusherFireSequence()); // fires
 	}
 }

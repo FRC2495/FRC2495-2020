@@ -37,7 +37,7 @@ public class VomitShooterStop extends InstantCommand {
 	// Called once when this command runs
 	@Override
 	protected void initialize() {
-		//System.out.println("GrasperStop: initialize");
+		//System.out.println("VomitShooterStop: initialize");
 		Robot.vomitShooter.stop();
 	}
 

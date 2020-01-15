@@ -9,8 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-import frc.robot.subsystems.VomitShooter;
-import frc.robot.*;
 
 public class ShooterPusherFireSequence extends CommandGroup {
 	/**
@@ -34,10 +32,8 @@ public class ShooterPusherFireSequence extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 
-		
         addSequential(new ShooterPusherUp());
         addSequential(new WaitCommand(1));
-        addSequential(new ShooterPusherDown());
-        
+        addSequential(new ShooterPusherDown());  
 	}
 }

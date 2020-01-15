@@ -25,42 +25,60 @@ import frc.robot.commands.VomitShooterStop;
 
 public class VomitShooter extends Subsystem {
 
-BaseMotorController shooterLeft, shooterRight;
-Robot robot;
+    BaseMotorController shooterLeft, shooterRight;
+    Robot robot;
 
-double wheelPower = -.95;
+    static final double WHEEL_POWER = -.95;
 
-public VomitShooter(BaseMotorController ShooterLeft_in, BaseMotorController shooterRight_in, Robot robot_in) {
-shooterLeft=ShooterLeft_in;
-shooterRight=shooterRight_in;
-robot=robot_in;
+    public VomitShooter(BaseMotorController ShooterLeft_in, BaseMotorController shooterRight_in, Robot robot_in) {
+        shooterLeft=ShooterLeft_in;
+        shooterRight=shooterRight_in;
+        robot=robot_in;
 
-shooterRight.follow(shooterLeft);
-shooterLeft.setInverted(true);
-shooterRight.setInverted(false);
-}
+        shooterLeft.configFactoryDefault();
+        shooterRight.configFactoryDefault();
+        
+        // Mode of operation during Neutral output may be set by using the setNeutralMode() function.
+		// As of right now, there are two options when setting the neutral mode of a motor controller,
+		// brake and coast.
+		shooterLeft.setNeutralMode(NeutralMode.Coast);
+		shooterRight.setNeutralMode(NeutralMode.Coast);
 
-public void initDefaultCommand() {
-    setDefaultCommand(new VomitShooterStop());
-}
+        // Motor controller output direction can be set by calling the setInverted() function as seen below.
+		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
+		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
+		// (when LEDs are green => forward limit switch and soft limits are being checked).
+        shooterLeft.setInverted(true);
+        shooterRight.setInverted(false);
 
-public void revBeforeFire() {
-    shooterLeft.set(ControlMode.PercentOutput, wheelPower);
-}
+        // Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
+		// Users will still need to set the motor controller's direction, and neutral mode.
+		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
+        // , talon to talon, victor to victor, talon to victor, and victor to talon.
+        shooterRight.follow(shooterLeft);
+    }
 
-public void stop() {
-    shooterLeft.set(ControlMode.PercentOutput, 0);
-}
+    public void initDefaultCommand() {
+        setDefaultCommand(new VomitShooterStop());
+    }
 
-@Override
-public void periodic() {
-    // Put code here to be run every loop
+    public void revBeforeFire() {
+        shooterLeft.set(ControlMode.PercentOutput, WHEEL_POWER);
+    }
 
-}
+    public void stop() {
+        shooterLeft.set(ControlMode.PercentOutput, 0);
+    }
 
-// for debug purpose only
-public void joystickControl(Joystick joystick)
-{
+    @Override
+    public void periodic() {
+        // Put code here to be run every loop
 
-}
+    }
+
+    // for debug purpose only
+    public void joystickControl(Joystick joystick)
+    {
+
+    }
 }

@@ -4,8 +4,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.Ports;
-import frc.robot.commands.ShooterPusherDown;
-
 
 
 // a class to raise the outer/main drivetrain (by lowering the inner/mini drivetrain)
