@@ -12,9 +12,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 import frc.robot.*;
 
 public class VomitShooterShooterPusherFireSequence extends CommandGroup {
-	/**
-	 * Add your docs here.
-	 */
+	// It shoots the ball
 	public VomitShooterShooterPusherFireSequence() {
 		// Add Commands here:
 		// e.g. addSequential(new Command1());

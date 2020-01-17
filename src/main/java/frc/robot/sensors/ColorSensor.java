@@ -5,7 +5,7 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import edu.wpi.first.wpilibj.I2C;
-
+// We're determining the colors from the spinny thing
 public class ColorSensor {
     private ColorSensorV3 colSensor;
     private ColorMatch colMatch;
@@ -15,12 +15,13 @@ public class ColorSensor {
     private final Color kGreenTarget = ColorMatch.makeColor(0.197, 0.561, 0.240);
     private final Color kRedTarget = ColorMatch.makeColor(0.561, 0.232, 0.114);
     private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
+    // They are creating the 4 color values that are our target
 
     public String colorString = new String("");
     public Color detectedColor;
 	
 	public ColorSensor() {
-        colSensor = new ColorSensorV3(I2C.Port.kOnboard);
+        colSensor = new ColorSensorV3(I2C.Port.kOnboard); // Creating a new color sensor on the onboard I2C Port
         
         colMatch = new ColorMatch();
 
@@ -28,15 +29,17 @@ public class ColorSensor {
         colMatch.addColorMatch(kGreenTarget);
         colMatch.addColorMatch(kRedTarget);
         colMatch.addColorMatch(kYellowTarget);
+        // Adding color targets to our color matcher
 
         colMatch.setConfidenceThreshold(0.9);
-    }
-    
+        // How accurately the color we're reading is relating to the target color
+        }
+    // Everytime this method is color is called check the current color against color target
     public void updateColorSensor() {
-        detectedColor = colSensor.getColor();
-        colResult = colMatch.matchColor(detectedColor);
+        detectedColor = colSensor.getColor(); // We're saving our current color that our sensor is seeing
+        colResult = colMatch.matchColor(detectedColor); // Checking the saved color against the target colors and saving the result
 
-        
+        // Checking to see if our saved result is equal to any of ur target collors and if so, saving thta color isa string 
         if (colResult != null && colResult.color == kBlueTarget) {
             colorString = "Blue";
           } else if (colResult != null && colResult.color == kRedTarget) {
@@ -61,7 +64,7 @@ public class ColorSensor {
     public double getBlue(){
         return colSensor.getBlue();
     }
-
+    // We are returning the saved result color
     public String getDetectedColor(){
         return colorString;
     }

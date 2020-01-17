@@ -11,22 +11,20 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.ShooterPusher.Position;
 
-/**
- * Add your docs here.
- */
+// To move the piston away from the ball
 public class ShooterPusherDown extends InstantCommand {
 
 	public ShooterPusherDown() { //true is up, false is down
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.shooterPusher);
+		requires(Robot.shooterPusher); // While using this command no other command can use it 
 	}
 
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
 		System.out.println("ShooterPusherDown: initialize ");
-		Robot.shooterPusher.setPosition(Position.DOWN);
+		Robot.shooterPusher.setPosition(Position.DOWN); // Making the piston go down
 	}
 
 }

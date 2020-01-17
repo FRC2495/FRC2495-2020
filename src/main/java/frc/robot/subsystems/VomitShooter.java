@@ -22,7 +22,7 @@ import frc.robot.commands.VomitShooterStop;
 //import frc.robot.sensors.Sonar;
 
 
-
+//Controls the shooter motors to shoot the balls 
 public class VomitShooter extends Subsystem {
 
     BaseMotorController shooterLeft, shooterRight;
@@ -30,6 +30,7 @@ public class VomitShooter extends Subsystem {
 
     static final double WHEEL_POWER = -.95;
 
+//The shooter left and shooter right are motors 
     public VomitShooter(BaseMotorController ShooterLeft_in, BaseMotorController shooterRight_in, Robot robot_in) {
         shooterLeft=ShooterLeft_in;
         shooterRight=shooterRight_in;
@@ -59,14 +60,14 @@ public class VomitShooter extends Subsystem {
     }
 
     public void initDefaultCommand() {
-        setDefaultCommand(new VomitShooterStop());
+        setDefaultCommand(new VomitShooterStop()); //Makes the shooter stop when it has no other command available 
     }
 
-    public void revBeforeFire() {
+    public void revBeforeFire() { //Starts spinning the wheels before shooting the ball
         shooterLeft.set(ControlMode.PercentOutput, WHEEL_POWER);
     }
 
-    public void stop() {
+    public void stop() { //Stops both of the wheels from spinning 
         shooterLeft.set(ControlMode.PercentOutput, 0);
     }
 
@@ -76,9 +77,4 @@ public class VomitShooter extends Subsystem {
 
     }
 
-    // for debug purpose only
-    public void joystickControl(Joystick joystick)
-    {
-
-    }
 }

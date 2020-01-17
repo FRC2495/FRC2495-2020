@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.Ports;
 
 
-// a class to raise the outer/main drivetrain (by lowering the inner/mini drivetrain)
+//Activates the piston to shoot the ball into the shooter 
 public class ShooterPusher extends Subsystem {
 	
 	static final int WAIT_MS = 1000;
@@ -14,8 +14,8 @@ public class ShooterPusher extends Subsystem {
     DoubleSolenoid upDown;
     
     public enum Position {
-		UP, // hook is facing up
-		DOWN, // hook is facing downward 
+		UP, // The piston is in the up position and shoots the ball
+		DOWN, // The piston is in the down position and can recieve another ball
 		UNKNOWN;
 	}
 
@@ -39,16 +39,16 @@ public class ShooterPusher extends Subsystem {
 
 	}
 
-	public void setPosition(Position pos)
+	public void setPosition(Position pos) //Telling the piston to be in the selected position 
 	{
 		switch(pos)
 		{
-			case UP:
+			case UP: //Telling the solenoid to have the piston go up
 			{
 				upDown.set(DoubleSolenoid.Value.kReverse); // adjust direction if needed
 				break;
 			}
-			case DOWN:
+			case DOWN: //Telling the solenoid to have the piston go up
 			{
 				upDown.set(DoubleSolenoid.Value.kForward); // adjust direction if needed
 				break;
@@ -60,21 +60,21 @@ public class ShooterPusher extends Subsystem {
 		}
 	}
 
-	public Position getPosition()
+	public Position getPosition() //Getting the current position
 	{
 		DoubleSolenoid.Value value = upDown.get();
 		
 		switch(value)
 		{
-			case kReverse:
+			case kReverse: //Checking if the piston is in the kReverse position (up)
 			{
 				return Position.UP;
 			}
-			case kForward:
+			case kForward: //Checking if the piston is in the kFoward position (down)
 			{
 				return Position.DOWN;
 			}
-			default:
+			default: //position unknown
 			{
 				return Position.UNKNOWN;
 			}

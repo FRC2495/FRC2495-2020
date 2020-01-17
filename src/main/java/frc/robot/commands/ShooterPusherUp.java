@@ -10,14 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 import frc.robot.subsystems.ShooterPusher.Position;
-/**
- * Add your docs here.
- */
+// To push the chambered ball into the shooter
 public class ShooterPusherUp extends InstantCommand {
 	public ShooterPusherUp() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.shooterPusher);
+		requires(Robot.shooterPusher); //
 	}
 
 	// Called once when the command executes

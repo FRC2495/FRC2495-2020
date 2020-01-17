@@ -9,7 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
-
+// It pushes the piston foward and waits a second and pushes back
 public class ShooterPusherFireSequence extends CommandGroup {
 	/**
 	 * Add your docs here.
@@ -32,8 +32,8 @@ public class ShooterPusherFireSequence extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 
-        addSequential(new ShooterPusherUp());
-        addSequential(new WaitCommand(1));
-        addSequential(new ShooterPusherDown());  
+        addSequential(new ShooterPusherUp()); // It pushes the piston foward
+        addSequential(new WaitCommand(1)); // It waits a second on the top
+        addSequential(new ShooterPusherDown());  // It brings the piston down
 	}
 }
