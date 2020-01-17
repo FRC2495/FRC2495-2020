@@ -132,6 +132,7 @@ public class Robot extends TimedRobot {
 	public static VomitShooter vomitShooter;
 	public static ShooterPusher shooterPusher;
 
+	public static ColorSensor colSensor;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -227,6 +228,7 @@ public class Robot extends TimedRobot {
 
 		vomitShooter = new VomitShooter(shooterLeft, shooterRight, this);    
 		shooterPusher = new ShooterPusher();
+		colSensor = new ColorSensor();
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
@@ -326,6 +328,9 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		camera.acquireTargets(false);
+
+		colSensor.updateColorSensor();
+
 		updateToSmartDash();
 	}
 
@@ -352,7 +357,11 @@ public class Robot extends TimedRobot {
 		Scheduler.getInstance().run();
 		
 		camera.acquireTargets(false);
+
+		colSensor.updateColorSensor();
+
 		updateToSmartDash();
+
 	}
 	
 	public void updateToSmartDash()
@@ -409,6 +418,11 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Sonar option", sonarOptionChooser.getSelected());
 		SmartDashboard.putString("Release chosen", releaseChooser.getSelected());
 		SmartDashboard.putString("Auton option", autonOptionChooser.getSelected());
+
+		SmartDashboard.putNumber("Color Sensor Red", colSensor.getRed());
+		SmartDashboard.putNumber("Color Sensor Blue", colSensor.getBlue());
+		SmartDashboard.putNumber("Color Sensor Green", colSensor.getGreen());
+		SmartDashboard.putString("Color Detected", colSensor.getDetectedColor());
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {
