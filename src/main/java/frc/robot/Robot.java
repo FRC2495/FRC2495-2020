@@ -133,6 +133,8 @@ public class Robot extends TimedRobot {
 	public static ShooterPusher shooterPusher;
 
 	public static ColorSensor colSensor;
+	public static WS2812 ws2812;
+
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -201,6 +203,7 @@ public class Robot extends TimedRobot {
 
 		pressureSensor = new PressureSensor();
 
+
 		// motorized devices
 
 		frontLeft = new WPI_TalonSRX(Ports.CAN.LEFT_FRONT);
@@ -228,7 +231,12 @@ public class Robot extends TimedRobot {
 
 		vomitShooter = new VomitShooter(shooterLeft, shooterRight, this);    
 		shooterPusher = new ShooterPusher();
+
+
+		// other sensors
+
 		colSensor = new ColorSensor();
+		ws2812 = new WS2812();
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
@@ -331,6 +339,8 @@ public class Robot extends TimedRobot {
 
 		colSensor.updateColorSensor();
 
+		ws2812.updateRainbow();
+
 		updateToSmartDash();
 	}
 
@@ -359,6 +369,8 @@ public class Robot extends TimedRobot {
 		camera.acquireTargets(false);
 
 		colSensor.updateColorSensor();
+
+		ws2812.updateRainbow();
 
 		updateToSmartDash();
 
