@@ -370,7 +370,11 @@ public class Robot extends TimedRobot {
 
 		colSensor.updateColorSensor();
 
-		ws2812.updateRainbow();
+		//ws2812.updateRainbow();
+	//	ws2812.updateBlue();
+
+		//ws2812.updateRed();
+		ws2812.updateGreen();
 
 		updateToSmartDash();
 

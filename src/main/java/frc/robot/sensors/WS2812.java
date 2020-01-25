@@ -61,4 +61,49 @@ public class WS2812 {
         led.setData(ledBuffer);    
     }
 
+
+    public void updateBlue()
+    {
+        // For every pixel
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+    
+          final var hue = 120;
+    
+          // Set the value
+          ledBuffer.setHSV(i, hue, 255, 128);
+        }
+    
+        // Set the LEDs
+        led.setData(ledBuffer);    
+    }
+
+    public void updateRed()
+    {
+        // For every pixel
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+    
+          final var hue = 0;
+    
+          // Set the value
+          ledBuffer.setHSV(i, hue, 255, 128);
+        }
+    
+        // Set the LEDs
+        led.setData(ledBuffer);    
+    }
+
+    public void updateGreen()
+    {
+        // For every pixel
+        for (var i = 0; i < ledBuffer.getLength(); i++) {
+    
+          final var hue = 60;
+    
+          // Set the value
+          ledBuffer.setHSV(i, hue, 255, 128);
+        }
+    
+        // Set the LEDs
+        led.setData(ledBuffer);    
+    }
 }
