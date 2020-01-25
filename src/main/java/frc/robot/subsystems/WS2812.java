@@ -5,18 +5,20 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.sensors;
+package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import frc.robot.interfaces.ICamera;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 // see https://docs.wpilib.org/en/latest/docs/software/actuators/addressable-leds.html
 
 /**
  * Add your docs here.
  */
-public class WS2812 {
+public class WS2812 extends Subsystem {
     private AddressableLED led;
     private AddressableLEDBuffer ledBuffer;
 
@@ -40,40 +42,51 @@ public class WS2812 {
         led.start();
     }
 
+    @Override
+    public void initDefaultCommand() {  
+      // Set the default command for a subsystem here.
+      // setDefaultCommand(new MySpecialCommand());
+    }
+  
+    @Override
+    public void periodic() {
+      // Put code here to be run every loop
+    }
+
     public void updateRainbow()
     {
-        // For every pixel
-        for (var i = 0; i < ledBuffer.getLength(); i++) {
-    
-          // Calculate the hue - hue is easier for rainbows because the color
-          // shape is a circle so only one value needs to precess
-          final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
-    
-          // Set the value
-          ledBuffer.setHSV(i, hue, 255, 128);
-        }
-    
-        // Increase by to make the rainbow "move"
-        rainbowFirstPixelHue += 3;
-    
-        // Check bounds
-        rainbowFirstPixelHue %= 180; 
+      // For every pixel
+      for (var i = 0; i < ledBuffer.getLength(); i++) {
+  
+        // Calculate the hue - hue is easier for rainbows because the color
+        // shape is a circle so only one value needs to precess
+        final var hue = (rainbowFirstPixelHue + (i * 180 / ledBuffer.getLength())) % 180;
+  
+        // Set the value
+        ledBuffer.setHSV(i, hue, 255, 128);
+      }
+  
+      // Increase by to make the rainbow "move"
+      rainbowFirstPixelHue += 3;
+  
+      // Check bounds
+      rainbowFirstPixelHue %= 180; 
 
-        // Set the LEDs
-        led.setData(ledBuffer);    
+      // Set the LEDs
+      led.setData(ledBuffer);    
     }
 
     public void updateHue(int hue)
     {
-        // For every pixel
-        for (var i = 0; i < ledBuffer.getLength(); i++) {
-    
-          // Set the value
-          ledBuffer.setHSV(i, hue, 255, 128);
-        }
-    
-        // Set the LEDs
-        led.setData(ledBuffer);    
+      // For every pixel
+      for (var i = 0; i < ledBuffer.getLength(); i++) {
+  
+        // Set the value
+        ledBuffer.setHSV(i, hue, 255, 128);
+      }
+  
+      // Set the LEDs
+      led.setData(ledBuffer);    
     }
 
     public void updateRed()
@@ -97,16 +110,16 @@ public class WS2812 {
     }
 
     public void updateFromCamera(ICamera camera_in) {
-        ICamera camera = camera_in;
+      ICamera camera = camera_in;
 
-        if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 5) { //Displays Green if in target
-          updateGreen();
-        }
-        else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 10) { //displays yellow if close to target
-          updateYellow();
-        }
-        else { // displays red if far from target 
-          updateRed();
-        }
+      if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 5) { //Displays Green if in target
+        updateGreen();
+      }
+      else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 10) { //displays yellow if close to target
+        updateYellow();
+      }
+      else { // displays red if far from target 
+        updateRed();
+      }
     }
 }
