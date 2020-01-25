@@ -374,7 +374,7 @@ public class Robot extends TimedRobot {
 	//	ws2812.updateBlue();
 
 		//ws2812.updateRed();
-		ws2812.updateGreen();
+		ws2812.updateFromCamera(camera);
 
 		updateToSmartDash();
 
