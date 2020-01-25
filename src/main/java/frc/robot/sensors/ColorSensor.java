@@ -5,6 +5,7 @@ import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
 import edu.wpi.first.wpilibj.I2C;
+
 // We're determining the colors from the spinny thing
 public class ColorSensor {
     private ColorSensorV3 colSensor;
@@ -33,8 +34,9 @@ public class ColorSensor {
 
         colMatch.setConfidenceThreshold(0.9);
         // How accurately the color we're reading is relating to the target color
-        }
-    // Everytime this method is color is called check the current color against color target
+    }
+	
+	// Everytime this method is color is called check the current color against color target
     public void updateColorSensor() {
         detectedColor = colSensor.getColor(); // We're saving our current color that our sensor is seeing
         colResult = colMatch.matchColor(detectedColor); // Checking the saved color against the target colors and saving the result
@@ -42,30 +44,30 @@ public class ColorSensor {
         // Checking to see if our saved result is equal to any of ur target collors and if so, saving thta color isa string 
         if (colResult != null && colResult.color == kBlueTarget) {
             colorString = "Blue";
-          } else if (colResult != null && colResult.color == kRedTarget) {
+        } else if (colResult != null && colResult.color == kRedTarget) {
             colorString = "Red";
-          } else if (colResult != null && colResult.color == kGreenTarget) {
+        } else if (colResult != null && colResult.color == kGreenTarget) {
             colorString = "Green";
-          } else if (colResult != null && colResult.color == kYellowTarget) {
+        } else if (colResult != null && colResult.color == kYellowTarget) {
             colorString = "Yellow";
-          } else {
+        } else {
             colorString = "Unknown";
-          }
+        }
     }
 	
-	public double getRed(){
+	public double getRed() {
         return colSensor.getRed();
 	}
 	
-	public double getGreen(){
+	public double getGreen() {
         return colSensor.getGreen();
     }
     
-    public double getBlue(){
+    public double getBlue() {
         return colSensor.getBlue();
     }
     // We are returning the saved result color
-    public String getDetectedColor(){
+    public String getDetectedColor() {
         return colorString;
     }
 
