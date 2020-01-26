@@ -255,4 +255,19 @@ public class LimelightCamera implements PIDSource, ICamera {
 	public synchronized double getOffsetBetweenCameraAndTarget() {
 		return offsetCameraTargetInches;
 	}
+
+	public enum LedMode {
+		PIPELINE,
+        FORCE_OFF,
+        FORCE_BLINK,
+		FORCE_ON
+	}
+
+	public synchronized void setLedMode(LedMode ledMode) {
+        nt.getEntry("ledMode").setNumber(ledMode.ordinal());
+	}
+	
+	public synchronized void setPipeline(byte pipeline) {
+        nt.getEntry("pipeline").setNumber(pipeline);
+    }
 }
