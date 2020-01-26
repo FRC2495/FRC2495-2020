@@ -32,7 +32,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	static final double MAX_PCT_OUTPUT = 1.0;
 		
 	static final int TALON_TIMEOUT_MS = 10;
-	public static final int TICKS_PER_REVOLUTION = 4096;
+	public static final int TICKS_PER_REVOLUTION = 4096; // TODO switch to 2048 if needed for Talon FX
 
 
 	// turn using camera settings
@@ -170,15 +170,14 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation
 		masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
+				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // TODO switch to FeedbackDevice.IntegratedSensor if needed for Talon FX
 				
 		masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
-				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
+				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // TODO switch to FeedbackDevice.IntegratedSensor if needed for Talon FX
 		
 		// Sensor phase is the term used to explain sensor direction.
 		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
 		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.  
-
 		masterLeft.setSensorPhase(true);
 		masterRight.setSensorPhase(true);
 		
