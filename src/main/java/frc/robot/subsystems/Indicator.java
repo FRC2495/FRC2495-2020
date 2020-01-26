@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import frc.robot.interfaces.ICamera;
+import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -18,15 +19,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Add your docs here.
  */
-public class WS2812 extends Subsystem {
+public class Indicator extends Subsystem {
 	private AddressableLED led;
 	private AddressableLEDBuffer ledBuffer;
+	private ICamera camera;
 
 	// Store what the last hue of the first pixel is
 	private int rainbowFirstPixelHue;
 	
-	public WS2812() 
+	public Indicator(ICamera camera_in) 
 	{
+		camera = camera_in;
+		
 		led = new AddressableLED(9); // TODO use constant to specify PWM port
 
 		// Reuse buffer
@@ -45,7 +49,7 @@ public class WS2812 extends Subsystem {
 	@Override
 	public void initDefaultCommand() {  
 		// Set the default command for a subsystem here.
-		// setDefaultCommand(new MySpecialCommand());
+		setDefaultCommand(new IndicatorIndicateUsingCamera());
 	}
 
 	@Override
@@ -76,7 +80,7 @@ public class WS2812 extends Subsystem {
 		led.setData(ledBuffer);    
 	}
 
-	public void updateHue(int hue)
+	public void setHue(int hue)
 	{
 		// For every pixel
 		for (var i = 0; i < ledBuffer.getLength(); i++) {
@@ -89,37 +93,41 @@ public class WS2812 extends Subsystem {
 		led.setData(ledBuffer);    
 	}
 
-	public void updateRed()
+	public void setRed()
 	{
-		updateHue(0);
+		setHue(0);
 	}
 
-	public void updateYellow()
+	public void setYellow()
 	{
-		updateHue(30);
+		setHue(30);
 	}
 
-	public void updateGreen()
+	public void setGreen()
 	{
-		updateHue(60);
+		setHue(60);
 	}
 
-	public void updateBlue()
+	public void setBlue()
 	{
-		updateHue(120);
+		setHue(120);
 	}
 
-	public void updateFromCamera(ICamera camera_in) {
-		ICamera camera = camera_in;
+	public void updateFromCamera() {
 
-		if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 5) { //Displays Green if in target
-			updateGreen();
+		if (camera != null) {
+			if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 5) { // displays green if in target
+				setGreen();
+			}
+			else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 10) { // displays yellow if close to target
+				setYellow();
+			}
+			else { // displays red if far from target 
+				setRed();
+			}
+		} else { // no camera, so arbitrarily displays blue 
+			setBlue();
 		}
-		else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 10) { //displays yellow if close to target
-			updateYellow();
-		}
-		else { // displays red if far from target 
-			updateRed();
-		}
+
 	}
 }

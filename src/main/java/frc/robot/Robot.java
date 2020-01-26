@@ -135,7 +135,7 @@ public class Robot extends TimedRobot {
 
 	// misc
 
-	public static WS2812 ws2812;
+	public static Indicator indicator;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -239,7 +239,7 @@ public class Robot extends TimedRobot {
 
 		// misc
 
-		ws2812 = new WS2812();
+		indicator = new Indicator(camera);
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
@@ -357,8 +357,6 @@ public class Robot extends TimedRobot {
 
 		colSensor.updateColorSensor();
 
-		ws2812.updateRainbow();
-
 		updateToSmartDash();
 	}
 
@@ -387,11 +385,6 @@ public class Robot extends TimedRobot {
 		camera.acquireTargets(false);
 
 		colSensor.updateColorSensor();
-
-		//ws2812.updateRainbow();
-		//ws2812.updateBlue();
-		//ws2812.updateRed();
-		ws2812.updateFromCamera(camera);
 
 		updateToSmartDash();
 
