@@ -111,43 +111,34 @@ public class OI {
 		gamepad = new Joystick(Ports.USB.GAMEPAD);
 
 		gamepadRYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RY);
-		
 
 		gamepadRYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RY,false);
-		
 
 		gamepadRXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RX);
-		
 
 		gamepadRXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RX,false);
-		
 
 		gamepadRT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RT);
 
 		gamepadLT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LT);
-		
-	
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
 
 		gamepadLYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY,false);
-	
 
 		gamepadLXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX);
 
-
 		gamepadLXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX,false);
-		
+
 		
 		gamepadRS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.RS);
 
 		gamepadLS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LS);
-		
 
 		gamePadStart = new JoystickButton(gamepad, ControllerBase.GamepadButtons.START);
-		
 
 		gamepadBack = new JoystickButton(gamepad, ControllerBase.GamepadButtons.BACK);
+		gamepadBack.whileHeld(new FullCalibrateAndReset());
 
 		gamepadRB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.RB);
 		gamepadRB.whenPressed(new ShooterPusherDown());
@@ -155,12 +146,9 @@ public class OI {
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
 		gamepadLB.whenPressed(new ShooterPusherUp());
 		
-		
-		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
-		
+		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);		
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
-		
 
 		gamepadB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.B);
 		gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
@@ -168,11 +156,11 @@ public class OI {
 		gamepadA = new JoystickButton(gamepad, ControllerBase.GamepadButtons.A);
 		gamepadA.whileHeld(new VomitShooterRevBeforeFire());
 
+
 		joyRight = new Joystick(Ports.USB.RIGHT);
 
 		joyRightBtn11 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN11); 
-		
-
+	
 		joyRightBtn10 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN10);
 
 		joyRightBtn9 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN9);
@@ -180,18 +168,22 @@ public class OI {
 		joyRightBtn8 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN8);
 		
 		joyRightBtn7 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN7);
+		joyRightBtn7.whenPressed(new DrivetrainStop());
 
 		joyRightBtn6 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN6);
+		joyRightBtn6.whenPressed(new DrivetrainResetEncoders());
 
 		joyRightBtn5 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN5);
+		//joyRightBtn5.whenPressed(new DrivetrainMoveUsingCameraPidController(LimelightCamera.OFFSET_CAMERA_HATCH_INCHES));
+		final int MAGIC_DISTANCE_INCHES = 20;
+		joyRightBtn5.whenPressed(new DrivetrainDriveUsingCamera(LimelightCamera.OFFSET_CAMERA_HATCH_INCHES + MAGIC_DISTANCE_INCHES));
 
 		joyRightBtn4 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN4);
+		joyRightBtn4.whenPressed(new DrivetrainTurnUsingCameraPidController());
 
 		joyRightBtn3 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN3);
-		
 
 		joyRightBtn2 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN2);
-		
 
 
 		joyLeft = new Joystick(Ports.USB.LEFT);
@@ -205,14 +197,19 @@ public class OI {
 		joyLeftBtn8 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN8);
 
 		joyLeftBtn7 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN7);
+		joyLeftBtn7.whenPressed(new DrivetrainStop());
 
 		joyLeftBtn6 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN6);
+		joyLeftBtn6.whenPressed(new DrivetrainAndGyroReset());
 
 		joyLeftBtn5 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN5);
+		joyLeftBtn5.whenPressed(new DrivetrainTurnAngleUsingPidController(90));
 
 		joyLeftBtn4 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN4);
+		joyLeftBtn4.whenPressed(new DrivetrainTurnAngleUsingPidController(-90));
 
 		joyLeftBtn3 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN3);
+		joyLeftBtn3.whenPressed(new DrivetrainMoveDistance(50));
 
 		joyLeftBtn2 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN2);
 

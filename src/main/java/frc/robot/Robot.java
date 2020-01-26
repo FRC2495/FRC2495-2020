@@ -89,7 +89,6 @@ public class Robot extends TimedRobot {
 	private String autonOption;
 	private SendableChooser<String> autonOptionChooser = new SendableChooser<>();
 
-
 	// sensors
 	
 	public static ICamera camera;
@@ -102,6 +101,8 @@ public class Robot extends TimedRobot {
 	public static HMAccelerometer accelerometer;
 
 	public static PressureSensor pressureSensor;
+
+	public static ColorSensor colSensor;
 	
 	// motorized devices
 	
@@ -132,7 +133,8 @@ public class Robot extends TimedRobot {
 	public static VomitShooter vomitShooter;
 	public static ShooterPusher shooterPusher;
 
-	public static ColorSensor colSensor;
+	// misc
+
 	public static WS2812 ws2812;
 
 	/**
@@ -203,6 +205,8 @@ public class Robot extends TimedRobot {
 
 		pressureSensor = new PressureSensor();
 
+		colSensor = new ColorSensor();
+
 
 		// motorized devices
 
@@ -233,9 +237,8 @@ public class Robot extends TimedRobot {
 		shooterPusher = new ShooterPusher();
 
 
-		// other sensors
+		// misc
 
-		colSensor = new ColorSensor();
 		ws2812 = new WS2812();
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
@@ -297,6 +300,21 @@ public class Robot extends TimedRobot {
 		//At this point we should know what auto run, where we started, and where our plates are located.
 		//So we are ready for autonomousPeriodic to be called.
 		updateToSmartDash();
+
+		switch (autonSelected) {
+			case Robot.AUTON_CUSTOM:
+				// TODO
+				break;
+
+			case Robot.AUTON_DO_NOTHING:
+				m_autonomousCommand = null;
+			
+				break;
+				
+			default:
+				// nothing
+				break;
+		} // end switch
 	
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
@@ -371,8 +389,7 @@ public class Robot extends TimedRobot {
 		colSensor.updateColorSensor();
 
 		//ws2812.updateRainbow();
-	//	ws2812.updateBlue();
-
+		//ws2812.updateBlue();
 		//ws2812.updateRed();
 		ws2812.updateFromCamera(camera);
 
