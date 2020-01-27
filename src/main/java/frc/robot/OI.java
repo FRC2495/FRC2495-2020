@@ -120,8 +120,10 @@ public class OI {
 		gamepadRXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RX,false);
 
 		gamepadRT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RT);
+		gamepadRT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));
 
 		gamepadLT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LT);
+		gamepadLT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
 
