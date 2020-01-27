@@ -19,6 +19,9 @@ public class IndicatorTimedScrollRainbow extends TimedCommand {
 	 */
 	public IndicatorTimedScrollRainbow(double timeout) {
 		super(timeout);
+
+		setRunWhenDisabled(true); // allows running of command when robot is disabled
+		
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.indicator);
