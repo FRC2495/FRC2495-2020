@@ -33,11 +33,19 @@ public class VomitShooterShooterPusherFireSequence extends CommandGroup {
 
 		requires(Robot.vomitShooter); // acquires reference to vomit shooter so that its default command is not called prematurely
 		
-		//addParallel(new IndicatorScrollRainbow()); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
-		addParallel(new IndicatorTimedScrollRainbow(3)); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
+		addParallel(new IndicatorScrollRainbow()); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
+		//addParallel(new IndicatorTimedScrollRainbow(3)); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
         addSequential(new VomitShooterRevBeforeFire()); // starts vomit shooter 
         addSequential(new WaitCommand(2)); // waits two secs
 		addSequential(new ShooterPusherFireSequence()); // fires
-		//addSequential(new IndicatorStop()); // should interrupt the scrolling of rainbow (and return to default command)
+		addSequential(new IndicatorStop()); // should interrupt the scrolling of rainbow (and return to default command)
+
+
+		// note: the following links are useful to verify that the old command-based framework should allow parallel commands using the same subsystem
+		// even if the new command-based framework does not...
+		// https://docs.wpilib.org/en/latest/docs/software/old-commandbased/commands/synchronizing-two-commands.html
+		// "Any command in the main sequence that requires a subsystem in use by a parallel command will cause the parallel command to be canceled."
+		// https://docs.wpilib.org/en/latest/docs/software/commandbased/command-groups.html
+		// "a parallel group may not contain multiple commands that require the same subsystem"
 	}
 }
