@@ -315,6 +315,8 @@ public class Robot extends TimedRobot {
 				// nothing
 				break;
 		} // end switch
+
+		camera.setLedMode(ICamera.LedMode.PIPELINE);
 	
 		// schedule the autonomous command (example)
 		if (m_autonomousCommand != null) {
@@ -342,6 +344,8 @@ public class Robot extends TimedRobot {
 		if (m_autonomousCommand != null) {
 			m_autonomousCommand.cancel();
 		}
+
+		camera.setLedMode(ICamera.LedMode.PIPELINE);
 	}
 
 	/**
@@ -374,6 +378,7 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		camera.setLedMode(ICamera.LedMode.FORCE_OFF);
 	}
 
 	@Override
