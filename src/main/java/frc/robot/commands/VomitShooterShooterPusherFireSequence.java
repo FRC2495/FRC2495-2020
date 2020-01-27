@@ -33,10 +33,11 @@ public class VomitShooterShooterPusherFireSequence extends CommandGroup {
 
 		requires(Robot.vomitShooter); // acquires reference to vomit shooter so that its default command is not called prematurely
 		
-		addParallel(new IndicatorScrollRainbow()); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
+		//addParallel(new IndicatorScrollRainbow()); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
+		addParallel(new IndicatorTimedScrollRainbow(3)); // scrolls rainbow in parallel to the rest of the commands (must be in parallel as command is blocking)
         addSequential(new VomitShooterRevBeforeFire()); // starts vomit shooter 
         addSequential(new WaitCommand(2)); // waits two secs
 		addSequential(new ShooterPusherFireSequence()); // fires
-		addSequential(new IndicatorStop()); // should interrupt the scrolling of rainbow (and return to default command)
+		//addSequential(new IndicatorStop()); // should interrupt the scrolling of rainbow (and return to default command)
 	}
 }
