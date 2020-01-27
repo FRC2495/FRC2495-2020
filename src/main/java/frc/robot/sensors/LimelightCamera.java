@@ -256,12 +256,12 @@ public class LimelightCamera implements PIDSource, ICamera {
 		return offsetCameraTargetInches;
 	}
 
-	public enum LedMode {
+	/*public enum LedMode {
 		PIPELINE,
         FORCE_OFF,
         FORCE_BLINK,
 		FORCE_ON
-	}
+	}*/
 
 	public synchronized void setLedMode(LedMode ledMode) {
         nt.getEntry("ledMode").setNumber(ledMode.ordinal());

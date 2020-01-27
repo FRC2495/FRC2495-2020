@@ -35,4 +35,15 @@ public interface ICamera extends PIDSource, PIDSource2 {
 	public void setOffsetBetweenCameraAndTarget(double offset);
 
 	public double getOffsetBetweenCameraAndTarget();
+
+	public enum LedMode {
+		PIPELINE,
+        FORCE_OFF,
+        FORCE_BLINK,
+		FORCE_ON
+	}
+
+	public void setLedMode(LedMode ledMode);
+	
+	public void setPipeline(byte pipeline);
 }

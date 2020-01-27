@@ -324,4 +324,12 @@ public class HMCamera implements PIDSource, ICamera {
 	public synchronized double getOffsetBetweenCameraAndTarget() {
 		return offsetCameraTargetInches;
 	}
+
+	public synchronized void setLedMode(LedMode ledMode) {
+		// not supported
+	}
+	
+	public synchronized void setPipeline(byte pipeline) {
+		// not supported
+    }
 }

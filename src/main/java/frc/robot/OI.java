@@ -20,6 +20,7 @@ import frc.robot.Ports;
 import frc.robot.ControllerBase;
 import frc.robot.util.GamepadAxis;
 import frc.robot.sensors.LimelightCamera;
+import frc.robot.interfaces.ICamera;
 
 
 /**
@@ -146,9 +147,11 @@ public class OI {
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
 		gamepadLB.whenPressed(new ShooterPusherUp());
 		
-		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);		
+		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
+		gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
+		gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
 
 		gamepadB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.B);
 		gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
