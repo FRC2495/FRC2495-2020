@@ -179,9 +179,9 @@ public class OI {
 		joyRightBtn6.whenPressed(new DrivetrainResetEncoders());
 
 		joyRightBtn5 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN5);
-		//joyRightBtn5.whenPressed(new DrivetrainMoveUsingCameraPidController(LimelightCamera.OFFSET_CAMERA_HATCH_INCHES));
+		//joyRightBtn5.whenPressed(new DrivetrainMoveUsingCameraPidController(LimelightCamera.OFFSET_CAMERA_TARGET_INCHES));
 		final int MAGIC_DISTANCE_INCHES = 20;
-		joyRightBtn5.whenPressed(new DrivetrainDriveUsingCamera(LimelightCamera.OFFSET_CAMERA_HATCH_INCHES + MAGIC_DISTANCE_INCHES));
+		joyRightBtn5.whenPressed(new DrivetrainDriveUsingCamera(Robot.camera.getOffsetBetweenCameraAndTarget() + MAGIC_DISTANCE_INCHES));
 
 		joyRightBtn4 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN4);
 		joyRightBtn4.whenPressed(new DrivetrainTurnUsingCameraPidController());

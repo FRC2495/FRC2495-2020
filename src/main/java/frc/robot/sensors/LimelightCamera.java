@@ -23,18 +23,18 @@ public class LimelightCamera implements PIDSource, ICamera {
 	private static final double HORIZONTAL_FOV_DEGREES = 59.6;
 
 	// The 2020 target has an overall height of 1 ft. 5 in. (~43 cm), and a width of 3 ft. 3¼ in. (~100 cm).
-	// The bottom of the target is 6 ft.9¼ in. (~206 cm) above the carpet. 
+	// The bottom of the target is 6 ft. 9¼ in. (~206 cm) above the carpet. 
 	private static final double TARGET_HEIGHT_INCHES = 17.0; // TODO set proper value PROPER VALUE IS 17.0 inches
 	private static final double TARGET_WIDTH_INCHES = 39.25; // TODO set proper value PROPER VALUE IS 39.25 inches
+	private static final double TARGET_ELEVATION_INCHES = 81.25;
+
+	private static final double CAM_ELEVATION_INCHES = 22.0; // TODO set proper value 
 
 	public static final double SAFE_DISTANCE_INCHES = 240;
 
 	public static final double MIN_OFFSET_CAMERA_TARGET_INCHES = 0;
 	public static final double DEFAULT_OFFSET_CAMERA_TARGET_INCHES = 10; // we need to leave some space between the camera and the target
 	public static final double MAX_OFFSET_CAMERA_TARGET_INCHES = 36;
-
-	public static final double OFFSET_CAMERA_HATCH_INCHES = 10;
-	public static final double OFFSET_CAMERA_PORT_INCHES = 24;
 
 	private static final int MAX_NT_RETRY = 5;
 	private static final double CAMERA_CATCHUP_DELAY_SECS = 0.50;
@@ -145,7 +145,12 @@ public class LimelightCamera implements PIDSource, ICamera {
 		if (isCoherent() && largeIndex != BAD_INDEX) {
 			double diagTargetDistance = TARGET_HEIGHT_INCHES * (VERTICAL_CAMERA_RES_PIXELS / height[largeIndex]) / 2.0
 					/ Math.tan(Math.toRadians(VERTICAL_FOV_DEGREES / 2));
-			return diagTargetDistance;
+
+			double horizTargetDistance = Math
+					.sqrt(diagTargetDistance * diagTargetDistance - (TARGET_ELEVATION_INCHES - CAM_ELEVATION_INCHES)
+							* (TARGET_ELEVATION_INCHES - CAM_ELEVATION_INCHES));
+
+			return horizTargetDistance;
 		} else
 			return Double.POSITIVE_INFINITY;
 	}
@@ -155,7 +160,12 @@ public class LimelightCamera implements PIDSource, ICamera {
 		if (isCoherent() && largeIndex != BAD_INDEX) {
 			double diagTargetDistance = TARGET_WIDTH_INCHES * (HORIZONTAL_CAMERA_RES_PIXELS / width[largeIndex]) / 2.0
 					/ Math.tan(Math.toRadians(HORIZONTAL_FOV_DEGREES / 2));
-			return diagTargetDistance;
+
+			double horizTargetDistance = Math
+					.sqrt(diagTargetDistance * diagTargetDistance - (TARGET_ELEVATION_INCHES - CAM_ELEVATION_INCHES)
+							* (TARGET_ELEVATION_INCHES - CAM_ELEVATION_INCHES));
+		
+			return horizTargetDistance;
 		} else
 			return Double.POSITIVE_INFINITY;
 	}
