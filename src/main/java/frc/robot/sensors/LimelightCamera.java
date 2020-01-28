@@ -20,9 +20,12 @@ public class LimelightCamera implements PIDSource, ICamera {
 	public static final int HORIZONTAL_CAMERA_RES_PIXELS = 320;
 	private static final int VERTICAL_CAMERA_RES_PIXELS = 240;
 	private static final double VERTICAL_FOV_DEGREES = 45.7; // see https://www.andymark.com/products/limelight2
-	private static final double HORIZONTAL_FOV_DEGREES = 59.6; 
-	private static final double TARGET_HEIGHT_INCHES = 5.5; // TODO set proper value PROPER VALUE IS 5.75 inches
-	private static final double TARGET_WIDTH_INCHES = 14.5;
+	private static final double HORIZONTAL_FOV_DEGREES = 59.6;
+
+	// The 2020 target has an overall height of 1 ft. 5 in. (~43 cm), and a width of 3 ft. 3¼ in. (~100 cm).
+	// The bottom of the target is 6 ft.9¼ in. (~206 cm) above the carpet. 
+	private static final double TARGET_HEIGHT_INCHES = 17.0; // TODO set proper value PROPER VALUE IS 17.0 inches
+	private static final double TARGET_WIDTH_INCHES = 39.25; // TODO set proper value PROPER VALUE IS 39.25 inches
 
 	public static final double SAFE_DISTANCE_INCHES = 240;
 
