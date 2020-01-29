@@ -4,6 +4,8 @@ import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
 import com.revrobotics.ColorMatch;
 import com.revrobotics.ColorMatchResult;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.I2C;
 
 // We're determining the colors from the spinny thing
@@ -43,13 +45,13 @@ public class ColorSensor {
 
         // Checking to see if our saved result is equal to any of ur target collors and if so, saving thta color isa string 
         if (colResult != null && colResult.color == kBlueTarget) {
-            colorString = "Blue";
+            colorString = "B";
         } else if (colResult != null && colResult.color == kRedTarget) {
-            colorString = "Red";
+            colorString = "R";
         } else if (colResult != null && colResult.color == kGreenTarget) {
-            colorString = "Green";
+            colorString = "G";
         } else if (colResult != null && colResult.color == kYellowTarget) {
-            colorString = "Yellow";
+            colorString = "Y";
         } else {
             colorString = "Unknown";
         }
@@ -70,5 +72,42 @@ public class ColorSensor {
     public String getDetectedColor() {
         return colorString;
     }
+
+    // Lookin for The desired color from the field "R", "G", "B", "Y"
+    public String getFieldColor(){
+        if(DriverStation.getInstance().getGameSpecificMessage().length() > 0)
+        return  DriverStation.getInstance().getGameSpecificMessage();
+        else
+        return "No given target";
+    }
+
+    // To check if the field That both us and the field are reading the right color
+    public boolean correctColor(){
+        String red = "R";
+        String blue = "B";
+        String green = "G";
+        String yellow = "Y";
+
+        String desiredColor =  DriverStation.getInstance().getGameSpecificMessage(); //Field the color wants
+        String detectedColor = getDetectedColor(); //color we are seeing
+
+
+        if(desiredColor.equals(red) && detectedColor.equals(blue)){
+            return true;
+        }
+        else if(desiredColor.equals(blue) && detectedColor.equals(red)){
+            return true;
+        }
+        else if(desiredColor.equals(green) && detectedColor.equals(yellow)){
+            return true;
+        }
+        else if(desiredColor.equals(yellow) && detectedColor.equals(green)){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    } 
 
 }
