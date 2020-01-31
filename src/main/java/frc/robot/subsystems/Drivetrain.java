@@ -139,7 +139,9 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	ICamera camera;
 	PIDController turnUsingCameraPidController; // the PID controller used to turn using camera
 	PIDController moveUsingCameraPidController; // the PID controller used to turn
-	
+
+	private double ratioBetweenInputandOutputLow = 9.7;
+	private double ratioBetweenInputandOutputHigh = 19.99;
 	
 	public Drivetrain(WPI_TalonSRX masterLeft_in ,WPI_TalonSRX masterRight_in , BaseMotorController followerLeft_in ,BaseMotorController followerRight_in, ADXRS450_Gyro gyro_in, Robot robot_in, ICamera camera_in) 
 	{
@@ -409,7 +411,40 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		moveDistance(dist, REDUCED_PCT_OUTPUT);
 	}
 
+	public void moveDistanceFromGearbox(double dist, double percentOutput, boolean gearSetting) // True is low gear setting, false is high gear setting
+	{
+		stop(); // in case we were still doing something
+		
+		resetEncoders();
+		setPIDParameters();
+		setNominalAndPeakOutputs(percentOutput); //this has a global impact, so we reset in stop()
+
+		if(gearSetting){ //Using the low gear ratio between input gear and output gear
+		rtac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
+		ltac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
+		
+		rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+		ltac = - ltac;
+		}
+
+		else{			//Using the high gear ratio between input gear and output gear
+		rtac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
+		ltac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
+		
+		rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+		ltac = - ltac;
+		}
+
+		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
+		masterRight.set(ControlMode.Position, rtac);
+		masterLeft.set(ControlMode.Position, ltac);
+
+		isMoving = true;
+		onTargetCountMoving = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
 	
+	}
 	public void moveDistanceHighSpeed(double dist) // moves the distance in inch given
 	{
 		moveDistance(dist, HIGH_PCT_OUTPUT);
@@ -482,7 +517,42 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	{
 		return Math.toRadians(angle) * RADIUS_DRIVEVETRAIN_INCHES;
 	}
-
+	// this method needs to be paired with checkMoveDistance()
+	public void moveDistanceAlongArcFromGearbox(int angle, boolean gearSetting) {
+		stop(); // in case we were still doing something
+		
+		double dist = arclength(angle);
+		double ldist, rdist;
+		
+		ldist = dist;
+		rdist = -dist;
+		
+		resetEncoders();
+		setPIDParameters();
+		if(gearSetting){ //Using the low gear ratio between input gear and output gear
+			rtac = rdist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
+			ltac = ldist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
+			
+			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+			ltac = - ltac;
+			}
+	
+			else{			//Using the high gear ratio between input gear and output gear
+			rtac = rdist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
+			ltac = ldist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
+			
+			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+			ltac = - ltac;
+			}
+		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
+		masterRight.set(ControlMode.Position, -rtac);
+		masterLeft.set(ControlMode.Position, -ltac);
+		
+		isMoving = true;
+		onTargetCountMoving = 0;
+		isReallyStalled = false;
+		stalledCount = 0;
+	}
 	// this method needs to be paired with checkMoveDistance()
 	public void moveDistanceAlongArc(int angle) {
 		stop(); // in case we were still doing something

@@ -100,7 +100,7 @@ public class Indicator extends Subsystem {
 
 	public void setYellow()
 	{
-		setHue(30);
+		setHue(45);
 	}
 
 	public void setGreen()
@@ -119,7 +119,7 @@ public class Indicator extends Subsystem {
 			if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 5) { // displays green if in target
 				setGreen();
 			}
-			else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 10) { // displays yellow if close to target
+			else if (Math.abs(camera.getAngleToTurnToCompositeTarget()) < 20) { // displays yellow if close to target
 				setYellow();
 			}
 			else { // displays red if far from target 
