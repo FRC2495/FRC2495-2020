@@ -20,8 +20,16 @@ public class ColorSensor {
     private final Color kYellowTarget = ColorMatch.makeColor(0.361, 0.524, 0.113);
     // They are creating the 4 color values that are our target
 
-    public String colorString = new String("");
+    public DetectedColor savedCol = null;
     public Color detectedColor;
+
+    public enum DetectedColor {
+		UNKNOWN,
+		BLUE,
+		GREEN,
+		RED,
+		YELLOW
+	}
 	
 	public ColorSensor() {
         colSensor = new ColorSensorV3(I2C.Port.kOnboard); // Creating a new color sensor on the onboard I2C Port
@@ -45,15 +53,15 @@ public class ColorSensor {
 
         // Checking to see if our saved result is equal to any of ur target collors and if so, saving thta color isa string 
         if (colResult != null && colResult.color == kBlueTarget) {
-            colorString = "B";
+            savedCol = DetectedColor.BLUE;
         } else if (colResult != null && colResult.color == kRedTarget) {
-            colorString = "R";
+            savedCol = DetectedColor.RED;
         } else if (colResult != null && colResult.color == kGreenTarget) {
-            colorString = "G";
+            savedCol = DetectedColor.GREEN;
         } else if (colResult != null && colResult.color == kYellowTarget) {
-            colorString = "Y";
+            savedCol = DetectedColor.YELLOW;
         } else {
-            colorString = "Unknown";
+            savedCol = DetectedColor.UNKNOWN;
         }
     }
 	
@@ -69,45 +77,8 @@ public class ColorSensor {
         return colSensor.getBlue();
     }
     // We are returning the saved result color
-    public String getDetectedColor() {
-        return colorString;
+    public DetectedColor getDetectedColor() {
+        return savedCol;
     }
-
-    // Lookin for The desired color from the field "R", "G", "B", "Y"
-    public String getFieldColor(){
-        if(DriverStation.getInstance().getGameSpecificMessage().length() > 0)
-        return  DriverStation.getInstance().getGameSpecificMessage();
-        else
-        return "No given target";
-    }
-
-    // To check if the field That both us and the field are reading the right color
-    public boolean correctColor(){
-        String red = "R";
-        String blue = "B";
-        String green = "G";
-        String yellow = "Y";
-
-        String desiredColor =  DriverStation.getInstance().getGameSpecificMessage(); //Field the color wants
-        String detectedColor = getDetectedColor(); //color we are seeing
-
-
-        if(desiredColor.equals(red) && detectedColor.equals(blue)){
-            return true;
-        }
-        else if(desiredColor.equals(blue) && detectedColor.equals(red)){
-            return true;
-        }
-        else if(desiredColor.equals(green) && detectedColor.equals(yellow)){
-            return true;
-        }
-        else if(desiredColor.equals(yellow) && detectedColor.equals(green)){
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    } 
 
 }

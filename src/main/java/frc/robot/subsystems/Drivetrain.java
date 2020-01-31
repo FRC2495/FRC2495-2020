@@ -408,6 +408,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	{
 		moveDistance(dist, REDUCED_PCT_OUTPUT);
 	}
+
 	
 	public void moveDistanceHighSpeed(double dist) // moves the distance in inch given
 	{
