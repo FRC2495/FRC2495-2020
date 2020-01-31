@@ -17,7 +17,7 @@ import frc.robot.interfaces.*;
 import frc.robot.sensors.*;
 //import frc.robot.commands.*;
 import frc.robot.subsystems.*;
-//import frc.robot.util.*;
+import frc.robot.util.*;
 
 
 /**
@@ -102,7 +102,7 @@ public class Robot extends TimedRobot {
 
 	public static PressureSensor pressureSensor;
 
-	public static ColorSensor colSensor;
+	public static ColorSensor colorSensor;
 	
 	// motorized devices
 	
@@ -124,7 +124,10 @@ public class Robot extends TimedRobot {
 	
 	public static /*I*/Hinge hingeControl;
 	
-	WPI_TalonSRX hinge; 
+	WPI_TalonSRX hinge;
+
+	public BaseMotorController spinnerMotor;
+	public static Spinner spinnerWheel;
 	
 	// pneumatic devices
 	
@@ -136,6 +139,8 @@ public class Robot extends TimedRobot {
 	// misc
 
 	public static Indicator indicator;
+
+	public static GameData gameData;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -205,7 +210,7 @@ public class Robot extends TimedRobot {
 
 		pressureSensor = new PressureSensor();
 
-		colSensor = new ColorSensor();
+		colorSensor = new ColorSensor();
 
 
 		// motorized devices
@@ -240,6 +245,11 @@ public class Robot extends TimedRobot {
 		// misc
 
 		indicator = new Indicator(camera);
+
+		spinnerMotor = new WPI_TalonSRX(7);
+		spinnerWheel = new Spinner(spinnerMotor,this);
+
+		gameData = new GameData();
 		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
@@ -359,7 +369,7 @@ public class Robot extends TimedRobot {
 		
 		camera.acquireTargets(false);
 
-		colSensor.updateColorSensor();
+		colorSensor.updateColorSensor();
 
 		updateToSmartDash();
 	}
@@ -389,7 +399,7 @@ public class Robot extends TimedRobot {
 		
 		camera.acquireTargets(false);
 
-		colSensor.updateColorSensor();
+		colorSensor.updateColorSensor();
 
 		updateToSmartDash();
 
@@ -450,9 +460,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putString("Release chosen", releaseChooser.getSelected());
 		SmartDashboard.putString("Auton option", autonOptionChooser.getSelected());
 
-		SmartDashboard.putNumber("Color Sensor Red", colSensor.getRed());
-		SmartDashboard.putNumber("Color Sensor Blue", colSensor.getBlue());
-		SmartDashboard.putNumber("Color Sensor Green", colSensor.getGreen());
+		SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
+		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
+		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {
