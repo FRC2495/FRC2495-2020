@@ -2,7 +2,7 @@ package frc.robot.util;
 
 import edu.wpi.first.wpilibj.DriverStation;
 
-import frc.robot.interfaces.*;
+//import frc.robot.interfaces.*;
 import frc.robot.sensors.ColorSensor;
 import frc.robot.sensors.ColorSensor.DetectedColor;
 
@@ -49,31 +49,33 @@ public class GameData {
 	}
 
 	public boolean matchSpecificedWithDetectedColor(ColorSensor colSensor_in){
-		  // To check if the field That both us and the field are reading the right color
-			colSensor = colSensor_in;
-			DetectedColor detectedColor = colSensor.getDetectedColor(); //color we are seeing
-			update();
-			SpecifiedColor specifiedColor = getSpecifiedColor();
-	
-			if(specifiedColor == SpecifiedColor.UNKNOWN || detectedColor == DetectedColor.UNKNOWN){
-				return false;
-			}
-			else if(specifiedColor == SpecifiedColor.RED && detectedColor == DetectedColor.BLUE){
-				return true;
-			}
-			else if(specifiedColor == SpecifiedColor.BLUE && detectedColor == DetectedColor.RED){
-				return true;
-			}
-			else if(specifiedColor == SpecifiedColor.GREEN && detectedColor == DetectedColor.YELLOW){
-				return true;
-			}
-			else if(specifiedColor == SpecifiedColor.YELLOW && detectedColor == DetectedColor.GREEN){
-				return true;
-			}
-			else{
-				return false;
-			}
-	
+		// To check if the field that both us and the field are reading the right color
+		colSensor = colSensor_in;
+
+		colSensor.updateColorSensor(); // just in case nobody forced update already
+		DetectedColor detectedColor = colSensor.getDetectedColor(); //color we are seeing
+
+		update();
+		SpecifiedColor specifiedColor = getSpecifiedColor();
+
+		if (specifiedColor == SpecifiedColor.UNKNOWN || detectedColor == DetectedColor.UNKNOWN){
+			return false;
+		}
+		else if (specifiedColor == SpecifiedColor.RED && detectedColor == DetectedColor.BLUE){
+			return true;
+		}
+		else if (specifiedColor == SpecifiedColor.BLUE && detectedColor == DetectedColor.RED){
+			return true;
+		}
+		else if (specifiedColor == SpecifiedColor.GREEN && detectedColor == DetectedColor.YELLOW){
+			return true;
+		}
+		else if (specifiedColor == SpecifiedColor.YELLOW && detectedColor == DetectedColor.GREEN){
+			return true;
+		}
+		else {
+			return false;
+		}
 		
 	}
 

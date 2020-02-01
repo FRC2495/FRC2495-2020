@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import frc.robot.interfaces.ICamera;
+import frc.robot.Ports;
 import frc.robot.commands.*;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -31,7 +32,7 @@ public class Indicator extends Subsystem {
 	{
 		camera = camera_in;
 		
-		led = new AddressableLED(9); // TODO use constant to specify PWM port
+		led = new AddressableLED(Ports.PWM.LED_STRIP);
 
 		// Reuse buffer
 		// Default to a length of 60, start empty output

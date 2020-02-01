@@ -86,4 +86,8 @@ public class Ports {
 			public static final int HOOK_UP = 7;
 			public static final int HOOK_DOWN = 6;
 		}
+
+		public static class PWM {
+			public static final int LED_STRIP = 9;
+		}
 }
