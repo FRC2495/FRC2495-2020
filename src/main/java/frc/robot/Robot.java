@@ -261,8 +261,8 @@ public class Robot extends TimedRobot {
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
 
-		gamepadRumbleUsingCameraCommand = new GamepadRumbleUsingCamera();
-		gamepadRumbleUsingCameraCommand.start();
+		gamepadRumbleUsingCameraCommand = new GamepadRumbleUsingCamera(); // must be created after OI
+		//gamepadRumbleUsingCameraCommand.start();
 
 		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(1);
 		indicatorTimedScrollRainbow.start();
@@ -366,6 +366,8 @@ public class Robot extends TimedRobot {
 		}
 
 		camera.setLedMode(ICamera.LedMode.PIPELINE);
+
+		gamepadRumbleUsingCameraCommand.start();
 	}
 
 	/**
@@ -398,6 +400,8 @@ public class Robot extends TimedRobot {
 	 */
 	@Override
 	public void disabledInit() {
+		gamepadRumbleUsingCameraCommand.cancel();
+
 		camera.setLedMode(ICamera.LedMode.FORCE_OFF);
 	}
 
@@ -412,7 +416,6 @@ public class Robot extends TimedRobot {
 		colorSensor.updateColorSensor();
 
 		updateToSmartDash();
-
 	}
 	
 	public void updateToSmartDash()
