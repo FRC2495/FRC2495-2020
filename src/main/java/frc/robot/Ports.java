@@ -49,6 +49,7 @@ public class Ports {
 			public static final int FRONT_CENTER = 5; // unused
 			public static final int REAR_CENTER = 6; // unused
 			public static final int ELEVATOR = 7;
+			public static final int SPINNER = 8;
 			public static final int GRASPER_LEFT = 8;
 			public static final int GRASPER_RIGHT = 9;
 			public static final int HINGE = 10;

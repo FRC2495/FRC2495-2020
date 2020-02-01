@@ -246,7 +246,7 @@ public class Robot extends TimedRobot {
 
 		indicator = new Indicator(camera);
 
-		spinnerMotor = new WPI_TalonSRX(7);
+		spinnerMotor = new WPI_TalonSRX(Ports.CAN.SPINNER);
 		spinnerWheel = new Spinner(spinnerMotor,this);
 
 		gameData = new GameData();
