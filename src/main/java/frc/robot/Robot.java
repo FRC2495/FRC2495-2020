@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import frc.robot.commands.GamepadRumbleUsingCamera;
+import frc.robot.commands.IndicatorTimedScrollRainbow;
 import frc.robot.interfaces.*;
 import frc.robot.sensors.*;
 //import frc.robot.commands.*;
@@ -36,8 +37,8 @@ public class Robot extends TimedRobot {
 	public static OI oi;
 	
 	Command m_autonomousCommand;
-
 	Command gamepadRumbleUsingCameraCommand;
+	Command indicatorTimedScrollRainbow;
 	
 	// choosers (for auton)
 	
@@ -262,6 +263,9 @@ public class Robot extends TimedRobot {
 
 		gamepadRumbleUsingCameraCommand = new GamepadRumbleUsingCamera();
 		gamepadRumbleUsingCameraCommand.start();
+
+		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(1);
+		indicatorTimedScrollRainbow.start();
 	} 
 
 	/**
