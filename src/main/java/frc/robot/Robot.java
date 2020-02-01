@@ -223,8 +223,8 @@ public class Robot extends TimedRobot {
 		elevator = new WPI_TalonSRX(Ports.CAN.ELEVATOR);
 		habElevator = new WPI_TalonSRX(Ports.CAN.HAB_ELEVATOR);
 
-		shooterLeft = new WPI_TalonSRX(Ports.CAN.GRASPER_LEFT);
-		shooterRight = new WPI_TalonSRX(Ports.CAN.GRASPER_RIGHT);
+		shooterLeft = new WPI_TalonSRX(Ports.CAN.SHOOTER_LEFT);
+		shooterRight = new WPI_TalonSRX(Ports.CAN.SHOOTER_RIGHT);
 
 		hinge = new WPI_TalonSRX(Ports.CAN.HINGE);
 
@@ -450,6 +450,8 @@ public class Robot extends TimedRobot {
 		
 		//SmartDashboard.putBoolean("Grasper IsGrasping?", grasper.isGrasping());
 		//SmartDashboard.putBoolean("Grasper IsReleasing?", grasper.isReleasing());
+
+		SmartDashboard.putBoolean("Spinner IsSpinning?", spinnerWheel.isSpinning());
 		
 		SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
 		SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	

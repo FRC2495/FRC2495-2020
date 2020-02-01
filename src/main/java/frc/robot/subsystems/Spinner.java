@@ -110,7 +110,7 @@ public class Spinner extends Subsystem{
 		spinnerMotor.configNominalOutputForward(0, TALON_TIMEOUT_MS);
 	}
 	
-	public boolean isSpining() {
+	public boolean isSpinning() {
 		return isSpinning;
 	}
 	

@@ -51,12 +51,13 @@ public class SpinnerColorMatch extends Command {
 	@Override
 	protected boolean isFinished() {
 		return Robot.gameData.matchSpecificedWithDetectedColor(Robot.colorSensor);
+		//return false;
 	}
 
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		System.out.println("GrasperGraspUsingSonar: end");
+		System.out.println("SpinnerColorMatch: end");
 		Robot.spinnerWheel.stop();
 	}
 
@@ -64,7 +65,7 @@ public class SpinnerColorMatch extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		System.out.println("GrasperGraspUsingSonar: interrupted");
+		System.out.println("SpinnerColorMatch: interrupted");
 		end();
 	}
 }
