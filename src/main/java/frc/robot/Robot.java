@@ -463,6 +463,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
 		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
+		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString()); 
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {

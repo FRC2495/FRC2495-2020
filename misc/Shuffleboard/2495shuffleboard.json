@@ -851,7 +851,8 @@
                   "_title": "ADXRS450_Gyro[0]",
                   "Visuals/Major tick spacing": 45.0,
                   "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true
+                  "Visuals/Show tick mark ring": true,
+                  "Visuals/Counter clockwise": false
                 },
                 {
                   "_type": "Relay Widget",
@@ -932,7 +933,10 @@
                 {
                   "_type": "Graph",
                   "_title": "Graph (no sources)",
-                  "Graph/Visible time": 30.0
+                  "Graph/Visible time": 30.0,
+                  "Y-axis/Automatic bounds": true,
+                  "Y-axis/Upper bound": 1.0,
+                  "Y-axis/Lower bound": -1.0
                 }
               ]
             }
@@ -985,7 +989,8 @@
                   "_title": "ADXRS450_Gyro[0]",
                   "Visuals/Major tick spacing": 45.0,
                   "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true
+                  "Visuals/Show tick mark ring": true,
+                  "Visuals/Counter clockwise": false
                 },
                 {
                   "_type": "Voltage View",
@@ -1140,7 +1145,8 @@
                   "_title": "ADXRS450_Gyro[0]",
                   "Visuals/Major tick spacing": 45.0,
                   "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true
+                  "Visuals/Show tick mark ring": true,
+                  "Visuals/Counter clockwise": false
                 },
                 {
                   "_type": "Voltage View",
@@ -1313,7 +1319,8 @@
                   "_title": "ADXRS450_Gyro[0]",
                   "Visuals/Major tick spacing": 45.0,
                   "Visuals/Starting angle": 180.0,
-                  "Visuals/Show tick mark ring": true
+                  "Visuals/Show tick mark ring": true,
+                  "Visuals/Counter clockwise": false
                 },
                 {
                   "_type": "Speed Controller",
@@ -2060,6 +2067,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Pressure",
               "_title": "SmartDashboard/Pressure"
+            }
+          },
+          "6,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Color Detected",
+              "_title": "SmartDashboard/Color Detected"
             }
           }
         }
