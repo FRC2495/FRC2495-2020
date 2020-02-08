@@ -12,7 +12,7 @@ import frc.robot.commands.*;
 import frc.robot.auton.AutonConstants;
 
 
-public class StartingPositionOneToAllianceTrench extends CommandGroup {
+public class StartingPositionThreeToAllianceTrench extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
@@ -20,12 +20,12 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         //Left is equal to 1
         //Right is equal to -1
 
-	public StartingPositionOneToAllianceTrench(String autonOption) {
+	public StartingPositionThreeToAllianceTrench(String autonOption) {
     
-        
+        addSequential(new DrivetrainTurnAngleUsingPidController(AutonConstants.ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        //To Turning from starting point 2 to Drop Zone 
 
-
-    addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
+    addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
     // TODO AddSequentialScore
