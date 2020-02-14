@@ -144,121 +144,8 @@ public class Hinge extends Subsystem implements IHinge {
 	}
 
 	// Private. We move until we reach the limit switch (in open loop). This gives us the physical zero
-	private void homePart1() {
-		// we assume that the reverse limit switch is enabled
-		//hinge.configSetParameter(ParamEnum.eClearPositionOnLimitR, 1, 0, 0, TALON_TIMEOUT_MS);
-		hinge.set(ControlMode.PercentOutput,-HOMING_PCT_OUTPUT); // we start moving down
-		
-		isHomingPart1 = true;
-	}
+
 	
-	// Private. We move back up a little (in closed loop). This gives us the virtual/logical zero.
-	// The purpose of this is to avoid hitting the limit switch too hard when we go down at full speed.
-	private void homePart2() {
-		hinge.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
-		hinge.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we set the current position to zero
-		
-		setPIDParameters(); // we switch to position mode
-		tac = +VIRTUAL_HOME_OFFSET_TICKS;
-		hinge.set(ControlMode.Position,tac); // we move to virtual zero
-		
-		isHomingPart2 = true;
-		onTargetCount = 0;
-	}
-	
-	// homes the hinge
-	// This is done in two steps:
-	// step 1: if not already at the switch, we go down slowly until we hit the limit switch.
-	// step 2: we go back up a little and mark the position as the virtual/logical zero.
-	public void home() {
-		hasBeenHomed = false; // flags that it has not been homed
-		
-		if (!getLimitSwitchState()) { 	// if we are not already at the switch
-										// we need to go down to find limit switch					
-			homePart1();
-			isHomingPart2 = true; // then we need to go to virtual zero later
-		} else {
-			isHomingPart1 = false; 	// we don't need to go down
-									// but we still need to go to virtual zero		
-			homePart2(); // we start part 2 directly
-		}
-	}
-	
-	// DO NOT TRY THIS AT HOME
-	// This is to fake homing the hinge when we cannot home it for real (e.g. because we have a cube loaded).
-	// It might be useful in auton... 
-	// And unlike the real home there is no need to wait for this method.
-	// THIS ASSUMES THAT THE HINGE IS ALL THE WAY DOWN!
-	public void fakeHomeWhenDown() {
-		hasBeenHomed = false; // flags that it has not been homed
-		
-		if (getLimitSwitchState()) { // there is a limit to how far we want to fake things... 						
-			System.out.println("REFUSING TO FAKE HOME WHEN YOU COULD HOME!");
-			return;
-		}
-		
-		stop(); // we get out of closed-loop if we were
-		// At this point we should be in percent output mode. This is needed to set the sensor position
-		
-		hinge.setSelectedSensorPosition(FAKE_HOME_POSITION_TICKS, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we claim to be at the fake home
-		
-		hasBeenHomed = true;
-	}
-
-	// this method need to be called to assess the homing progress
-	// (and it takes care of going to step 2 if needed)
-	public boolean checkHome() {
-		if (isHomingPart1) {
-			isHomingPart1 = !getLimitSwitchState(); // we are not done until we reach the switch
-
-			if (!isHomingPart1) {
-				System.out.println("You have reached the home.");
-				hinge.set(ControlMode.PercentOutput,0); // turn power off
-				
-				homePart2(); // we move on to part 2
-			}
-		} else if (isHomingPart2) {
-			isHomingPart2 = isReallyHomingPart2();
-			//isHomingPart2 = false;
-
-			if (!isHomingPart2) {
-				System.out.println("You have reached the virtual zero.");
-
-				hinge.set(ControlMode.PercentOutput,0); // we stop AND MAKE SURE WE DO NOT MOVE WHEN SETTING POSITION
-				hinge.setSelectedSensorPosition(0, PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // we mark the virtual zero
-
-				hasBeenHomed = true;
-			}
-		}
-
-		return isHoming();
-	}
-
-	// Private. Checks if homing step 2 is done.
-	private boolean isReallyHomingPart2() {
-
-		double error = hinge.getClosedLoopError(PRIMARY_PID_LOOP);
-		
-		boolean isOnTarget = (Math.abs(error) < TICK_THRESH);
-		
-		if (isOnTarget) { // if we are on target in this iteration 
-			onTargetCount++; // we increase the counter
-		} else { // if we are not on target in this iteration
-			if (onTargetCount > 0) { // even though we were on target at least once during a previous iteration
-				onTargetCount = 0; // we reset the counter as we are not on target anymore
-				System.out.println("Triple-check failed (hinge homing part 2).");
-			} else {
-				// we are definitely homing
-				//System.out.println("Hinge homing part 2 error: " + Math.abs(error));
-			}
-		}
-		
-		if (onTargetCount > MOVE_ON_TARGET_MINIMUM_COUNT) { // if we have met the minimum
-			return false;
-		}
-			
-		return true;
-	}
 	
 	// This method should be called to assess the progress of a move
 	public boolean tripleCheckMove() {
@@ -367,18 +254,6 @@ public class Hinge extends Subsystem implements IHinge {
 		return hinge.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 
-	public boolean isHoming() {
-		return isHomingPart1 || isHomingPart2;
-	}
-	
-	public boolean isHomingPart1() {
-		return isHomingPart1;
-	}
-	
-	public boolean isHomingPart2() {
-		return isHomingPart2;
-	}
-
 	public boolean isMoving() {
 		return isMoving;
 	}
@@ -452,7 +327,7 @@ public class Hinge extends Subsystem implements IHinge {
 	// for debug purpose only
 	public void joystickControl(Joystick joystick)
 	{
-		if (!isMoving && !isHoming()) // if we are already doing a move we don't take over
+		if (!isMoving) // if we are already doing a move we don't take over
 		{
 			hinge.set(ControlMode.PercentOutput, -joystick.getY());
 		}
@@ -461,10 +336,6 @@ public class Hinge extends Subsystem implements IHinge {
 	public double getTarget() {
 		return tac;
 	}
-	
-	public boolean hasBeenHomed()
-	{
-		return hasBeenHomed;
-	}
+
 
 }

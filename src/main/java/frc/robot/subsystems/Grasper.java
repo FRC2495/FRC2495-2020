@@ -21,7 +21,6 @@ import frc.robot.sensors.Sonar;
  *
  */
 public class Grasper extends Subsystem implements IGrasper{
-
 	/**
 	 * 
 	 */
@@ -38,8 +37,7 @@ public class Grasper extends Subsystem implements IGrasper{
 	static final int GRASP_DISTANCE_INCHES = 13;
 	static final int RELEASE_DISTANCE_INCHES = 17;
 	
-	BaseMotorController grasperLeft , grasperRight; 
-	Sonar sonar;
+	BaseMotorController grasperLeft; 
 	
 	// shared grasp and release settings
 	private int onTargetCount; // counter indicating how many times/iterations we were on target
@@ -51,43 +49,32 @@ public class Grasper extends Subsystem implements IGrasper{
 	Robot robot;
 	
 	
-	public Grasper(BaseMotorController grasperLeft_in, BaseMotorController grasperRight_in, Robot robot_in) {
+	public Grasper(BaseMotorController grasperLeft_in, Robot robot_in) {
 		
 		grasperLeft = grasperLeft_in;
-		grasperRight = grasperRight_in;
 		
 		robot = robot_in;
 
 		grasperLeft.configFactoryDefault();
-		grasperRight.configFactoryDefault();
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
 		grasperLeft.setNeutralMode(NeutralMode.Brake);
-		grasperRight.setNeutralMode(NeutralMode.Brake);
 		
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		grasperLeft.setInverted(true);
-		grasperRight.setInverted(false);
-		
+
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
-		grasperRight.follow(grasperLeft);
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
-	}
-	
-	public Grasper(BaseMotorController grasperLeft_in, BaseMotorController grasperRight_in, Sonar sonar_in, Robot robot_in) {
-		this(grasperLeft_in, grasperRight_in, robot_in);
-		
-		sonar = sonar_in;
 	}
 	
 	@Override
@@ -129,75 +116,14 @@ public class Grasper extends Subsystem implements IGrasper{
 		isReleasing = false;
 	}
 	
-	public boolean tripleCheckGraspUsingSonar() {
-		if (sonar != null && isGrasping) {
-						
-			boolean isOnTarget = sonar.getRangeInInches() < GRASP_DISTANCE_INCHES;
-			
-			if (isOnTarget) { // if we are on target in this iteration 
-				onTargetCount++; // we increase the counter
-			} else { // if we are not on target in this iteration
-				if (onTargetCount > 0) { // even though we were on target at least once during a previous iteration
-					onTargetCount = 0; // we reset the counter as we are not on target anymore
-					System.out.println("Triple-check failed (grasping).");
-				} else {
-					// we are definitely moving
-					//System.out.println("Grasping. Sonar range: " + sonar.getRangeInInches());
-				}
-			}
-			
-			if (onTargetCount > ON_TARGET_MINIMUM_COUNT) { // if we have met the minimum
-				isGrasping = false;
-			}
-			
-			if (!isGrasping) {
-				System.out.println("You have reached the target (grasping).");
-				stop();				 
-			}
-		}
-		return isGrasping;
-	}
-	
-	public boolean tripleCheckReleaseUsingSonar() {
-		if (sonar != null && isReleasing) {
-						
-			boolean isOnTarget = sonar.getRangeInInches() > RELEASE_DISTANCE_INCHES;
-			
-			if (isOnTarget) { // if we are on target in this iteration 
-				onTargetCount++; // we increase the counter
-			} else { // if we are not on target in this iteration
-				if (onTargetCount > 0) { // even though we were on target at least once during a previous iteration
-					onTargetCount = 0; // we reset the counter as we are not on target anymore
-					System.out.println("Triple-check failed (releasing).");
-				} else {
-					// we are definitely moving
-					//System.out.println("Releasing. Sonar range: " + sonar.getRangeInInches());
-				}
-			}
-			
-			if (onTargetCount > ON_TARGET_MINIMUM_COUNT) { // if we have met the minimum
-				isReleasing = false;
-			}
-			
-			if (!isReleasing) {
-				System.out.println("You have reached the target (releasing).");
-				stop();				 
-			}
-		}
-		return isReleasing;
-	}
 		
 	// NOTE THAT THIS METHOD WILL IMPACT BOTH OPEN AND CLOSED LOOP MODES
 	public void setNominalAndPeakOutputs(double peakOutput)
 	{
 		grasperLeft.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
 		grasperLeft.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
-		grasperRight.configPeakOutputForward(peakOutput, TALON_TIMEOUT_MS);
-		grasperRight.configPeakOutputReverse(-peakOutput, TALON_TIMEOUT_MS);
-		
-		grasperRight.configNominalOutputForward(0, TALON_TIMEOUT_MS);
+
 		grasperLeft.configNominalOutputForward(0, TALON_TIMEOUT_MS);
-		grasperRight.configNominalOutputReverse(0, TALON_TIMEOUT_MS);
 		grasperLeft.configNominalOutputReverse(0, TALON_TIMEOUT_MS);
 	}
 	

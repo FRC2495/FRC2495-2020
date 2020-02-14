@@ -20,7 +20,7 @@ public class StartingPositionThreeToOpponentTrench extends CommandGroup {
         //Left is equal to -1
         //Right is equal to 1
 
-	public StartingPositionThreeToOpponentTrench(String autonOption) {
+	public StartingPositionThreeToOpponentTrench() {
     
         addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * AutonConstants.ANGLE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
         //To Turning from starting point 3 to Drop Zone 

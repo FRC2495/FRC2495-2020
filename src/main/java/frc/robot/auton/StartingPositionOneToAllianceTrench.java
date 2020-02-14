@@ -20,7 +20,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         //Left is equal to 1
         //Right is equal to -1
 
-	public StartingPositionOneToAllianceTrench(String autonOption) {
+	public StartingPositionOneToAllianceTrench() {
     
         
 

@@ -11,19 +11,7 @@ public interface IHinge {
 	// This is done in two steps:
 	// step 1: if not already at the switch, we go down slowly until we hit the limit switch.
 	// step 2: we go back up a little and mark the position as the virtual/logical zero.
-	public void home();
-	
-	// DO NOT TRY THIS AT HOME
-	// This is to fake homing the hinge when we cannot home it for real (e.g. because we have a cube loaded).
-	// It might be useful in auton... 
-	// And unlike the real home there is no need to wait for this method.
-	// THIS ASSUMES THAT THE HINGE IS ALL THE WAY DOWN!
-	public void fakeHomeWhenDown();
 
-	// this method need to be called to assess the homing progress
-	// (and it takes care of going to step 2 if needed)
-	public boolean checkHome();
-	
 	// This method should be called to assess the progress of a move
 	public boolean tripleCheckMove();
 	
@@ -36,8 +24,6 @@ public interface IHinge {
 	public double getPosition();
 
 	public double getEncoderPosition();
-
-	public boolean isHoming();
 
 	public boolean isMoving();
 	
@@ -56,6 +42,5 @@ public interface IHinge {
 	
 	public double getTarget();
 	
-	public boolean hasBeenHomed();
 
 }

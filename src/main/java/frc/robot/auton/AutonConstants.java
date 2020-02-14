@@ -23,5 +23,9 @@ public class AutonConstants {
     public static final int ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH = 42;
     
     public static final double DISTANCE_FROM_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_END = 260;
+
+    public static final double DISTANCE_FROM_REV_POINT_ONE_TO_DROP_ZONE = 131.77; 
+
+    public static final int ANGLE_BETWEEN_DROP_ZONE_AND_REV_POINT_ONE = 0; 
     
 }

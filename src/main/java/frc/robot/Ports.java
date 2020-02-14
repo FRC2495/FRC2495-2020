@@ -42,6 +42,7 @@ public class Ports {
 			public static final int PDP = 0;*/
 			
 			// 2019 robot
+			/*
 			public static final int RIGHT_FRONT = 1;
 			public static final int RIGHT_REAR = 2;
 			public static final int LEFT_FRONT = 3;
@@ -55,6 +56,18 @@ public class Ports {
 			public static final int WINCH = 11; 
 			public static final int HAB_ELEVATOR = 12;
 			public static final int SPINNER = 13;
+			public static final int PCM = 9;
+			public static final int PDP = 0;
+			*/
+
+			//2020 Robot
+			public static final int RIGHT_FRONT = 1;
+			public static final int RIGHT_REAR = 2;
+			public static final int LEFT_FRONT = 3;
+			public static final int LEFT_REAR = 4;
+			public static final int GRASPER = 5;
+			public static final int HINGE = 10;
+			public static final int SPINNER = 11; 
 			public static final int PCM = 9;
 			public static final int PDP = 0;
 		}

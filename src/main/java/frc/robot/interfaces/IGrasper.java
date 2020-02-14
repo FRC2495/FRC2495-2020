@@ -9,10 +9,6 @@ public interface IGrasper {
 	public void release();
 	
 	public void stop();
-	
-	public boolean tripleCheckGraspUsingSonar();
-	
-	public boolean tripleCheckReleaseUsingSonar();
 		
 	// NOTE THAT THIS METHOD WILL IMPACT BOTH OPEN AND CLOSED LOOP MODES
 	public void setNominalAndPeakOutputs(double peakOutput);

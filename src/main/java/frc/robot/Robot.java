@@ -52,20 +52,15 @@ public class Robot extends TimedRobot {
 	private String gamePieceSelected;
 	private SendableChooser<String> gamePieceChooser = new SendableChooser<>();
 	
-	public static final String START_POSITION_HAB1_LEFT = "Hab 1 Left";
-	public static final String START_POSITION_HAB1_CENTER_LEFT = "Hab 1 Center Left";
-	public static final String START_POSITION_HAB1_CENTER_RIGHT = "Hab 1 Center Right";
-	public static final String START_POSITION_HAB1_RIGHT = "Hab 1 Right";
-	public static final String START_POSITION_HAB2_LEFT = "Hab 2 Left";
-	public static final String START_POSITION_HAB2_RIGHT = "Hab 2 Right";
+	public static final String START_POSITION_1 = "Starting Position 1";
+	public static final String START_POSITION_2 = "Starting Position 2";
+	public static final String START_POSITION_3 = "Starting Position 3";
 	private String startPosition;
 	private SendableChooser<String> startPositionChooser = new SendableChooser<>();
 
-	public static final String MAIN_TARGET_ROCKET = "Rocket";
-	public static final String MAIN_TARGET_SHIP_BAY0 = "Ship Bay 0";
-	public static final String MAIN_TARGET_SHIP_BAY1 = "Ship Bay 1";
-	public static final String MAIN_TARGET_SHIP_BAY2 = "Ship Bay 2";
-	public static final String MAIN_TARGET_SHIP_BAY3 = "Ship Bay 3";
+	public static final String MAIN_TARGET_OPP_TRENCH= "Rocket";
+	public static final String MAIN_TARGET_ALI_TRENCH= "Ship Bay 0";
+	public static final String MAIN_TARGET_REV_POINT= "Ship Bay 1";
 	private String mainTarget;
 	private SendableChooser<String> mainTargetChooser = new SendableChooser<>();
 	
@@ -129,6 +124,7 @@ public class Robot extends TimedRobot {
 	public static /*I*/Hinge hingeControl;
 	
 	WPI_TalonSRX hinge;
+	WPI_TalonSRX grasp;
 
 	public BaseMotorController spinnerMotor;
 	public static Spinner spinnerWheel;
@@ -154,27 +150,14 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		// choosers (for auton)
 		
-		autonChooser.setDefaultOption("Do Nothing", AUTON_DO_NOTHING);
-		autonChooser.addOption("My Auto", AUTON_CUSTOM);
-		SmartDashboard.putData("Auto choices", autonChooser);
-
-		gamePieceChooser.setDefaultOption("Hatch Panel", GAME_PIECE_HATCH_PANEL);
-		gamePieceChooser.addOption("Cargo", GAME_PIECE_CARGO);
-		SmartDashboard.putData("Game piece choices", gamePieceChooser);
-		
-		startPositionChooser.addOption("Hab 1 Left", START_POSITION_HAB1_LEFT);
-		startPositionChooser.setDefaultOption("Hab 1 Center Left", START_POSITION_HAB1_CENTER_LEFT);
-		startPositionChooser.addOption("Hab 1 Center Right", START_POSITION_HAB1_CENTER_RIGHT);
-		startPositionChooser.addOption("Hab 1 Right", START_POSITION_HAB1_RIGHT);
-		startPositionChooser.addOption("Hab 2 Left", START_POSITION_HAB2_LEFT);
-		startPositionChooser.addOption("Hab 2 Right", START_POSITION_HAB2_RIGHT);
+		startPositionChooser.addOption("Starting Position 1", START_POSITION_1);
+		startPositionChooser.setDefaultOption("Starting Position 2", START_POSITION_2);
+		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
 		SmartDashboard.putData("Start positions", startPositionChooser);
 
-		mainTargetChooser.addOption("Rocket", MAIN_TARGET_ROCKET);
-		mainTargetChooser.setDefaultOption("Ship Bay 0", MAIN_TARGET_SHIP_BAY0);
-		mainTargetChooser.addOption("Ship Bay 1", MAIN_TARGET_SHIP_BAY1);
-		mainTargetChooser.addOption("Ship Bay 2", MAIN_TARGET_SHIP_BAY2);
-		mainTargetChooser.addOption("Ship Bay 3", MAIN_TARGET_SHIP_BAY3);
+		mainTargetChooser.addOption("Rocket", MAIN_TARGET_ALI_TRENCH);
+		mainTargetChooser.setDefaultOption("Ship Bay 0", MAIN_TARGET_OPP_TRENCH);
+		mainTargetChooser.addOption("Ship Bay 1", MAIN_TARGET_REV_POINT);
 		SmartDashboard.putData("Main targets", mainTargetChooser);
 		
 		cameraOptionChooser.setDefaultOption("Always", CAMERA_OPTION_USE_ALWAYS);
@@ -188,10 +171,6 @@ public class Robot extends TimedRobot {
 		sonarOptionChooser.addOption("Grasp Only", SONAR_OPTION_USE_GRASP_ONLY);		
 		sonarOptionChooser.addOption("Never", SONAR_OPTION_USE_NEVER);
 		SmartDashboard.putData("Sonar options", sonarOptionChooser);
-		
-		releaseChooser.setDefaultOption("Release", GRASPER_OPTION_RELEASE);
-		releaseChooser.addOption("Don't release", GRASPER_OPTION_DONT_RELEASE);
-		SmartDashboard.putData("Release options", releaseChooser);
 
 		autonOptionChooser.setDefaultOption("Reload", AUTON_OPTION_RELOAD);
 		autonOptionChooser.addOption("Don't Reload", AUTON_OPTION_DONT_RELOAD);
@@ -224,18 +203,13 @@ public class Robot extends TimedRobot {
 		rearLeft = new WPI_VictorSPX(Ports.CAN.LEFT_REAR);
 		rearRight = new WPI_VictorSPX(Ports.CAN.RIGHT_REAR);
 
-		elevator = new WPI_TalonSRX(Ports.CAN.ELEVATOR);
-		habElevator = new WPI_TalonSRX(Ports.CAN.HAB_ELEVATOR);
-
-		shooterLeft = new WPI_TalonSRX(Ports.CAN.SHOOTER_LEFT);
-		shooterRight = new WPI_TalonSRX(Ports.CAN.SHOOTER_RIGHT);
-
 		hinge = new WPI_TalonSRX(Ports.CAN.HINGE);
+		grasp = new WPI_TalonSRX(Ports.CAN.GRASPER);
 
 		drivetrain = new Drivetrain( frontLeft, frontRight, rearLeft, rearRight, gyro, this, camera);	
 		
 		hingeControl = new Hinge(hinge, this);
-		
+		grasper = new Grasper(grasp, this);
 
 		// pneumatic devices
 
@@ -446,10 +420,8 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putBoolean("Hinge Forward Limit Switch", hingeControl.getForwardLimitSwitchState());
 		SmartDashboard.putNumber("Hinge Position", hingeControl.getPosition());
 		SmartDashboard.putNumber("Hinge Enc Position", hingeControl.getEncoderPosition());
-		SmartDashboard.putBoolean("Hinge IsHoming?", hingeControl.isHoming());
 		SmartDashboard.putBoolean("Hinge IsMoving?", hingeControl.isMoving());
 		SmartDashboard.putNumber("Hinge Target", hingeControl.getTarget());
-		SmartDashboard.putBoolean("Hinge Has Been Homed?", hingeControl.hasBeenHomed());
 		SmartDashboard.putBoolean("Hinge isDown", hingeControl.isDown());
 		SmartDashboard.putBoolean("Hinge isMidway", hingeControl.isMidway());
 		SmartDashboard.putBoolean("Hinge isUp", hingeControl.isUp());
