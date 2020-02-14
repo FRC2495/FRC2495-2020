@@ -6,9 +6,9 @@ public class AutonConstants {
 
     public static final double DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE = 186.75;
 
-    //public static final double DISTANCE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE = 120;
+    public static final double DISTANCE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE = 161.5;
     
-    //public static final int ANGLE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE = 30;
+    public static final int ANGLE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE = 48;
 
     public static final int ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE = 30;
     
@@ -18,5 +18,10 @@ public class AutonConstants {
     
     public static final int ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH = 18;
 
+    public static final double DISTANCE_FROM_OPPONENT_TRENCH_TO_DROP_ZONE = 277.59;
 
+    public static final int ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH = 42;
+    
+    public static final double DISTANCE_FROM_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_END = 260;
+    
 }
