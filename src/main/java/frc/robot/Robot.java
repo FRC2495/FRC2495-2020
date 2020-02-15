@@ -58,9 +58,9 @@ public class Robot extends TimedRobot {
 	private String startPosition;
 	private SendableChooser<String> startPositionChooser = new SendableChooser<>();
 
-	public static final String MAIN_TARGET_OPP_TRENCH= "Rocket";
-	public static final String MAIN_TARGET_ALI_TRENCH= "Ship Bay 0";
-	public static final String MAIN_TARGET_REV_POINT= "Ship Bay 1";
+	public static final String MAIN_TARGET_OPPONENT_TRENCH= "Opponent Trench";
+	public static final String MAIN_TARGET_ALLIANCE_TRENCH= "Alliance Trench";
+	public static final String MAIN_TARGET_RENDEZVOUS_POINT= "RendezVous Point";
 	private String mainTarget;
 	private SendableChooser<String> mainTargetChooser = new SendableChooser<>();
 	
@@ -155,9 +155,9 @@ public class Robot extends TimedRobot {
 		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
 		SmartDashboard.putData("Start positions", startPositionChooser);
 
-		mainTargetChooser.addOption("Rocket", MAIN_TARGET_ALI_TRENCH);
-		mainTargetChooser.setDefaultOption("Ship Bay 0", MAIN_TARGET_OPP_TRENCH);
-		mainTargetChooser.addOption("Ship Bay 1", MAIN_TARGET_REV_POINT);
+		mainTargetChooser.addOption("Alliance Trench", MAIN_TARGET_ALLIANCE_TRENCH);
+		mainTargetChooser.setDefaultOption("Opponent Trench", MAIN_TARGET_OPPONENT_TRENCH);
+		mainTargetChooser.addOption("RendezVous Point", MAIN_TARGET_RENDEZVOUS_POINT);
 		SmartDashboard.putData("Main targets", mainTargetChooser);
 		
 		cameraOptionChooser.setDefaultOption("Always", CAMERA_OPTION_USE_ALWAYS);

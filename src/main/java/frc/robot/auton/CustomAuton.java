@@ -61,13 +61,13 @@ public class CustomAuton extends CommandGroup {
 		switch (startPosition) {
 			case Robot.START_POSITION_1:
 				switch (mainTarget) {
-					case Robot.MAIN_TARGET_ALI_TRENCH:
+					case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
 						addSequential(new StartingPositionOneToAllianceTrench());
 						break;
-					case Robot.MAIN_TARGET_OPP_TRENCH:
+					case Robot.MAIN_TARGET_OPPONENT_TRENCH:
 						addSequential(new StartingPositionOneToOpponentTrench());
 						break;
-                    case Robot.MAIN_TARGET_REV_POINT:
+                    case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
 						//addSequential(new StartingPositionOnetoRendevousPoint(autonOption));
 						break;
 					default:
@@ -78,13 +78,13 @@ public class CustomAuton extends CommandGroup {
 
 			case Robot.START_POSITION_2:
             switch (mainTarget) {
-                case Robot.MAIN_TARGET_ALI_TRENCH:
+                case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
                     addSequential(new StartingPositionTwoToAllianceTrench());
                     break;
-                case Robot.MAIN_TARGET_OPP_TRENCH:
+                case Robot.MAIN_TARGET_OPPONENT_TRENCH:
                     addSequential(new StartingPositionTwoToOpponentTrench());
                     break;
-                case Robot.MAIN_TARGET_REV_POINT:
+                case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
                     //addSequential(new StartingPositionTwotoRendevousPoint(autonOption));
                     break;
                 default:
@@ -95,13 +95,13 @@ public class CustomAuton extends CommandGroup {
 
 				case Robot.START_POSITION_3:
 				switch (mainTarget) {
-					case Robot.MAIN_TARGET_ALI_TRENCH:
+					case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
 						addSequential(new StartingPositionThreeToAllianceTrench());
 						break;
-					case Robot.MAIN_TARGET_OPP_TRENCH:
+					case Robot.MAIN_TARGET_OPPONENT_TRENCH:
 						addSequential(new StartingPositionThreeToOpponentTrench());
 						break;
-                    case Robot.MAIN_TARGET_REV_POINT:
+                    case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
 						//addSequential(new StartingPositionThreetoRendevousPoint(autonOption));
 						break;
 					default:
