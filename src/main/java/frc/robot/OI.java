@@ -157,10 +157,12 @@ public class OI {
 		gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
 
 		gamepadB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.B);
-		gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
+		//gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
+		gamepadB.whileHeld(new GrasperRelease());
 
 		gamepadA = new JoystickButton(gamepad, ControllerBase.GamepadButtons.A);
-		gamepadA.whileHeld(new VomitShooterRevBeforeFire());
+		//gamepadA.whileHeld(new VomitShooterRevBeforeFire());
+		gamepadA.whileHeld(new GrasperGrasp());
 
 
 		joyRight = new Joystick(Ports.USB.RIGHT);
@@ -197,8 +199,10 @@ public class OI {
 		joyLeftBtn11 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN11);
 		
 		joyLeftBtn10 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN10);
+		joyLeftBtn10.whileHeld(new GrasperJoystickControl());
 
 		joyLeftBtn9 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN9);
+		joyLeftBtn9.whileHeld(new HingeJoystickControl());
 
 		joyLeftBtn8 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN8);
 
