@@ -112,18 +112,23 @@ public class OI {
 		gamepad = new Joystick(Ports.USB.GAMEPAD);
 
 		gamepadRYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RY);
+		gamepadRYp.whenPressed(new HingeMoveUp());
 
 		gamepadRYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RY,false);
+		gamepadRYn.whenPressed(new HingeMoveUp());
 
 		gamepadRXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RX);
+		gamepadRXp.whenPressed(new HingeMoveUp());
 
 		gamepadRXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RX,false);
+		gamepadRXn.whenPressed(new HingeMoveUp());
 
 		gamepadRT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.RT);
-		gamepadRT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));
+		//gamepadRT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));
+		gamepadRT.whenPressed(new HingeMoveDown());
 
 		gamepadLT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LT);
-		gamepadLT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
+		//gamepadLT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
 
@@ -145,16 +150,18 @@ public class OI {
 		gamepadBack.whileHeld(new FullCalibrateAndReset());
 
 		gamepadRB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.RB);
-		gamepadRB.whenPressed(new ShooterPusherDown());
+		//gamepadRB.whenPressed(new ShooterPusherDown());
+		gamepadRB.whenPressed(new HingeMoveMidway());
 
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
-		gamepadLB.whenPressed(new ShooterPusherUp());
+		//gamepadLB.whenPressed(new ShooterPusherUp());
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
-		gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
+		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
-		gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
+		//gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
+		gamepadX.whenPressed(new HingeAndGrasperStop());
 
 		gamepadB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.B);
 		//gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
