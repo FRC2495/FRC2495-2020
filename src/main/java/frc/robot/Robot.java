@@ -113,20 +113,21 @@ public class Robot extends TimedRobot {
 	BaseMotorController rearRight;
 	
 
-	WPI_TalonSRX elevator;
-	WPI_TalonSRX habElevator;
+	//WPI_TalonSRX elevator;
+	//WPI_TalonSRX habElevator;
 
 	public static /*I*/Grasper grasper;
 	
-	BaseMotorController shooterLeft;
-	BaseMotorController shooterRight;
+	//BaseMotorController shooterLeft;
+	//BaseMotorController shooterRight;
 	
 	public static /*I*/Hinge hingeControl;
 	
-	WPI_TalonSRX hinge;
+	WPI_TalonSRX hinge_master;
+	BaseMotorController hinge_follower;
 	WPI_TalonSRX grasp;
 
-	public BaseMotorController spinnerMotor;
+	//public BaseMotorController spinnerMotor;
 	public static Spinner spinnerWheel;
 	
 	// pneumatic devices
@@ -203,29 +204,34 @@ public class Robot extends TimedRobot {
 		rearLeft = new WPI_VictorSPX(Ports.CAN.LEFT_REAR);
 		rearRight = new WPI_VictorSPX(Ports.CAN.RIGHT_REAR);
 
-		hinge = new WPI_TalonSRX(Ports.CAN.HINGE);
+		hinge_master = new WPI_TalonSRX(Ports.CAN.HINGE_MASTER);
+		hinge_follower = new WPI_TalonSRX(Ports.CAN.HINGE_FOLLOWER);
+
 		grasp = new WPI_TalonSRX(Ports.CAN.GRASPER);
 
 		drivetrain = new Drivetrain( frontLeft, frontRight, rearLeft, rearRight, gyro, this, camera);	
 		
-		hingeControl = new Hinge(hinge, this);
+		hingeControl = new Hinge(hinge_master, hinge_follower, this);
+		
 		grasper = new Grasper(grasp, this);
+
+		//spinnerMotor = new WPI_TalonSRX(Ports.CAN.SPINNER);
+		//spinnerWheel = new Spinner(spinnerMotor,this);
+
+		//vomitShooter = new VomitShooter(shooterLeft, shooterRight, this); 
+
 
 		// pneumatic devices
 
 		compressor = new Compressor();
 		compressor.checkCompressor();
-
-		vomitShooter = new VomitShooter(shooterLeft, shooterRight, this);    
-		shooterPusher = new ShooterPusher();
+   
+		//shooterPusher = new ShooterPusher();
 
 
 		// misc
 
 		indicator = new Indicator(camera);
-
-		spinnerMotor = new WPI_TalonSRX(Ports.CAN.SPINNER);
-		spinnerWheel = new Spinner(spinnerMotor,this);
 
 		gameData = new GameData();
 		
@@ -433,10 +439,10 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Range to target", sonar.getRangeInInches());
 		SmartDashboard.putNumber("Sonar Voltage", sonar.getVoltage()); 
 		
-		//SmartDashboard.putBoolean("Grasper IsGrasping?", grasper.isGrasping());
-		//SmartDashboard.putBoolean("Grasper IsReleasing?", grasper.isReleasing());
+		SmartDashboard.putBoolean("Grasper IsGrasping?", grasper.isGrasping());
+		SmartDashboard.putBoolean("Grasper IsReleasing?", grasper.isReleasing());
 
-		SmartDashboard.putBoolean("Spinner IsSpinning?", spinnerWheel.isSpinning());
+		//SmartDashboard.putBoolean("Spinner IsSpinning?", spinnerWheel.isSpinning());
 		
 		SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
 		SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	

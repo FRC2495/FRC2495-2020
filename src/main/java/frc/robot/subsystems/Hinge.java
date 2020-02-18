@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
+import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
@@ -61,6 +62,7 @@ public class Hinge extends Subsystem implements IHinge {
 	boolean isHomingPart1, isHomingPart2, isMoving, isMovingUp;
 	
 	WPI_TalonSRX hinge;
+	BaseMotorController hinge_follower;
 	
 	double tac;
 	boolean hasBeenHomed = false;
@@ -70,16 +72,19 @@ public class Hinge extends Subsystem implements IHinge {
 	Robot robot; 
 	
 	
-	public Hinge(WPI_TalonSRX hinge_in, Robot robot_in) {
+	public Hinge(WPI_TalonSRX hinge_in, BaseMotorController hinge_follower_in, Robot robot_in) {
 		hinge = hinge_in;
+		hinge_follower = hinge_follower_in;
 		robot = robot_in;
 		
 		hinge.configFactoryDefault();
+		hinge_follower.configFactoryDefault();
 
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.	
 		hinge.setNeutralMode(NeutralMode.Brake);
+		hinge_follower.setNeutralMode(NeutralMode.Brake);
 		
 		// Sensor phase is the term used to explain sensor direction.
 		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
@@ -96,6 +101,13 @@ public class Hinge extends Subsystem implements IHinge {
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked). 	
 		hinge.setInverted(false); // invert if required
+		hinge_follower.setInverted(false);
+
+		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
+		// Users will still need to set the motor controller's direction, and neutral mode.
+		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
+		// , talon to talon, victor to victor, talon to victor, and victor to talon.
+		hinge_follower.follow(hinge);
 		
 		setPIDParameters();
 		
