@@ -696,24 +696,24 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	{
 		if (!isMoving && !isTurning && !isMovingUsingCamera && !isTurningUsingCamera) // if we are already doing a move or turn we don't take over
 		{
-			if(!held)
-			{
+			//if(!held)
+			//{
 				//masterRight.set(ControlMode.PercentOutput, joyRight.getY() * .75);
 				//masterLeft.set(ControlMode.PercentOutput, joyLeft.getY() * .75);
 				
 				//differentialDrive.tankDrive(joyLeft.getY() * .75, -joyRight.getY() * .75); // right needs to be reversed
 				
-				differentialDrive.arcadeDrive(-joyRight.getX() * .80, joyLeft.getY() * .80); // right needs to be reversed
-			}
-			else
-			{
+			//	differentialDrive.arcadeDrive(-joyRight.getX() * .80, joyLeft.getY() * .80); // right needs to be reversed
+			//}
+			//else
+			//{
 				//masterRight.set(ControlMode.PercentOutput, joyRight.getY());
 				//masterLeft.set(ControlMode.PercentOutput, joyLeft.getY());
 				
 				//differentialDrive.tankDrive(joyLeft.getY(), -joyRight.getY()); // right needs to be reversed
 				
 				differentialDrive.arcadeDrive(-joyRight.getX(), joyLeft.getY()); // right needs to be reversed
-			}
+			//}
 		}
 	}	
 
