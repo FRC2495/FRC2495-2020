@@ -140,6 +140,7 @@ public class Robot extends TimedRobot {
 
 	public static VomitShooter vomitShooter;
 	public static ShooterPusher shooterPusher;
+	public static Gearbox gearbox;
 
 	// misc
 
@@ -236,6 +237,8 @@ public class Robot extends TimedRobot {
 		compressor.checkCompressor();
    
 		//shooterPusher = new ShooterPusher();
+
+		gearbox = new Gearbox();
 
 
 		// misc
