@@ -71,8 +71,8 @@ public class Ports {
 			public static final int SPINNER = 8;
 			public static final int PCM = 9;
 			public static final int PDP = 0;
-			public static final int LIFTER_MASTER = 10;
-			public static final int LIFTER_FOLLOWER = 11;
+			public static final int WINCH_MASTER = 10;
+			public static final int WINCH_FOLLOWER = 11;
 		}
 		
 		public static class USB{
