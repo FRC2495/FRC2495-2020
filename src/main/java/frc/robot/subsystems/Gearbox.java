@@ -48,7 +48,7 @@ public class Gearbox extends Subsystem {
 				highLow.set(DoubleSolenoid.Value.kReverse); // adjust direction if needed
 				break;
 			}
-			case LOW: //Telling the solenoid to have the piston go up
+			case LOW: //Telling the solenoid to have the piston go down
 			{
 				highLow.set(DoubleSolenoid.Value.kForward); // adjust direction if needed
 				break;
