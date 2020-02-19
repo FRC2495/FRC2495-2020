@@ -209,7 +209,7 @@ public class OI {
 		joyLeft = new Joystick(Ports.USB.LEFT);
 
 		joyLeftBtn11 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN11);
-		joyLeftBtn10.whileHeld(new WinchJoystickControl());
+		joyLeftBtn11.whileHeld(new WinchJoystickControl());
 		
 		joyLeftBtn10 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN10);
 		joyLeftBtn10.whileHeld(new GrasperJoystickControl());
