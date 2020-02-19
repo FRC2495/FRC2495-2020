@@ -112,7 +112,6 @@ public class Robot extends TimedRobot {
 	BaseMotorController rearLeft; 
 	BaseMotorController rearRight;
 	
-
 	//WPI_TalonSRX elevator;
 	//WPI_TalonSRX habElevator;
 
@@ -129,6 +128,11 @@ public class Robot extends TimedRobot {
 
 	//public BaseMotorController spinnerMotor;
 	public static Spinner spinnerWheel;
+
+	BaseMotorController winch_master;
+	BaseMotorController winch_follower;
+
+	public static /*I*/Winch winchControl;
 	
 	// pneumatic devices
 	
@@ -219,6 +223,11 @@ public class Robot extends TimedRobot {
 		//spinnerWheel = new Spinner(spinnerMotor,this);
 
 		//vomitShooter = new VomitShooter(shooterLeft, shooterRight, this); 
+
+		winch_master = new WPI_TalonSRX(Ports.CAN.WINCH_MASTER);
+		winch_follower = new WPI_TalonSRX(Ports.CAN.WINCH_FOLLOWER);
+
+		winchControl = new Winch(winch_master, winch_follower, this);
 
 
 		// pneumatic devices

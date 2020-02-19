@@ -34,6 +34,7 @@ public class Winch implements IWinch {
 	protected static final long WINCH_STOP_DELAY_MS = 500; // TODO tune
 
 	BaseMotorController winch; 
+	BaseMotorController winch_follower;
 	
 	boolean isWinchingUp;
 	boolean isWinchingDown;
@@ -41,9 +42,10 @@ public class Winch implements IWinch {
 	Robot robot;
 	
 	
-	public Winch(BaseMotorController winch_in, Robot robot_in) {
+	public Winch(BaseMotorController winch_in, BaseMotorController winch_follower_in, Robot robot_in) {
 		
 		winch = winch_in;
+		winch_follower = winch_follower_in;
 				
 		robot = robot_in;
 		
@@ -51,6 +53,7 @@ public class Winch implements IWinch {
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
 		winch.setNeutralMode(NeutralMode.Brake);
+		winch_follower.setNeutralMode(NeutralMode.Brake);
 				
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
@@ -58,11 +61,13 @@ public class Winch implements IWinch {
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
 		//this might me wrong =j
 		winch.setInverted(true);
+		winch_follower.setInverted(true);
 		
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
+		winch_follower.follow(winch);
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
