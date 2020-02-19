@@ -93,14 +93,20 @@ public class Ports {
 			public static final int BASIN_UP = 7;*/
 			
 			// 2019 robot
-			public static final int KICKER_OUT = 0;
+			/*public static final int KICKER_OUT = 0;
 			public static final int KICKER_IN = 1;		
 			public static final int SUCKER_EXHALE = 2;
 			public static final int SUCKER_INHALE= 3;
 			public static final int EJECTOR_RETRACTED = 5;
 			public static final int EJECTOR_EXTENDED = 4;			
 			public static final int HOOK_UP = 7;
-			public static final int HOOK_DOWN = 6;
+			public static final int HOOK_DOWN = 6;*/
+
+			// 2020 robot
+			public static final int GEAR_HIGH = 0;
+			public static final int GEAR_LOW = 1;		
+			public static final int PUSHER_UP = 7;
+			public static final int PUSHER_DOWN = 6;
 		}
 
 		public static class PWM {

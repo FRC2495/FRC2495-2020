@@ -21,7 +21,7 @@ public class ShooterPusher extends Subsystem {
 
 	public ShooterPusher() {
 		// the double solenoid valve will send compressed air from the tank wherever needed
-		upDown = new DoubleSolenoid(Ports.CAN.PCM, Ports.PCM.HOOK_UP, Ports.PCM.HOOK_DOWN); // make sure ports are properly sets in Ports.java	
+		upDown = new DoubleSolenoid(Ports.CAN.PCM, Ports.PCM.PUSHER_UP, Ports.PCM.PUSHER_DOWN); // make sure ports are properly sets in Ports.java	
 	}
 	
 	@Override
