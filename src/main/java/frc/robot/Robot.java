@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+//import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import frc.robot.commands.GamepadRumbleUsingCamera;
 import frc.robot.commands.IndicatorTimedScrollRainbow;
@@ -206,8 +207,8 @@ public class Robot extends TimedRobot {
 
 		frontLeft = new WPI_TalonSRX(Ports.CAN.LEFT_FRONT);
 		frontRight = new WPI_TalonSRX(Ports.CAN.RIGHT_FRONT);
-		rearLeft = new WPI_VictorSPX(Ports.CAN.LEFT_REAR);
-		rearRight = new WPI_VictorSPX(Ports.CAN.RIGHT_REAR);
+		rearLeft = new WPI_TalonFX(Ports.CAN.LEFT_REAR);
+		rearRight = new WPI_TalonFX(Ports.CAN.RIGHT_REAR);
 
 		hinge_master = new WPI_TalonSRX(Ports.CAN.HINGE_MASTER);
 		hinge_follower = new WPI_TalonSRX(Ports.CAN.HINGE_FOLLOWER);
