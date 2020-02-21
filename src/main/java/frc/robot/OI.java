@@ -146,7 +146,7 @@ public class OI {
 		gamepadLS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LS);
 
 		gamePadStart = new JoystickButton(gamepad, ControllerBase.GamepadButtons.START);
-		gamePadStart.whenPressed(new SpinnerColorMatch());
+		//gamePadStart.whenPressed(new SpinnerColorMatch());
 
 		gamepadBack = new JoystickButton(gamepad, ControllerBase.GamepadButtons.BACK);
 		gamepadBack.whileHeld(new FullCalibrateAndReset());

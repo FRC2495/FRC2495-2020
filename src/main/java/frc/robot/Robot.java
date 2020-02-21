@@ -456,14 +456,14 @@ public class Robot extends TimedRobot {
 
 		//SmartDashboard.putBoolean("Spinner IsSpinning?", spinnerWheel.isSpinning());
 		
-		SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
-		SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	
-		SmartDashboard.putString("Start position", startPositionChooser.getSelected());
-		SmartDashboard.putString("Main target", mainTargetChooser.getSelected());
-		SmartDashboard.putString("Camera option", cameraOptionChooser.getSelected());
-		SmartDashboard.putString("Sonar option", sonarOptionChooser.getSelected());
-		SmartDashboard.putString("Release chosen", releaseChooser.getSelected());
-		SmartDashboard.putString("Auton option", autonOptionChooser.getSelected());
+		//SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
+		//SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	
+		//SmartDashboard.putString("Start position", startPositionChooser.getSelected());
+		//SmartDashboard.putString("Main target", mainTargetChooser.getSelected());
+		//SmartDashboard.putString("Camera option", cameraOptionChooser.getSelected());
+		//SmartDashboard.putString("Sonar option", sonarOptionChooser.getSelected());
+		//SmartDashboard.putString("Release chosen", releaseChooser.getSelected());
+		//SmartDashboard.putString("Auton option", autonOptionChooser.getSelected());
 
 		SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
