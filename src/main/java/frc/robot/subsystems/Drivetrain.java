@@ -32,7 +32,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	static final double MAX_PCT_OUTPUT = 1.0;
 		
 	static final int TALON_TIMEOUT_MS = 10;
-	public static final int TICKS_PER_REVOLUTION = 4096; // TODO switch to 2048 if needed for Talon FX
+	public static final int TICKS_PER_REVOLUTION = 2048; // TODO switch to 2048 if needed for Talon FX
 
 
 	// turn using camera settings
@@ -140,8 +140,8 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	PIDController turnUsingCameraPidController; // the PID controller used to turn using camera
 	PIDController moveUsingCameraPidController; // the PID controller used to turn
 
-	private double ratioBetweenInputandOutputLow = 9.7;
-	private double ratioBetweenInputandOutputHigh = 19.99;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW = 9.7;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH = 19.99;
 	
 	public Drivetrain(WPI_TalonSRX masterLeft_in ,WPI_TalonSRX masterRight_in , BaseMotorController followerLeft_in ,BaseMotorController followerRight_in, ADXRS450_Gyro gyro_in, Robot robot_in, ICamera camera_in) 
 	{
@@ -171,10 +171,10 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		// Note: With Phoenix framework, position units are in the natural units of the sensor.
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation
-		masterLeft.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
+		masterLeft.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
 				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // TODO switch to FeedbackDevice.IntegratedSensor if needed for Talon FX
 				
-		masterRight.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,
+		masterRight.configSelectedFeedbackSensor(FeedbackDevice.IntegratedSensor,
 				PRIMARY_PID_LOOP, TALON_TIMEOUT_MS); // TODO switch to FeedbackDevice.IntegratedSensor if needed for Talon FX
 		
 		// Sensor phase is the term used to explain sensor direction.
@@ -420,19 +420,18 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		setNominalAndPeakOutputs(percentOutput); //this has a global impact, so we reset in stop()
 
 		if(gearSetting){ //Using the low gear ratio between input gear and output gear
-		rtac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
-		ltac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
-		
-		rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
-		ltac = - ltac;
+			rtac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
+			ltac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
+			
+			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+			ltac = - ltac;
 		}
-
 		else{			//Using the high gear ratio between input gear and output gear
-		rtac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
-		ltac = dist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
-		
-		rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
-		ltac = - ltac;
+			rtac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH * TICKS_PER_REVOLUTION;
+			ltac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH * TICKS_PER_REVOLUTION;
+			
+			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
+			ltac = - ltac;
 		}
 
 		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
@@ -530,20 +529,19 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		resetEncoders();
 		setPIDParameters();
 		if(gearSetting){ //Using the low gear ratio between input gear and output gear
-			rtac = rdist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
-			ltac = ldist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputLow * TICKS_PER_REVOLUTION;
+			rtac = rdist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
+			ltac = ldist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
 			
 			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
 			ltac = - ltac;
-			}
-	
-			else{			//Using the high gear ratio between input gear and output gear
-			rtac = rdist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
-			ltac = ldist / PERIMETER_WHEEL_INCHES * ratioBetweenInputandOutputHigh * TICKS_PER_REVOLUTION;
+		}
+		else{			//Using the high gear ratio between input gear and output gear
+			rtac = rdist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH * TICKS_PER_REVOLUTION;
+			ltac = ldist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH * TICKS_PER_REVOLUTION;
 			
 			rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
 			ltac = - ltac;
-			}
+		}
 		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
 		masterRight.set(ControlMode.Position, -rtac);
 		masterLeft.set(ControlMode.Position, -ltac);

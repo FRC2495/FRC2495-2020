@@ -436,7 +436,7 @@ public class Robot extends TimedRobot {
 	
 		
 		SmartDashboard.putBoolean("Hinge Limit Switch", hingeControl.getLimitSwitchState());
-		//SmartDashboard.putBoolean("Hinge Forward Limit Switch", hingeControl.getForwardLimitSwitchState());
+		SmartDashboard.putBoolean("Hinge Forward Limit Switch", hingeControl.getForwardLimitSwitchState());
 		SmartDashboard.putNumber("Hinge Position", hingeControl.getPosition());
 		SmartDashboard.putNumber("Hinge Enc Position", hingeControl.getEncoderPosition());
 		SmartDashboard.putBoolean("Hinge IsMoving?", hingeControl.isMoving());
