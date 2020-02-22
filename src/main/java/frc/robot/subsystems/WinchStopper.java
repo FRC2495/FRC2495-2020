@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 import frc.robot.Ports;
+import frc.robot.commands.WinchStopperSetStop;
 
 
 //Activates the piston to shoot the ball into the shooter 
@@ -26,7 +27,7 @@ public class WinchStopper extends Subsystem {
 	
 	@Override
 	public void initDefaultCommand() {
-		setPosition(WinchStopper.Position.STOPPED);
+
 	}
 
 	@Override

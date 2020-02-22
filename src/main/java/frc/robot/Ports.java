@@ -105,8 +105,8 @@ public class Ports {
 			// 2020 robot
 			public static final int GEAR_HIGH = 0;
 			public static final int GEAR_LOW = 1;
-			public static final int WINCH_STOPPED = 2;
-			public static final int WINCH_NOT = 3; 
+			public static final int WINCH_STOPPED = 3;
+			public static final int WINCH_NOT = 2; 
 			public static final int PUSHER_UP = 7;
 			public static final int PUSHER_DOWN = 6;
 		}
