@@ -7,9 +7,15 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
+import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
+import com.ctre.phoenix.ParamEnum;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -51,7 +57,7 @@ public class Winch extends Subsystem implements IWinch {
 	
 	protected static final long WINCH_STOP_DELAY_MS = 500; // TODO tune
 
-	BaseMotorController winch; 
+	WPI_TalonSRX winch; 
 	BaseMotorController winch_follower;
 	
 	boolean isWinchingUp;
@@ -60,7 +66,7 @@ public class Winch extends Subsystem implements IWinch {
 	Robot robot;
 	
 	
-	public Winch(BaseMotorController winch_in, BaseMotorController winch_follower_in, Robot robot_in) {
+	public Winch(WPI_TalonSRX winch_in, BaseMotorController winch_follower_in, Robot robot_in) {
 		
 		winch = winch_in;
 		winch_follower = winch_follower_in;
@@ -79,8 +85,12 @@ public class Winch extends Subsystem implements IWinch {
 		// Sensor phase is the term used to explain sensor direction.
 		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
 		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.
-		//winch.setSensorPhase(false);
+		winch.setSensorPhase(true);
 
+		//Enable limit switches
+		winch.configForwardLimitSwitchSource(LimitSwitchSource.FeedbackConnector, LimitSwitchNormal.NormallyOpen, TALON_TIMEOUT_MS);
+		winch.overrideLimitSwitchesEnable(true);
+	
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
@@ -99,12 +109,17 @@ public class Winch extends Subsystem implements IWinch {
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
 
+	
 		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor controller.
 		// Note: With Phoenix framework, position units are in the natural units of the sensor.
 		// This ensures the best resolution possible when performing closed-loops in firmware.
 		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation		
 		winch.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,	PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
+		
+		// this will reset the encoder automatically when at or past the forward limit sensor
+		winch.configSetParameter(ParamEnum.eClearPositionOnLimitF, 1, 0, 0, TALON_TIMEOUT_MS);
+		
 	}
 	
 	@Override
@@ -227,5 +242,9 @@ public class Winch extends Subsystem implements IWinch {
 			winch.stop();
 		}
 	}	
+
+	public boolean getForwardLimitSwitchState() {
+		return winch.getSensorCollection().isFwdLimitSwitchClosed();
+	}
 
 }

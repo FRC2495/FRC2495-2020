@@ -127,7 +127,7 @@ public class Robot extends TimedRobot {
 	//public BaseMotorController spinnerMotor;
 	public static Spinner spinnerWheel;
 
-	BaseMotorController winch_master;
+	WPI_TalonSRX winch_master;
 	BaseMotorController winch_follower;
 
 	public static /*I*/Winch winchControl;
@@ -478,6 +478,7 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
 		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
 		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString()); 
+		SmartDashboard.putNumber("Winch Encoder Value", winchControl.getEncoderPosition());
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {
