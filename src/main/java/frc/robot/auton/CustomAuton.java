@@ -30,7 +30,7 @@ public class CustomAuton extends CommandGroup {
      * @param autonOption_in   auton option
      * @return
      */
-    public void CargoCustomAuton(String startPosition_in, String mainTarget_in, String cameraOption_in,
+    public CustomAuton(String startPosition_in, String mainTarget_in, String cameraOption_in,
             String sonarOption_in, String autonOption_in) {
 
 		startPosition = startPosition_in;

@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 //import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import frc.robot.auton.CustomAuton;
 import frc.robot.commands.GamepadRumbleUsingCamera;
 import frc.robot.commands.IndicatorTimedScrollRainbow;
 import frc.robot.interfaces.*;
@@ -316,7 +317,7 @@ public class Robot extends TimedRobot {
 
 		switch (autonSelected) {
 			case Robot.AUTON_CUSTOM:
-				// TODO
+				m_autonomousCommand = new CustomAuton(startPosition, mainTarget, cameraOption, sonarOption, autonOption);
 				break;
 
 			case Robot.AUTON_DO_NOTHING:
