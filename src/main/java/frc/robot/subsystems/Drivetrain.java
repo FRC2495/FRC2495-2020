@@ -411,7 +411,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		moveDistance(dist, REDUCED_PCT_OUTPUT);
 	}
 
-	public void moveDistanceFromGearbox(double dist, double percentOutput, boolean gearSetting) // True is low gear setting, false is high gear setting
+	public void moveDistance(double dist, double percentOutput) // True is low gear setting, false is high gear setting
 	{
 		stop(); // in case we were still doing something
 		
@@ -419,7 +419,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		setPIDParameters();
 		setNominalAndPeakOutputs(percentOutput); //this has a global impact, so we reset in stop()
 
-		if(gearSetting){ //Using the low gear ratio between input gear and output gear
+		if(Robot.gearbox.getGear() == Gearbox.Gear.LOW){ //Using the low gear ratio between input gear and output gear
 			rtac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
 			ltac = dist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
 			
@@ -449,30 +449,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		moveDistance(dist, HIGH_PCT_OUTPUT);
 	}
 	
-	// this method needs to be paired with checkMoveDistance()
-	public void moveDistance(double dist, double percentOutput) // moves the distance in inch given
-	{
-		stop(); // in case we were still doing something
-		
-		resetEncoders();
-		setPIDParameters();
-		setNominalAndPeakOutputs(percentOutput); //this has a global impact, so we reset in stop()
-		
-		rtac = dist / PERIMETER_WHEEL_INCHES * TICKS_PER_REVOLUTION;
-		ltac = dist / PERIMETER_WHEEL_INCHES * TICKS_PER_REVOLUTION;
-		
-		rtac = - rtac; // account for fact that front of robot is back from sensor's point of view
-		ltac = - ltac;
-		
-		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
-		masterRight.set(ControlMode.Position, rtac);
-		masterLeft.set(ControlMode.Position, ltac);
-
-		isMoving = true;
-		onTargetCountMoving = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
+	
 	
 	public boolean tripleCheckMoveDistance() {
 		if (isMoving) {
@@ -517,7 +494,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		return Math.toRadians(angle) * RADIUS_DRIVEVETRAIN_INCHES;
 	}
 	// this method needs to be paired with checkMoveDistance()
-	public void moveDistanceAlongArcFromGearbox(int angle, boolean gearSetting) {
+	public void moveDistanceAlongArc(int angle) {
 		stop(); // in case we were still doing something
 		
 		double dist = arclength(angle);
@@ -528,7 +505,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		
 		resetEncoders();
 		setPIDParameters();
-		if(gearSetting){ //Using the low gear ratio between input gear and output gear
+		if(Robot.gearbox.getGear() == Gearbox.Gear.LOW){ //Using the low gear ratio between input gear and output gear
 			rtac = rdist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
 			ltac = ldist / PERIMETER_WHEEL_INCHES * RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW * TICKS_PER_REVOLUTION;
 			
@@ -552,29 +529,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		stalledCount = 0;
 	}
 	// this method needs to be paired with checkMoveDistance()
-	public void moveDistanceAlongArc(int angle) {
-		stop(); // in case we were still doing something
-		
-		double dist = arclength(angle);
-		double ldist, rdist;
-		
-		ldist = dist;
-		rdist = -dist;
-		
-		resetEncoders();
-		setPIDParameters();
-		
-		rtac = rdist / PERIMETER_WHEEL_INCHES * TICKS_PER_REVOLUTION;
-		ltac = ldist / PERIMETER_WHEEL_INCHES * TICKS_PER_REVOLUTION;
-		System.out.println("rtac, ltac: " + rtac + ", " + ltac);
-		masterRight.set(ControlMode.Position, -rtac);
-		masterLeft.set(ControlMode.Position, -ltac);
-		
-		isMoving = true;
-		onTargetCountMoving = 0;
-		isReallyStalled = false;
-		stalledCount = 0;
-	}
+
 	
 	// return if drivetrain might be stalled
 	public boolean tripleCheckIfStalled() {
