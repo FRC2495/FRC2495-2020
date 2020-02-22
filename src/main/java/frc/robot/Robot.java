@@ -57,7 +57,8 @@ public class Robot extends TimedRobot {
 
 	public static final String MAIN_TARGET_OPPONENT_TRENCH= "Opponent Trench";
 	public static final String MAIN_TARGET_ALLIANCE_TRENCH= "Alliance Trench";
-	public static final String MAIN_TARGET_RENDEZVOUS_POINT= "RendezVous Point";
+	public static final String MAIN_TARGET_RENDEZVOUS_POINT= "Rendezvous Point";
+	public static final String MAIN_TARGET_NOWHERE = "Nowhere";
 	private String mainTarget;
 	private SendableChooser<String> mainTargetChooser = new SendableChooser<>();
 	
@@ -162,9 +163,10 @@ public class Robot extends TimedRobot {
 		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
 		SmartDashboard.putData("Start positions", startPositionChooser);
 
+		mainTargetChooser.setDefaultOption("To Nowhere", MAIN_TARGET_NOWHERE);
 		mainTargetChooser.addOption("Alliance Trench", MAIN_TARGET_ALLIANCE_TRENCH);
-		mainTargetChooser.setDefaultOption("Opponent Trench", MAIN_TARGET_OPPONENT_TRENCH);
-		mainTargetChooser.addOption("RendezVous Point", MAIN_TARGET_RENDEZVOUS_POINT);
+		mainTargetChooser.addOption("Opponent Trench", MAIN_TARGET_OPPONENT_TRENCH);
+		mainTargetChooser.addOption("Rendezvous Point", MAIN_TARGET_RENDEZVOUS_POINT);
 		SmartDashboard.putData("Main targets", mainTargetChooser);
 		
 		cameraOptionChooser.setDefaultOption("Always", CAMERA_OPTION_USE_ALWAYS);

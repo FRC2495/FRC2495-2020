@@ -70,6 +70,9 @@ public class CustomAuton extends CommandGroup {
                     case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
 						//addSequential(new StartingPositionOnetoRendevousPoint(autonOption));
 						break;
+					case Robot.MAIN_TARGET_NOWHERE:
+						addSequential(new StartingPositionOneToNowhere());
+						break;
 					default:
 						// nothing
 						break;
@@ -86,7 +89,10 @@ public class CustomAuton extends CommandGroup {
                     break;
                 case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
                     //addSequential(new StartingPositionTwotoRendevousPoint(autonOption));
-                    break;
+					break;
+				case Robot.MAIN_TARGET_NOWHERE:
+					addSequential(new StartingPositionTwoToNowhere());
+					break;	
                 default:
                     // nothing
                     break;
@@ -103,6 +109,9 @@ public class CustomAuton extends CommandGroup {
 						break;
                     case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
 						//addSequential(new StartingPositionThreetoRendevousPoint(autonOption));
+						break;
+					case Robot.MAIN_TARGET_NOWHERE:
+						addSequential(new StartingPositionThreeToNowhere());
 						break;
 					default:
 						// nothing
