@@ -24,7 +24,8 @@ public class Hinge extends Subsystem implements IHinge {
 	
 	public static final double GEAR_RATIO = 3.0; // TODO change if needed
 	
-	public static final int ANGLE_TO_TRAVEL_TICKS = Robot.COMPETITION_BOT_CONFIG?148000:148000; // TODO set proper value
+	public static final int ANGLE_TO_TRAVEL_TICKS = Robot.COMPETITION_BOT_CONFIG?340000:340000; // TODO set proper value
+	public static final int ANGLE_TO_MIDWAY_TICKS = Robot.COMPETITION_BOT_CONFIG?42000:42000;
 	public static final int FAKE_HOME_POSITION_TICKS = ANGLE_TO_TRAVEL_TICKS; 
 	
 	/*
@@ -35,7 +36,7 @@ public class Hinge extends Subsystem implements IHinge {
 	static final double VIRTUAL_HOME_OFFSET_TICKS = 1000; // position of virtual home compared to physical home
 	
 	static final double HOMING_PCT_OUTPUT = 0.3; // ~homing speed
-	static final double MAX_PCT_OUTPUT = 0.6; // ~full speed
+	static final double MAX_PCT_OUTPUT = 1.0; // ~full speed
 	
 	static final int TALON_TIMEOUT_MS = 10;
 	public static final int TICKS_PER_REVOLUTION = 4096;
@@ -46,7 +47,7 @@ public class Hinge extends Subsystem implements IHinge {
 	
 	static final int SLOT_0 = 0;
 	
-	static final double REDUCED_PCT_OUTPUT = 0.5;
+	static final double REDUCED_PCT_OUTPUT = 0.8;
 	
 	static final double MOVE_PROPORTIONAL_GAIN = 0.06;
 	static final double MOVE_INTEGRAL_GAIN = 0.0;
@@ -128,6 +129,8 @@ public class Hinge extends Subsystem implements IHinge {
 		isHomingPart2 = false;
 		isMoving = false;
 		isMovingUp = false;
+
+		hasBeenHomed = true; // we always consider the hinged homed as we have limit sensors on both sides
 	}
 
 	@Override
@@ -228,7 +231,8 @@ public class Hinge extends Subsystem implements IHinge {
 			
 			setNominalAndPeakOutputs(MAX_PCT_OUTPUT); // we may need to check if we were up in which case we may want to reduce output
 
-			tac = ANGLE_TO_TRAVEL_TICKS / 2;
+			//tac = ANGLE_TO_TRAVEL_TICKS / 2;
+			tac = ANGLE_TO_MIDWAY_TICKS;
 			hinge.set(ControlMode.Position,tac);
 			
 			isMoving = true;
