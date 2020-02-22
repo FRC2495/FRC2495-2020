@@ -26,7 +26,6 @@ public class Hinge extends Subsystem implements IHinge {
 	
 	public static final int ANGLE_TO_TRAVEL_TICKS = Robot.COMPETITION_BOT_CONFIG?340000:340000; // TODO set proper value
 	public static final int ANGLE_TO_MIDWAY_TICKS = Robot.COMPETITION_BOT_CONFIG?42000:42000;
-	public static final int FAKE_HOME_POSITION_TICKS = ANGLE_TO_TRAVEL_TICKS; 
 	
 	/*
 	!!! VIRTUAL_HOME_OFFSET_TICKS is important for moving up,     !!!
@@ -35,7 +34,6 @@ public class Hinge extends Subsystem implements IHinge {
 	*/
 	static final double VIRTUAL_HOME_OFFSET_TICKS = 1000; // position of virtual home compared to physical home
 	
-	static final double HOMING_PCT_OUTPUT = 0.3; // ~homing speed
 	static final double MAX_PCT_OUTPUT = 1.0; // ~full speed
 	
 	static final int TALON_TIMEOUT_MS = 10;
@@ -47,7 +45,7 @@ public class Hinge extends Subsystem implements IHinge {
 	
 	static final int SLOT_0 = 0;
 	
-	static final double REDUCED_PCT_OUTPUT = 0.8;
+	static final double REDUCED_PCT_OUTPUT = 0.5;
 	
 	static final double MOVE_PROPORTIONAL_GAIN = 0.06;
 	static final double MOVE_INTEGRAL_GAIN = 0.0;
@@ -158,9 +156,6 @@ public class Hinge extends Subsystem implements IHinge {
 		return hinge.getSensorCollection().isFwdLimitSwitchClosed();
 	}
 
-	// Private. We move until we reach the limit switch (in open loop). This gives us the physical zero
-
-	
 	
 	// This method should be called to assess the progress of a move
 	public boolean tripleCheckMove() {
@@ -249,7 +244,7 @@ public class Hinge extends Subsystem implements IHinge {
 			//setPIDParameters();
 			System.out.println("Moving Down");
 			
-			setNominalAndPeakOutputs(HOMING_PCT_OUTPUT);
+			setNominalAndPeakOutputs(REDUCED_PCT_OUTPUT);
 	
 			tac = ANGLE_TO_TRAVEL_TICKS;
 			hinge.set(ControlMode.Position,tac);
