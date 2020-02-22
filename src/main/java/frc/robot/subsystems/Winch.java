@@ -24,16 +24,30 @@ import frc.robot.Robot;
  */
 public class Winch extends Subsystem implements IWinch {
 
-	/**
-	 * 
-	 */
+	
+	// general settings
 	static final double MAX_PCT_OUTPUT = 1.0;
 	static final int WAIT_MS = 1000;
 	static final int TIMEOUT_MS = 5000;
 
 	static final int TALON_TIMEOUT_MS = 10;
 
+	// move settings
 	static final int PRIMARY_PID_LOOP = 0;
+	
+	static final int SLOT_0 = 0;
+	
+	static final double REDUCED_PCT_OUTPUT = 0.5;
+	
+	static final double MOVE_PROPORTIONAL_GAIN = 0.06;
+	static final double MOVE_INTEGRAL_GAIN = 0.0;
+	static final double MOVE_DERIVATIVE_GAIN = 0.0;
+	
+	static final int TALON_TICK_THRESH = 256;//128;
+	static final double TICK_THRESH = 4096;	
+	
+	private final static int MOVE_ON_TARGET_MINIMUM_COUNT= 10; // number of times/iterations we need to be on target to really be on target
+
 	
 	protected static final long WINCH_STOP_DELAY_MS = 500; // TODO tune
 
@@ -62,11 +76,15 @@ public class Winch extends Subsystem implements IWinch {
 		winch.setNeutralMode(NeutralMode.Brake);
 		winch_follower.setNeutralMode(NeutralMode.Brake);
 				
+		// Sensor phase is the term used to explain sensor direction.
+		// In order for limit switches and closed-loop features to function properly the sensor and motor has to be in-phase.
+		// This means that the sensor position must move in a positive direction as the motor controller drives positive output.
+		//winch.setSensorPhase(false);
+
 		// Motor controller output direction can be set by calling the setInverted() function as seen below.
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		//this might me wrong =j
 		winch.setInverted(true);
 		winch_follower.setInverted(true);
 		
@@ -75,6 +93,8 @@ public class Winch extends Subsystem implements IWinch {
 		// The method follow() allows users to create a motor controller follower of not only the same model, but also other models
 		// , talon to talon, victor to victor, talon to victor, and victor to talon.
 		winch_follower.follow(winch);
+
+		//setPIDParameters();
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
@@ -140,6 +160,33 @@ public class Winch extends Subsystem implements IWinch {
 		isWinchingDown = false;
 	}
 	
+	private void setPIDParameters() {		
+		winch.configAllowableClosedloopError(SLOT_0, TALON_TICK_THRESH, TALON_TIMEOUT_MS);
+		
+		// P is the proportional gain. It modifies the closed-loop output by a proportion (the gain value)
+		// of the closed-loop error.
+		// P gain is specified in output unit per error unit.
+		// When tuning P, it's useful to estimate your starting value.
+		// If you want your mechanism to drive 50% output when the error is 4096 (one rotation when using CTRE Mag Encoder),
+		// then the calculated Proportional Gain would be (0.50 X 1023) / 4096 = ~0.125.
+		
+		// I is the integral gain. It modifies the closed-loop output according to the integral error
+		// (summation of the closed-loop error each iteration).
+		// I gain is specified in output units per integrated error.
+		// If your mechanism never quite reaches your target and using integral gain is viable,
+		// start with 1/100th of the Proportional Gain.
+		
+		// D is the derivative gain. It modifies the closed-loop output according to the derivative error
+		// (change in closed-loop error each iteration).
+		// D gain is specified in output units per derivative error.
+		// If your mechanism accelerates too abruptly, Derivative Gain can be used to smooth the motion.
+		// Typically start with 10x to 100x of your current Proportional Gain.
+		
+		winch.config_kP(SLOT_0, MOVE_PROPORTIONAL_GAIN, TALON_TIMEOUT_MS);
+		winch.config_kI(SLOT_0, MOVE_INTEGRAL_GAIN, TALON_TIMEOUT_MS);
+		winch.config_kD(SLOT_0, MOVE_DERIVATIVE_GAIN, TALON_TIMEOUT_MS);
+		winch.config_kF(SLOT_0, 0, TALON_TIMEOUT_MS);
+	}
 	
 	// NOTE THAT THIS METHOD WILL IMPACT BOTH OPEN AND CLOSED LOOP MODES
 	public void setNominalAndPeakOutputs(double peakOutput)
@@ -162,7 +209,10 @@ public class Winch extends Subsystem implements IWinch {
 	// for debug purpose only
 	public void joystickControl(Joystick joystick)
 	{
-		winch.set(ControlMode.PercentOutput, joystick.getY());
+		if (!isWinchingUp && !isWinchingDown) // if we are already doing a move we don't take over
+		{
+			winch.set(ControlMode.PercentOutput, joystick.getY());
+		}
 	}
 	
 	private class WinchStopTask extends TimerTask {
