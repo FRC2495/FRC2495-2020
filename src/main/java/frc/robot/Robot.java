@@ -177,6 +177,10 @@ public class Robot extends TimedRobot {
 		sonarOptionChooser.addOption("Grasp Only", SONAR_OPTION_USE_GRASP_ONLY);		
 		sonarOptionChooser.addOption("Never", SONAR_OPTION_USE_NEVER);
 		SmartDashboard.putData("Sonar options", sonarOptionChooser);
+		
+		releaseChooser.setDefaultOption("Release", GRASPER_OPTION_RELEASE);
+		releaseChooser.addOption("Don't release", GRASPER_OPTION_DONT_RELEASE);
+		SmartDashboard.putData("Release options", releaseChooser);
 
 		autonOptionChooser.setDefaultOption("Reload", AUTON_OPTION_RELOAD);
 		autonOptionChooser.addOption("Don't Reload", AUTON_OPTION_DONT_RELOAD);
