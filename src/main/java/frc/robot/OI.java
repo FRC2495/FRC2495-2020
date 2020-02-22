@@ -160,6 +160,7 @@ public class OI {
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
+		gamepadY.whenPressed(new IfNuclearOptionEnabled(new WinchWinchDown(), new DoNothing()));
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
 		//gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));

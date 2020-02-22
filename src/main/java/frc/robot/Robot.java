@@ -409,6 +409,9 @@ public class Robot extends TimedRobot {
 		colorSensor.updateColorSensor();
 
 		updateToSmartDash();
+
+		indicator.updateRainbow();
+		
 	}
 	
 	public void updateToSmartDash()
