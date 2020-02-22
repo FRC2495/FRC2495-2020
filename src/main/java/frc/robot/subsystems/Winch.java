@@ -85,8 +85,8 @@ public class Winch extends Subsystem implements IWinch {
 		// Note: Regardless of invert value, the LEDs will blink green when positive output is requested (by robot code or firmware closed loop).
 		// Only the motor leads are inverted. This feature ensures that sensor phase and limit switches will properly match the LED pattern
 		// (when LEDs are green => forward limit switch and soft limits are being checked).
-		winch.setInverted(true);
-		winch_follower.setInverted(true);
+		winch.setInverted(false);
+		winch_follower.setInverted(false);
 		
 		// Both the Talon SRX and Victor SPX have a follower feature that allows the motor controllers to mimic another motor controller's output.
 		// Users will still need to set the motor controller's direction, and neutral mode.
