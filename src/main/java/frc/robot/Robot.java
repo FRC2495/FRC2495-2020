@@ -47,11 +47,6 @@ public class Robot extends TimedRobot {
 	public static final String AUTON_CUSTOM = "My Auto";
 	private String autonSelected;
 	private SendableChooser<String> autonChooser = new SendableChooser<>();
-
-	public static final String GAME_PIECE_HATCH_PANEL = "Hatch Panel";
-	public static final String GAME_PIECE_CARGO = "Cargo";
-	private String gamePieceSelected;
-	private SendableChooser<String> gamePieceChooser = new SendableChooser<>();
 	
 	public static final String START_POSITION_1 = "Starting Position 1";
 	public static final String START_POSITION_2 = "Starting Position 2";
@@ -157,6 +152,10 @@ public class Robot extends TimedRobot {
 	public void robotInit() {
 		// choosers (for auton)
 		
+		autonChooser.setDefaultOption("Do Nothing", AUTON_DO_NOTHING);
+		autonChooser.addOption("My Auto", AUTON_CUSTOM);
+		SmartDashboard.putData("Auto choices", autonChooser);
+
 		startPositionChooser.addOption("Starting Position 1", START_POSITION_1);
 		startPositionChooser.setDefaultOption("Starting Position 2", START_POSITION_2);
 		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
@@ -287,10 +286,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void autonomousInit() {
 		autonSelected = autonChooser.getSelected();
-		System.out.println("Auton selected: " + autonSelected);
-		
-		gamePieceSelected = gamePieceChooser.getSelected();
-		System.out.println("Game piece: " + gamePieceSelected);
+		System.out.println("Auton selected: " + autonSelected);	
 
 		startPosition = startPositionChooser.getSelected();
 		System.out.println("Start position: " + startPosition);
@@ -458,7 +454,6 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putBoolean("Spinner IsSpinning?", spinnerWheel.isSpinning());
 		
 		//SmartDashboard.putString("Auton selected", autonChooser.getSelected());	
-		//SmartDashboard.putString("Game piece", gamePieceChooser.getSelected());	
 		//SmartDashboard.putString("Start position", startPositionChooser.getSelected());
 		//SmartDashboard.putString("Main target", mainTargetChooser.getSelected());
 		//SmartDashboard.putString("Camera option", cameraOptionChooser.getSelected());
