@@ -160,7 +160,7 @@ public class OI {
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
-		gamepadY.whenPressed(new IfNuclearOptionEnabled(new WinchWinchStopperMagicWinch(), new DoNothing()));
+		gamepadY.whileHeld(new IfNuclearOptionEnabled(new WinchWinchStopperMagicWinch(), new DoNothing()));
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
 		//gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
@@ -210,7 +210,8 @@ public class OI {
 		joyLeft = new Joystick(Ports.USB.LEFT);
 
 		joyLeftBtn11 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN11);
-		joyLeftBtn11.whileHeld(new WinchJoystickControl());
+		//joyLeftBtn11.whileHeld(new WinchJoystickControl());
+		joyLeftBtn11.whileHeld(new WinchWinchStopperJoystickControl());
 		
 		joyLeftBtn10 = new JoystickButton(joyLeft, ControllerBase.JoystickButtons.BTN10);
 		joyLeftBtn10.whileHeld(new GrasperJoystickControl());
