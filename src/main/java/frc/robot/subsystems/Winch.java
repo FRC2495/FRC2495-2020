@@ -6,6 +6,7 @@ package frc.robot.subsystems;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.BaseMotorController;
@@ -31,6 +32,8 @@ public class Winch extends Subsystem implements IWinch {
 	static final int TIMEOUT_MS = 5000;
 
 	static final int TALON_TIMEOUT_MS = 10;
+
+	static final int PRIMARY_PID_LOOP = 0;
 	
 	protected static final long WINCH_STOP_DELAY_MS = 500; // TODO tune
 
@@ -49,6 +52,9 @@ public class Winch extends Subsystem implements IWinch {
 		winch_follower = winch_follower_in;
 				
 		robot = robot_in;
+
+		winch.configFactoryDefault();
+		winch_follower.configFactoryDefault();
 		
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
@@ -72,6 +78,13 @@ public class Winch extends Subsystem implements IWinch {
 		
 		// set peak output to max in case if had been reduced previously
 		setNominalAndPeakOutputs(MAX_PCT_OUTPUT);
+
+		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
+		// of the system using that motor controller.
+		// Note: With Phoenix framework, position units are in the natural units of the sensor.
+		// This ensures the best resolution possible when performing closed-loops in firmware.
+		// CTRE Magnetic Encoder (relative/quadrature) =  4096 units per rotation		
+		winch.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative,	PRIMARY_PID_LOOP, TALON_TIMEOUT_MS);
 	}
 	
 	@Override
@@ -100,6 +113,10 @@ public class Winch extends Subsystem implements IWinch {
 		winch.set(ControlMode.PercentOutput, -MAX_PCT_OUTPUT);
 		
 		isWinchingDown = true;
+	}
+
+	public double getEncoderPosition() {
+		return winch.getSelectedSensorPosition(PRIMARY_PID_LOOP);
 	}
 	
 	public synchronized void winchUpAndStop() {
