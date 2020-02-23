@@ -109,9 +109,6 @@ public class Robot extends TimedRobot {
 	WPI_TalonSRX frontRight;
 	BaseMotorController rearLeft; 
 	BaseMotorController rearRight;
-	
-	//WPI_TalonSRX elevator;
-	//WPI_TalonSRX habElevator;
 
 	public static /*I*/Grasper grasper;
 	
@@ -122,6 +119,7 @@ public class Robot extends TimedRobot {
 	
 	WPI_TalonSRX hinge_master;
 	BaseMotorController hinge_follower;
+
 	WPI_TalonSRX grasp;
 
 	//public BaseMotorController spinnerMotor;
@@ -141,6 +139,7 @@ public class Robot extends TimedRobot {
 	public static Gearbox gearbox;
 
 	public static WinchStopper winchStopperControl; 
+	public static WinchLock winchLockControl;
 
 	// misc
 
@@ -249,6 +248,9 @@ public class Robot extends TimedRobot {
 
 		gearbox = new Gearbox();
 
+		winchStopperControl = new WinchStopper();
+		winchLockControl = new WinchLock();
+
 
 		// misc
 
@@ -256,7 +258,6 @@ public class Robot extends TimedRobot {
 
 		gameData = new GameData();
 		
-		winchStopperControl = new WinchStopper();
 		// OI must be constructed after subsystems. If the OI creates Commands
 		//(which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -268,8 +269,6 @@ public class Robot extends TimedRobot {
 
 		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(1);
 		indicatorTimedScrollRainbow.start();
-
-		gearbox.setGear(Gearbox.Gear.LOW);
 	} 
 
 	/**
@@ -369,6 +368,9 @@ public class Robot extends TimedRobot {
 		camera.setLedMode(ICamera.LedMode.PIPELINE);
 
 		gamepadRumbleUsingCameraCommand.start();
+
+		
+		gearbox.setGear(Gearbox.Gear.LOW);
 	}
 
 	/**

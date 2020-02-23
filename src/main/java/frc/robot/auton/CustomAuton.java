@@ -56,6 +56,8 @@ public class CustomAuton extends CommandGroup {
 		// a CommandGroup containing them would require both the chassis and the
 		// arm.
 
+		addSequential(new GearboxSetGearLow()); // forces low gear just in case
+
 		addSequential(new HingeMoveUp()); // forces hinge back up just in case
 
 		switch (startPosition) {

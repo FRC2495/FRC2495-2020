@@ -8,21 +8,21 @@ import frc.robot.commands.WinchStopperSetStop;
 
 
 //Activates the piston to shoot the ball into the shooter 
-public class WinchStopper extends Subsystem {
+public class WinchLock extends Subsystem {
 	
 	static final int WAIT_MS = 1000;
 	
-    DoubleSolenoid stopNot;
+    DoubleSolenoid lockedNot;
     
     public enum Position {
-		STOPPED, // The winch is stopped
-		FREE, // The winch is free
+		LOCKED, // The winch is stopped
+		UNLOCKED, // The winch is free
 		UNKNOWN;
 	}
 
-	public WinchStopper() {
+	public WinchLock() {
 		// the double solenoid valve will send compressed air from the tank wherever needed
-		stopNot = new DoubleSolenoid(Ports.CAN.PCM, Ports.PCM.WINCH_STOPPER_STOPPED, Ports.PCM.WINCH_STOPPER_FREE); // make sure ports are properly sets in Ports.java	
+		lockedNot = new DoubleSolenoid(Ports.CAN.PCM, Ports.PCM.WINCH_LOCK_LOCKED, Ports.PCM.WINCH_LOCK_UNLOCKED); // make sure ports are properly sets in Ports.java	
 	}
 	
 	@Override
@@ -40,14 +40,14 @@ public class WinchStopper extends Subsystem {
 	{
 		switch(pos)
 		{
-			case STOPPED: //Telling the solenoid to have the piston go up
+			case LOCKED: //Telling the solenoid to have the piston go up
 			{
-				stopNot.set(DoubleSolenoid.Value.kReverse); // adjust direction if needed
+				lockedNot.set(DoubleSolenoid.Value.kReverse); // adjust direction if needed
 				break;
 			}
-			case FREE: //Telling the solenoid to have the piston go down
+			case UNLOCKED: //Telling the solenoid to have the piston go down
 			{
-				stopNot.set(DoubleSolenoid.Value.kForward); // adjust direction if needed
+				lockedNot.set(DoubleSolenoid.Value.kForward); // adjust direction if needed
 				break;
 			}
 			default:
@@ -59,17 +59,17 @@ public class WinchStopper extends Subsystem {
 
 	public Position getPosition() //Getting the current gear
 	{
-		DoubleSolenoid.Value value = stopNot.get();
+		DoubleSolenoid.Value value = lockedNot.get();
 		
 		switch(value)
 		{
 			case kReverse: //Checking if the piston is in the kReverse position (high)
 			{
-				return Position.STOPPED;
+				return Position.LOCKED;
 			}
 			case kForward: //Checking if the piston is in the kFoward position (low)
 			{
-				return Position.FREE;
+				return Position.UNLOCKED;
 			}
 			default: //gear unknown
 			{
