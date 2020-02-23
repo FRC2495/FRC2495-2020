@@ -1423,13 +1423,13 @@
                 {
                   "_type": "Speed Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [4]",
-                  "_title": "LiveWindow/Ungrouped/Talon FX [4]",
+                  "_title": "/LiveWindow/Ungrouped/Talon FX [4]",
                   "Visuals/Orientation": "HORIZONTAL"
                 },
                 {
                   "_type": "Speed Controller",
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [2]",
-                  "_title": "LiveWindow/Ungrouped/Talon FX [2]",
+                  "_title": "/LiveWindow/Ungrouped/Talon FX [2]",
                   "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
@@ -1577,45 +1577,6 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gyro Value",
               "_title": "SmartDashboard/Gyro Value"
-            }
-          },
-          "4,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isDown",
-              "_title": "SmartDashboard/Elevator isDown",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isMidway",
-              "_title": "SmartDashboard/Elevator isMidway",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isUp",
-              "_title": "SmartDashboard/Elevator isUp",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
             }
           },
           "5,2": {
@@ -2135,7 +2096,7 @@
       }
     },
     {
-      "title": "DIAGElevatorHinge",
+      "title": "DIAGHinge",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -2144,95 +2105,6 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "0,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator Has Been Homed?",
-              "_title": "SmartDashboard/Elevator Has Been Homed?",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "0,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator IsMoving?",
-              "_title": "SmartDashboard/Elevator IsMoving?",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator Limit Switch",
-              "_title": "SmartDashboard/Elevator Limit Switch",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator Position",
-              "_title": "SmartDashboard/Elevator Position"
-            }
-          },
-          "2,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isDown",
-              "_title": "SmartDashboard/Elevator isDown",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isMidway",
-              "_title": "SmartDashboard/Elevator isMidway",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator isUp",
-              "_title": "SmartDashboard/Elevator isUp",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "3,0": {
             "size": [
               1,
@@ -2342,30 +2214,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Hinge isUp",
               "_title": "SmartDashboard/Hinge isUp",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Elevator Target",
-              "_title": "SmartDashboard/Elevator Target"
-            }
-          },
-          "0,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator IsHoming?",
-              "_title": "SmartDashboard/Elevator IsHoming?",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -2591,7 +2439,7 @@
       }
     },
     {
-      "title": "DIAGHabElevatorKicker",
+      "title": "DIAGWinch",
       "autoPopulate": false,
       "autoPopulatePrefix": "",
       "widgetPane": {
@@ -2600,91 +2448,6 @@
         "hgap": 16.0,
         "vgap": 16.0,
         "tiles": {
-          "2,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator Enc Position",
-              "_title": "SmartDashboard/Hab Elevator Enc Position"
-            }
-          },
-          "1,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator IsMoving?",
-              "_title": "SmartDashboard/Hab Elevator IsMoving?",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "2,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator Position",
-              "_title": "SmartDashboard/Hab Elevator Position"
-            }
-          },
-          "2,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Text View",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator Target",
-              "_title": "SmartDashboard/Hab Elevator Target"
-            }
-          },
-          "3,2": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator isDown",
-              "_title": "SmartDashboard/Hab Elevator isDown",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,1": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator isMidway",
-              "_title": "SmartDashboard/Hab Elevator isMidway",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,0": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator isUp",
-              "_title": "SmartDashboard/Hab Elevator isUp",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
           "5,2": {
             "size": [
               1,
@@ -2693,7 +2456,7 @@
             "content": {
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Winch Encoder Value",
-              "_title": "SmartDashboard/Winch Encoder Value"
+              "_title": "/SmartDashboard/Winch Encoder Value"
             }
           },
           "5,1": {
@@ -2704,7 +2467,7 @@
             "content": {
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Winch Forward Limit Switch",
-              "_title": "SmartDashboard/Winch Forward Limit Switch",
+              "_title": "/SmartDashboard/Winch Forward Limit Switch",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
@@ -2822,32 +2585,6 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Hinge IsMoving?",
               "_title": "SmartDashboard/Hinge IsMoving?",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "4,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Hab Elevator IsMoving?",
-              "_title": "SmartDashboard/Hab Elevator IsMoving?",
-              "Colors/Color when true": "#7CFC00FF",
-              "Colors/Color when false": "#8B0000FF"
-            }
-          },
-          "3,4": {
-            "size": [
-              1,
-              1
-            ],
-            "content": {
-              "_type": "Boolean Box",
-              "_source0": "network_table:///SmartDashboard/Elevator IsMoving?",
-              "_title": "SmartDashboard/Elevator IsMoving?",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
