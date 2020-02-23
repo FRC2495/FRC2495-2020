@@ -15,21 +15,19 @@ public class StartingPositionTwoToNowhere extends CommandGroup {
 
 	public StartingPositionTwoToNowhere() {
     
-        
-
         addSequential(new DrivetrainTurnAngleUsingPidController(AutonConstants.ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
         //To Turning from starting point 2 to Drop Zone 
 
-    addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
         addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
 
-    addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
-    //Hard left turn to become parallel to alliance station
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
+        //Hard left turn to become parallel to alliance station
 
-    addSequential(new DrivetrainMoveDistance(60));
-    //Move along alliance station 5' towards HF
+        addSequential(new DrivetrainMoveDistance(60));
+        //Move along alliance station 5' towards HF
 
     }
 

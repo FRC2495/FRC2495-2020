@@ -12,8 +12,8 @@ import frc.robot.Robot;
 import frc.robot.subsystems.WinchStopper;
 
 // To set stopped position
-public class WinchStopperSetNot extends InstantCommand {
-	public WinchStopperSetNot() {
+public class WinchStopperSetFree extends InstantCommand {
+	public WinchStopperSetFree() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.winchStopperControl); //
@@ -22,8 +22,8 @@ public class WinchStopperSetNot extends InstantCommand {
 	// Called once when the command executes
 	@Override
 	protected void initialize() {
-		System.out.println("WinchStopperSetNot: initialize");
-		Robot.winchStopperControl.setPosition(WinchStopper.Position.NOT);
+		System.out.println("WinchStopperSetFree: initialize");
+		Robot.winchStopperControl.setPosition(WinchStopper.Position.FREE);
 	}
 
 }

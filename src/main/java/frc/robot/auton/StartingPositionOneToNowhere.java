@@ -15,19 +15,16 @@ public class StartingPositionOneToNowhere extends CommandGroup {
 
 	public StartingPositionOneToNowhere() {
     
-        
-
-
-    addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
+        addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
-    addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
+        addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
 
-    addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
-    //Hard left turn to become parallel to alliance station
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
+        //Hard left turn to become parallel to alliance station
 
-    addSequential(new DrivetrainMoveDistance(60));
-    //Move along alliance station 5' towards HF
+        addSequential(new DrivetrainMoveDistance(60));
+        //Move along alliance station 5' towards HF
 
     }
 

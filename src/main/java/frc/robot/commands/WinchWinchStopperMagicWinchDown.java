@@ -40,8 +40,8 @@ public class WinchWinchStopperMagicWinchDown extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		System.out.println("WinchJoystickControl: initialize");
-		Robot.winchStopperControl.setPosition(WinchStopper.Position.NOT);
+		System.out.println("WinchWinchStopperMagicWinchDown: initialize");
+		Robot.winchStopperControl.setPosition(WinchStopper.Position.FREE);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -59,7 +59,7 @@ public class WinchWinchStopperMagicWinchDown extends Command {
 	// Called once after isFinished returns true
 	@Override
 	protected void end() {
-		System.out.println("WinchJoystickControl: end");
+		System.out.println("WinchWinchStopperMagicWinchDown: end");
 		Robot.winchControl.stop();
 		Robot.winchStopperControl.setPosition(WinchStopper.Position.STOPPED);
 	}
@@ -68,7 +68,7 @@ public class WinchWinchStopperMagicWinchDown extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		System.out.println("WinchJoystickControl: interrupted");
+		System.out.println("WinchWinchStopperMagicWinchDown: interrupted");
 		end(); // TODO check if this is a good idea
 	}
 }

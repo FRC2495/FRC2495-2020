@@ -185,7 +185,7 @@ public class OI {
 		joyRightBtn9.whenPressed(new WinchStopperSetStop());
 
 		joyRightBtn8 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN8);
-		joyRightBtn8.whenPressed(new WinchStopperSetNot());
+		joyRightBtn8.whenPressed(new WinchStopperSetFree());
 		
 		joyRightBtn7 = new JoystickButton(joyRight, ControllerBase.JoystickButtons.BTN7);
 		joyRightBtn7.whenPressed(new DrivetrainStop());

@@ -15,8 +15,8 @@ public class WinchStopper extends Subsystem {
     DoubleSolenoid stopNot;
     
     public enum Position {
-		STOPPED, // The gearbox is in high gear
-		NOT, // The gearbox is in low gear
+		STOPPED, // The winch is stopped
+		FREE, // The winch is free
 		UNKNOWN;
 	}
 
@@ -45,7 +45,7 @@ public class WinchStopper extends Subsystem {
 				stopNot.set(DoubleSolenoid.Value.kReverse); // adjust direction if needed
 				break;
 			}
-			case NOT: //Telling the solenoid to have the piston go down
+			case FREE: //Telling the solenoid to have the piston go down
 			{
 				stopNot.set(DoubleSolenoid.Value.kForward); // adjust direction if needed
 				break;
@@ -69,7 +69,7 @@ public class WinchStopper extends Subsystem {
 			}
 			case kForward: //Checking if the piston is in the kFoward position (low)
 			{
-				return Position.NOT;
+				return Position.FREE;
 			}
 			default: //gear unknown
 			{

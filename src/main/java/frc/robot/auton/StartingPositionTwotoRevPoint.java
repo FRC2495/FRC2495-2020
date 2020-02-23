@@ -15,10 +15,10 @@ public class StartingPositionTwotoRevPoint extends CommandGroup {
 
     public StartingPositionTwotoRevPoint() {
     
-    addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * AutonConstants.ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * AutonConstants.ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
         //To Turning from starting point 2 to Drop Zone 
 
-    addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
 
     }
 

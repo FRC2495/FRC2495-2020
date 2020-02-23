@@ -79,7 +79,7 @@ public class CustomAuton extends CommandGroup {
 				}
 				break;
 
-				case Robot.START_POSITION_2:
+			case Robot.START_POSITION_2:
 				switch (mainTarget) {
 					case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
 						addSequential(new StartingPositionTwoToAllianceTrench());
@@ -99,7 +99,7 @@ public class CustomAuton extends CommandGroup {
 				}
 				break;
 
-				case Robot.START_POSITION_3:
+			case Robot.START_POSITION_3:
 				switch (mainTarget) {
 					case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
 						addSequential(new StartingPositionThreeToAllianceTrench());
@@ -118,6 +118,7 @@ public class CustomAuton extends CommandGroup {
 						break;
 				}
 				break;
+
             default:{
                 //nothing
                 break;
