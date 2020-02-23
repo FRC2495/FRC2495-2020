@@ -57,10 +57,10 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	// NOTE: it might make sense to decrease the PID controller period below 0.02 sec (which is the period used by the main loop)
 	static final double TURN_PID_CONTROLLER_PERIOD_SECONDS = .01; // 0.01 sec = 10 ms 	
 	
-	static final double MIN_TURN_PCT_OUTPUT = Robot.COMPETITION_BOT_CONFIG?0.6:0.6;
-	static final double MAX_TURN_PCT_OUTPUT = Robot.COMPETITION_BOT_CONFIG?0.9:0.9;
+	static final double MIN_TURN_PCT_OUTPUT = Robot.COMPETITION_BOT_CONFIG?0.3:0.3;
+	static final double MAX_TURN_PCT_OUTPUT = Robot.COMPETITION_BOT_CONFIG?0.6:0.6;
 	
-	static final double TURN_PROPORTIONAL_GAIN = 0.04;
+	static final double TURN_PROPORTIONAL_GAIN = 0.02;
 	static final double TURN_INTEGRAL_GAIN = 0.0;
 	static final double TURN_DERIVATIVE_GAIN = 0.0;
 	
@@ -140,8 +140,8 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	PIDController turnUsingCameraPidController; // the PID controller used to turn using camera
 	PIDController moveUsingCameraPidController; // the PID controller used to turn
 
-	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW = 9.7;
-	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH = 19.99;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW = 23;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH = 9.7;
 	
 	public Drivetrain(WPI_TalonSRX masterLeft_in ,WPI_TalonSRX masterRight_in , BaseMotorController followerLeft_in ,BaseMotorController followerRight_in, ADXRS450_Gyro gyro_in, Robot robot_in, ICamera camera_in) 
 	{

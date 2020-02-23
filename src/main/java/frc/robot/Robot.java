@@ -268,6 +268,8 @@ public class Robot extends TimedRobot {
 
 		indicatorTimedScrollRainbow = new IndicatorTimedScrollRainbow(1);
 		indicatorTimedScrollRainbow.start();
+
+		gearbox.setGear(Gearbox.Gear.LOW);
 	} 
 
 	/**
@@ -481,6 +483,8 @@ public class Robot extends TimedRobot {
 
 		SmartDashboard.putNumber("Winch Encoder Value", winchControl.getEncoderPosition());
 		SmartDashboard.putBoolean("Winch Forward Limit Switch", winchControl.getForwardLimitSwitchState());
+
+		SmartDashboard.putString("Gearbox Position", gearbox.getGear().toString());
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {

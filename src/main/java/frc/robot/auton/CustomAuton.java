@@ -79,25 +79,25 @@ public class CustomAuton extends CommandGroup {
 				}
 				break;
 
-			case Robot.START_POSITION_2:
-            switch (mainTarget) {
-                case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
-                    addSequential(new StartingPositionTwoToAllianceTrench());
-                    break;
-                case Robot.MAIN_TARGET_OPPONENT_TRENCH:
-                    addSequential(new StartingPositionTwoToOpponentTrench());
-                    break;
-                case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
-                    //addSequential(new StartingPositionTwotoRendevousPoint(autonOption));
-					break;
-				case Robot.MAIN_TARGET_NOWHERE:
-					addSequential(new StartingPositionTwoToNowhere());
-					break;	
-                default:
-                    // nothing
-                    break;
-            }
-            break;
+				case Robot.START_POSITION_2:
+				switch (mainTarget) {
+					case Robot.MAIN_TARGET_ALLIANCE_TRENCH:
+						addSequential(new StartingPositionTwoToAllianceTrench());
+						break;
+					case Robot.MAIN_TARGET_OPPONENT_TRENCH:
+						addSequential(new StartingPositionTwoToOpponentTrench());
+						break;
+					case Robot.MAIN_TARGET_RENDEZVOUS_POINT:
+						//addSequential(new StartingPositionTwotoRendevousPoint(autonOption));
+						break;
+					case Robot.MAIN_TARGET_NOWHERE:
+						addSequential(new StartingPositionTwoToNowhere());
+						break;	
+					default:
+						// nothing
+						break;
+				}
+				break;
 
 				case Robot.START_POSITION_3:
 				switch (mainTarget) {

@@ -53,7 +53,7 @@ public class WinchWinchStopperMagicWinchUp extends Command {
 	// Make this return true when this Command no longer needs to run execute()
 	@Override
 	protected boolean isFinished() {
-		return false;
+		return Robot.winchControl.getEncoderPosition() < -27100;
 	}
 
 	// Called once after isFinished returns true
