@@ -478,7 +478,9 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
 		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
 		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString()); 
+
 		SmartDashboard.putNumber("Winch Encoder Value", winchControl.getEncoderPosition());
+		SmartDashboard.putBoolean("Winch Forward Limit Switch", winchControl.getForwardLimitSwitchState());
 	}
 
 	public static void setGyroHasBeenManuallyCalibratedAtLeastOnce(boolean flag) {

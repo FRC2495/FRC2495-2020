@@ -1419,6 +1419,18 @@
                   "_source0": "network_table:///LiveWindow/Ungrouped/Talon SRX [13]",
                   "_title": "Talon SRX [13]",
                   "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [4]",
+                  "_title": "LiveWindow/Ungrouped/Talon FX [4]",
+                  "Visuals/Orientation": "HORIZONTAL"
+                },
+                {
+                  "_type": "Speed Controller",
+                  "_source0": "network_table:///LiveWindow/Ungrouped/Talon FX [2]",
+                  "_title": "LiveWindow/Ungrouped/Talon FX [2]",
+                  "Visuals/Orientation": "HORIZONTAL"
                 }
               ]
             }
@@ -2669,6 +2681,30 @@
               "_type": "Boolean Box",
               "_source0": "network_table:///SmartDashboard/Hab Elevator isUp",
               "_title": "SmartDashboard/Hab Elevator isUp",
+              "Colors/Color when true": "#7CFC00FF",
+              "Colors/Color when false": "#8B0000FF"
+            }
+          },
+          "5,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Winch Encoder Value",
+              "_title": "SmartDashboard/Winch Encoder Value"
+            }
+          },
+          "5,1": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Boolean Box",
+              "_source0": "network_table:///SmartDashboard/Winch Forward Limit Switch",
+              "_title": "SmartDashboard/Winch Forward Limit Switch",
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
