@@ -146,7 +146,7 @@ public class OI {
 		gamepadLS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LS);
 
 		gamePadStart = new JoystickButton(gamepad, ControllerBase.GamepadButtons.START);
-		//gamePadStart.whenPressed(new SpinnerColorMatch());
+		gamePadStart.whenPressed(new HingeAndGrasperStop());
 
 		gamepadBack = new JoystickButton(gamepad, ControllerBase.GamepadButtons.BACK);
 		gamepadBack.whileHeld(new FullCalibrateAndReset());
@@ -160,11 +160,11 @@ public class OI {
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
-		gamepadY.whileHeld(new IfNuclearOptionEnabled(new WinchWinchStopperMagicWinch(), new DoNothing()));
+		gamepadY.whileHeld(new WinchWinchStopperMagicWinchUp());
 
 		gamepadX = new JoystickButton(gamepad, ControllerBase.GamepadButtons.X);
-		//gamepadX.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
-		gamepadX.whenPressed(new HingeAndGrasperStop());
+		gamepadX.whileHeld(new WinchWinchStopperMagicWinchDown());
+		
 
 		gamepadB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.B);
 		//gamepadB.whenPressed(new VomitShooterShooterPusherFireSequence());
