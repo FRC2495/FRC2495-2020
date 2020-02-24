@@ -13,6 +13,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 import frc.robot.subsystems.WinchStopper;
+import frc.robot.subsystems.WinchLock;
 
 /**
  *
@@ -41,6 +42,7 @@ public class WinchWinchStopperMagicWinchUp extends Command {
 	@Override
 	protected void initialize() {
 		System.out.println("WinchWinchStopperMagicWinchUp: initialize");
+		Robot.winchLockControl.setPosition(WinchLock.Position.UNLOCKED); // TODO check if this makes sense
 		Robot.winchStopperControl.setPosition(WinchStopper.Position.FREE);
 	}
 
