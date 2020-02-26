@@ -141,6 +141,8 @@ public class Robot extends TimedRobot {
 	public static WinchStopper winchStopperControl; 
 	public static WinchLock winchLockControl;
 
+	public static SpinnerRaiser spinnerRaiser;
+
 	// misc
 
 	public static Indicator indicator;
@@ -250,6 +252,8 @@ public class Robot extends TimedRobot {
 
 		winchStopperControl = new WinchStopper();
 		winchLockControl = new WinchLock();
+
+		spinnerRaiser = new SpinnerRaiser();
 
 
 		// misc
