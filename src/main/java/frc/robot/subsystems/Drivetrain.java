@@ -161,10 +161,10 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 		// Mode of operation during Neutral output may be set by using the setNeutralMode() function.
 		// As of right now, there are two options when setting the neutral mode of a motor controller,
 		// brake and coast.
-		masterLeft.setNeutralMode(NeutralMode.Brake); // sets the talons on brake mode
-		followerLeft.setNeutralMode(NeutralMode.Brake);	
-		masterRight.setNeutralMode(NeutralMode.Brake);
-		followerRight.setNeutralMode(NeutralMode.Brake);
+		masterLeft.setNeutralMode(NeutralMode.Coast); // sets the talons on brake mode
+		followerLeft.setNeutralMode(NeutralMode.Coast);	
+		masterRight.setNeutralMode(NeutralMode.Coast);
+		followerRight.setNeutralMode(NeutralMode.Coast);
 		
 		// Sensors for motor controllers provide feedback about the position, velocity, and acceleration
 		// of the system using that motor controller.

@@ -2627,7 +2627,7 @@
               "imageHeight": -1
             }
           },
-          "9,3": {
+          "8,4": {
             "size": [
               1,
               1
@@ -2636,6 +2636,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/limelight_PipelineName",
               "_title": "SmartDashboard/limelight_PipelineName"
+            }
+          },
+          "9,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Gearbox Position",
+              "_title": "/SmartDashboard/Gearbox Position"
             }
           }
         }
