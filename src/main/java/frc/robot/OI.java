@@ -129,14 +129,19 @@ public class OI {
 
 		gamepadLT = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LT);
 		//gamepadLT.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_OFF));
+		gamepadLT.whenPressed(new SpinnerRaiserDown());
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
+		gamepadLYp.whenPressed(new SpinnerRaiserUp());
 
 		gamepadLYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY,false);
+		gamepadLYn.whenPressed(new SpinnerRaiserUp());
 
 		gamepadLXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX);
+		gamepadLXp.whenPressed(new SpinnerRaiserUp());
 
 		gamepadLXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX,false);
+		gamepadLXn.whenPressed(new SpinnerRaiserUp());
 
 		
 		gamepadRS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.RS);
@@ -155,6 +160,7 @@ public class OI {
 
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
 		//gamepadLB.whenPressed(new ShooterPusherUp());
+		gamepadLB.whileHeld(new SpinnerSpin());
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
