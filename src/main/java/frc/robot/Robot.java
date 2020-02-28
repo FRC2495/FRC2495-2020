@@ -122,7 +122,7 @@ public class Robot extends TimedRobot {
 
 	WPI_TalonSRX grasp;
 
-	//public BaseMotorController spinnerMotor;
+	public BaseMotorController spinnerMotor;
 	public static Spinner spinnerWheel;
 
 	WPI_TalonSRX winch_master;
@@ -230,8 +230,8 @@ public class Robot extends TimedRobot {
 		
 		grasper = new Grasper(grasp, this);
 
-		//spinnerMotor = new WPI_TalonSRX(Ports.CAN.SPINNER);
-		//spinnerWheel = new Spinner(spinnerMotor,this);
+		spinnerMotor = new WPI_TalonSRX(Ports.CAN.SPINNER);
+		spinnerWheel = new Spinner(spinnerMotor,this);
 
 		//vomitShooter = new VomitShooter(shooterLeft, shooterRight, this); 
 
