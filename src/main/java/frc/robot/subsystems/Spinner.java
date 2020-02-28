@@ -118,7 +118,7 @@ public class Spinner extends Subsystem{
 	public void joystickControl(Joystick joystick)
 	{
 		//spinnerMotor.set(ControlMode.PercentOutput, joystick.getY());
-		spinnerMotor.set(ControlMode.PercentOutput, joystick.getRawAxis(ControllerBase.GamepadAxes.RX));
+		spinnerMotor.set(ControlMode.PercentOutput, joystick.getRawAxis(ControllerBase.GamepadAxes.LX));
 	}
 }
 
