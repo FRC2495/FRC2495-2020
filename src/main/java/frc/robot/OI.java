@@ -133,9 +133,11 @@ public class OI {
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
 		gamepadLYp.whenPressed(new SpinnerRaiserUp());
+		//gamepadLYp.whenPressed(new SpinnerSpinThrice());
 
 		gamepadLYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY,false);
 		gamepadLYn.whenPressed(new SpinnerRaiserUp());
+		//gamepadLYn.whenPressed(new SpinnerColorMatch());
 
 		gamepadLXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX);
 		gamepadLXp.whenPressed(new SpinnerRaiserUp());
