@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.interfaces.*;
 import frc.robot.commands.*;
 import frc.robot.Robot;
-import frc.robot.sensors.Sonar;
+import frc.robot.ControllerBase;
 
 
 /**
@@ -36,7 +36,6 @@ public class Spinner extends Subsystem{
 	static final int TALON_TIMEOUT_MS = 10;
 
 	BaseMotorController spinnerMotor; 
-	Sonar sonar;
 	
 	// shared grasp and release settings
 	private int onTargetCount; // counter indicating how many times/iterations we were on target
@@ -82,6 +81,7 @@ public class Spinner extends Subsystem{
 
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new SpinnerStop());
+		//setDefaultCommand(new SpinnerJoystickControl());
 	}
 
 	@Override
@@ -117,7 +117,8 @@ public class Spinner extends Subsystem{
 	// for debug purpose only
 	public void joystickControl(Joystick joystick)
 	{
-		spinnerMotor.set(ControlMode.PercentOutput, joystick.getY());
+		//spinnerMotor.set(ControlMode.PercentOutput, joystick.getY());
+		spinnerMotor.set(ControlMode.PercentOutput, joystick.getRawAxis(ControllerBase.GamepadAxes.RX));
 	}
 }
 

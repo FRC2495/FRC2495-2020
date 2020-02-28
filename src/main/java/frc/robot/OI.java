@@ -161,6 +161,7 @@ public class OI {
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
 		//gamepadLB.whenPressed(new ShooterPusherUp());
 		gamepadLB.whileHeld(new SpinnerSpin());
+		//gamepadLXn.whenPressed(new SpinnerRaiserUp());
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
