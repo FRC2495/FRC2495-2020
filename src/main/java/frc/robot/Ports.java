@@ -111,8 +111,8 @@ public class Ports {
 			public static final int WINCH_LOCK_UNLOCKED = 5; 
 			public static final int PUSHER_UP = 7; // cannot be used at same time as spinner raiser
 			public static final int PUSHER_DOWN = 6;
-			public static final int SPINNER_RAISER_UP = 6;
-			public static final int SPINNER_RAISER_DOWN = 7;
+			public static final int SPINNER_RAISER_UP = 7;
+			public static final int SPINNER_RAISER_DOWN = 6;
 		}
 
 		public static class PWM {
