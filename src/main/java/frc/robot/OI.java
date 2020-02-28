@@ -132,18 +132,18 @@ public class OI {
 		gamepadLT.whenPressed(new SpinnerRaiserDown());
 
 		gamepadLYp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY);
-		gamepadLYp.whenPressed(new SpinnerRaiserUp());
-		//gamepadLYp.whenPressed(new SpinnerSpinThrice());
+		//gamepadLYp.whenPressed(new SpinnerRaiserUp());
+		gamepadLYp.whenPressed(new SpinnerColorMatch()); // pulling back towards operator
 
 		gamepadLYn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LY,false);
-		gamepadLYn.whenPressed(new SpinnerRaiserUp());
-		//gamepadLYn.whenPressed(new SpinnerColorMatch());
+		//gamepadLYn.whenPressed(new SpinnerRaiserUp());
+		gamepadLYn.whenPressed(new SpinnerSpinThrice()); // pushing forward
 
 		gamepadLXp = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX);
-		gamepadLXp.whenPressed(new SpinnerRaiserUp());
+		//gamepadLXp.whenPressed(new SpinnerRaiserUp());
 
 		gamepadLXn = new GamepadAxis(gamepad, ControllerBase.GamepadAxes.LX,false);
-		gamepadLXn.whenPressed(new SpinnerRaiserUp());
+		//gamepadLXn.whenPressed(new SpinnerRaiserUp());
 
 		
 		gamepadRS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.RS);
@@ -151,7 +151,7 @@ public class OI {
 		gamepadLS = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LS);
 
 		gamePadStart = new JoystickButton(gamepad, ControllerBase.GamepadButtons.START);
-		gamePadStart.whenPressed(new HingeAndGrasperStop());
+		gamePadStart.whenPressed(new HingeAndGrasperAndSpinnerStop());
 
 		gamepadBack = new JoystickButton(gamepad, ControllerBase.GamepadButtons.BACK);
 		gamepadBack.whileHeld(new FullCalibrateAndReset());
@@ -162,8 +162,8 @@ public class OI {
 
 		gamepadLB = new JoystickButton(gamepad, ControllerBase.GamepadButtons.LB);
 		//gamepadLB.whenPressed(new ShooterPusherUp());
-		gamepadLB.whileHeld(new SpinnerSpin());
-		//gamepadLB.whenPressed(new SpinnerRaiserUp());
+		//gamepadLB.whileHeld(new SpinnerSpin());
+		gamepadLB.whenPressed(new SpinnerRaiserUp());
 		
 		gamepadY = new JoystickButton(gamepad, ControllerBase.GamepadButtons.Y);
 		//gamepadY.whenPressed(new CameraSetLedMode(ICamera.LedMode.FORCE_ON));	
