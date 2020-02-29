@@ -79,4 +79,30 @@ public class GameData {
 		
 	}
 
+
+	public DetectedColor convertSpecifiedColorToColorToDetect(){
+
+		update();
+		SpecifiedColor specifiedColor = getSpecifiedColor();
+
+		if (specifiedColor == SpecifiedColor.UNKNOWN){
+			return DetectedColor.UNKNOWN;
+		}
+		else if (specifiedColor == SpecifiedColor.RED){
+			return DetectedColor.BLUE;
+		}
+		else if (specifiedColor == SpecifiedColor.BLUE){
+			return DetectedColor.RED;
+		}
+		else if (specifiedColor == SpecifiedColor.GREEN){
+			return DetectedColor.YELLOW;
+		}
+		else if (specifiedColor == SpecifiedColor.YELLOW){
+			return DetectedColor.GREEN;
+		}
+		else {
+			return DetectedColor.UNKNOWN;
+		}
+		
+	}
 }

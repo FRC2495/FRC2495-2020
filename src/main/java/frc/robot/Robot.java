@@ -485,7 +485,8 @@ public class Robot extends TimedRobot {
 		SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
 		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
-		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString()); 
+		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString());
+		SmartDashboard.putString("COLOR TO DETECT",gameData.convertSpecifiedColorToColorToDetect().toString());
 
 		SmartDashboard.putNumber("Winch Encoder Value", winchControl.getEncoderPosition());
 		SmartDashboard.putBoolean("Winch Forward Limit Switch", winchControl.getForwardLimitSwitchState());

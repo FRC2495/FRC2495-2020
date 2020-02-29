@@ -2550,7 +2550,7 @@
               "_title": "SmartDashboard/Distance to Target"
             }
           },
-          "0,3": {
+          "0,4": {
             "size": [
               1,
               1
@@ -2647,6 +2647,17 @@
               "_type": "Text View",
               "_source0": "network_table:///SmartDashboard/Gearbox Position",
               "_title": "/SmartDashboard/Gearbox Position"
+            }
+          },
+          "0,3": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/COLOR TO DETECT",
+              "_title": "SmartDashboard/COLOR TO DETECT"
             }
           }
         }
