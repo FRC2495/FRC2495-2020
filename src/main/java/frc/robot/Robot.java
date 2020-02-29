@@ -161,8 +161,8 @@ public class Robot extends TimedRobot {
 		autonChooser.addOption("My Auto", AUTON_CUSTOM);
 		SmartDashboard.putData("Auto choices", autonChooser);
 
-		startPositionChooser.addOption("Starting Position 1", START_POSITION_1);
-		startPositionChooser.setDefaultOption("Starting Position 2", START_POSITION_2);
+		startPositionChooser.setDefaultOption("Starting Position 1", START_POSITION_1);
+		startPositionChooser.addOption("Starting Position 2", START_POSITION_2);
 		startPositionChooser.addOption("Starting Position 3", START_POSITION_3);
 		SmartDashboard.putData("Start positions", startPositionChooser);
 
