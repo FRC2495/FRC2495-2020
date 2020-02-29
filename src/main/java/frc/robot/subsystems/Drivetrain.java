@@ -140,8 +140,8 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	PIDController turnUsingCameraPidController; // the PID controller used to turn using camera
 	PIDController moveUsingCameraPidController; // the PID controller used to turn
 
-	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW = 16.325;
-	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH = 7.925;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_LOW = 17.825;
+	private final static double RATIO_BETWEEN_INPUT_AND_OUTPUT_HIGH = 8.525;
 	
 	public Drivetrain(WPI_TalonSRX masterLeft_in ,WPI_TalonSRX masterRight_in , BaseMotorController followerLeft_in ,BaseMotorController followerRight_in, ADXRS450_Gyro gyro_in, Robot robot_in, ICamera camera_in) 
 	{

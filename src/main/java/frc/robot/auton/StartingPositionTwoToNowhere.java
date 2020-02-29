@@ -23,11 +23,20 @@ public class StartingPositionTwoToNowhere extends CommandGroup {
 
         addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
-        //Hard left turn to become parallel to alliance station
+        addSequential(new DrivetrainMoveDistance(-24));
+        //Move backwards from DZ 
 
-        addSequential(new DrivetrainMoveDistance(60));
-        //Move along alliance station 5' towards HF
+        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * 90));
+        //Hard Right turn to become parallel to alliance station
+
+        addSequential(new DrivetrainMoveDistance(66));
+        //Move along alliance station 5.5' towards TA
+
+        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * 90));
+        //Hard Right turn to become parallel to alliance station
+
+        addSequential(new DrivetrainMoveDistance(200));
+        //Move forward 200" to get close to TA
 
     }
 
