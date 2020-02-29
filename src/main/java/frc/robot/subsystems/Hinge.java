@@ -36,7 +36,7 @@ public class Hinge extends Subsystem implements IHinge {
 	
 	static final double MAX_PCT_OUTPUT = 1.0; // ~full speed
 	
-	static final int TALON_TIMEOUT_MS = 10;
+	static final int TALON_TIMEOUT_MS = 20;
 	public static final int TICKS_PER_REVOLUTION = 4096;
 	
 	

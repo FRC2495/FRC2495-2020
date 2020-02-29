@@ -34,7 +34,7 @@ public class Winch extends Subsystem implements IWinch {
 	static final int WAIT_MS = 1000;
 	static final int TIMEOUT_MS = 5000;
 
-	static final int TALON_TIMEOUT_MS = 10;
+	static final int TALON_TIMEOUT_MS = 20;
 
 	// move settings
 	static final int PRIMARY_PID_LOOP = 0;

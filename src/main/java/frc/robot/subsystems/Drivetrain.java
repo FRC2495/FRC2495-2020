@@ -31,7 +31,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	
 	static final double MAX_PCT_OUTPUT = 1.0;
 		
-	static final int TALON_TIMEOUT_MS = 10;
+	static final int TALON_TIMEOUT_MS = 20;
 	public static final int TICKS_PER_REVOLUTION = 2048; // TODO switch to 2048 if needed for Talon FX
 
 
@@ -105,7 +105,7 @@ public class Drivetrain extends Subsystem implements PIDOutput, PIDOutput2, PIDO
 	static final double TICK_THRESH = TALON_TICK_THRESH * 4;
 	public static final double TICK_PER_100MS_THRESH = 64; // about a tenth of a rotation per second 
 
-	private final static int MOVE_ON_TARGET_MINIMUM_COUNT = 10; // number of times/iterations we need to be on target to really be on target
+	private final static int MOVE_ON_TARGET_MINIMUM_COUNT = 20; // number of times/iterations we need to be on target to really be on target
 
 	private final static int MOVE_STALLED_MINIMUM_COUNT = MOVE_ON_TARGET_MINIMUM_COUNT * 2 + 30; // number of times/iterations we need to be stalled to really be stalled
 	

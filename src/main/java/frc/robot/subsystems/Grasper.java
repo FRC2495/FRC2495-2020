@@ -32,7 +32,7 @@ public class Grasper extends Subsystem implements IGrasper{
 	static final int WAIT_MS = 1000;
 	static final int TIMEOUT_MS = 5000;
 
-	static final int TALON_TIMEOUT_MS = 10;
+	static final int TALON_TIMEOUT_MS = 20;
 
 	static final int GRASP_DISTANCE_INCHES = 13;
 	static final int RELEASE_DISTANCE_INCHES = 17;
