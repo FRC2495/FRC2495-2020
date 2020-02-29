@@ -9,7 +9,7 @@ public class StartingPositionThreeToNowhere extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
-    final int TURN_DIRECTION = 1;
+    final int TURN_DIRECTION = -1;
         //Left is equal to 1
         //Right is equal to -1
 
