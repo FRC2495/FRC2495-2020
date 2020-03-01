@@ -72,7 +72,7 @@ public class StartingPositionOneToOpponentTrench extends CommandGroup {
 
         addSequential(new DrivetrainMoveUsingCameraPidController(18));
 
-        addSequential(new GrasperRelease());
+        addSequential(new GrasperTimedRelease(2));
         //Drops the Power Cells
 
     }
