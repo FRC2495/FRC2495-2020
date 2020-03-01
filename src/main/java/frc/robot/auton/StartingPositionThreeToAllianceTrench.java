@@ -28,7 +28,10 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
-        addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
+        addSequential(new GrasperTimedRelease(2));
+
+        addParallel(new GrasperTimedRelease(2));
+        //Continues releasing as we pull back
 
         addSequential(new DrivetrainTurnAngleUsingPidController( -TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //To Turning from the Drop Zone to the Alliance Trench

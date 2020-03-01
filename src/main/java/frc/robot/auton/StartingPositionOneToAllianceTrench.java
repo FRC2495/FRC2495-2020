@@ -27,7 +27,10 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
 
         addSequential(new HingeMoveMidway());
 
-        addSequential(new GrasperTimedRelease(1));
+        addSequential(new GrasperTimedRelease(2));
+
+        addParallel(new GrasperTimedRelease(2));
+        //Continues releasing as we pull back
 
         addSequential(new DrivetrainMoveDistance(-24));
 

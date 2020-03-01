@@ -18,7 +18,10 @@ public class StartingPositionOneToNowhere extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
-        addSequential(new GrasperRelease(), 2); //TODO TestWaitFunction
+        addSequential(new GrasperTimedRelease(2));
+
+        addParallel(new GrasperTimedRelease(2));
+        //Continues releasing as we pull back
 
         addSequential(new DrivetrainMoveDistance(-24));
         //Move backwards from DZ 
