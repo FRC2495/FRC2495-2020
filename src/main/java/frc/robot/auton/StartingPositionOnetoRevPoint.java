@@ -15,7 +15,7 @@ public class StartingPositionOnetoRevPoint extends CommandGroup {
 
     public StartingPositionOnetoRevPoint() {
 
-        addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
+        addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
     }
