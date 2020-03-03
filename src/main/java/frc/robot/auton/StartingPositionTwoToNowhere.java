@@ -9,9 +9,9 @@ public class StartingPositionTwoToNowhere extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
-    final int TURN_DIRECTION = -1;
-        //Left is equal to 1
-        //Right is equal to -1
+    final int TURN_DIRECTION = +1;
+        //Left is equal to -1
+        //Right is equal to +1
 
 	public StartingPositionTwoToNowhere() {
     
@@ -31,13 +31,13 @@ public class StartingPositionTwoToNowhere extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(-24));
         //Move backwards from DZ 
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * 90));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
         //Hard Right turn to become parallel to alliance station
 
         addSequential(new DrivetrainMoveDistance(66));
         //Move along alliance station 5.5' towards TA
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * 90));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
         //Hard Right turn to become parallel to alliance station
 
         addSequential(new DrivetrainMoveDistance(200));

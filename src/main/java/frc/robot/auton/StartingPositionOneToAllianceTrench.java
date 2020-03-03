@@ -16,9 +16,9 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
 	/**
 	 * Add your docs here.
 	 */
-    final int TURN_DIRECTION = -1;
+    final int TURN_DIRECTION = +1;
         //Left is equal to -1
-        //Right is equal to 1
+        //Right is equal to +1
 
 	public StartingPositionOneToAllianceTrench() {
     
@@ -34,7 +34,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
 
         addSequential(new DrivetrainMoveDistance(-24));
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(+ TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //To Turning from the Drop Zone to the Alliance Trench
 
         addParallel(new HingeMoveDown());
@@ -52,13 +52,13 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance (AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_END));
         //Moving foward, all the way to the end of the Alliance Trench  
 
-        addSequential(new DrivetrainMoveDistance (-TURN_DIRECTION * AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_END));
+        addSequential(new DrivetrainMoveDistance (TURN_DIRECTION * AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_END));
         //Move backwards all through the Alliance Trench (instead of turning) 
 
         addSequential(new GrasperStop());
         //Stops Intake
 
-        addSequential(new DrivetrainTurnAngleUsingPidController( -TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //To Turning to the Drop Zone from the Alliance Trench
         
         addParallel(new HingeMoveUp());
@@ -67,7 +67,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_DROP_ZONE));
         //To Move from the Alliance Trench to the Drop Zone
 
-        addSequential(new DrivetrainTurnAngleUsingPidController( -TURN_DIRECTION *  AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION *  AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
         //Angling towards the Drop Zone 
 
         addSequential(new DrivetrainMoveUsingCameraPidController(36));
