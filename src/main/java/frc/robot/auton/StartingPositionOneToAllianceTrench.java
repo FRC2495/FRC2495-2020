@@ -35,7 +35,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(-24));
         //Moving backwards after delivering 
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the drop zone to face the alliance trench run
 
         addParallel(new HingeMoveDown());
@@ -53,13 +53,13 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance (AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_BALL_END));
         //Moving from the beginning of the trench run to the end of the last ball's distance on it 
 
-        addSequential(new DrivetrainMoveDistance (TURN_DIRECTION * AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_BALL_END));
+        addSequential(new DrivetrainMoveDistance (- AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_ALLIANCE_TRENCH_BALL_END));
         //Move backwards all through the alliance trench run
 
         addSequential(new GrasperStop());
         //Stops Intake
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the alliance trench run to the drop zone
         
         addParallel(new HingeMoveMidway());
@@ -68,7 +68,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_DROP_ZONE));
         //To Move from the alliance trench to the drop zone
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION *  AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
         //Angling towards the drop zone 
 
         addSequential(new DrivetrainMoveUsingCameraPidController(36));
