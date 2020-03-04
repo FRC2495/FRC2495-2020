@@ -64,7 +64,7 @@ public class StartingPositionThreeToOpponentTrench extends CommandGroup {
         addSequential(new DrivetrainTurnAngleUsingPidController( TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
         //To Turning to the Drop Zone from the Opponent Trench
 
-        addParallel(new HingeMoveUp());
+        addParallel(new HingeMoveMidway());
         //Moves Intake to Scoring Position
 
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_OPPONENT_TRENCH_TO_DROP_ZONE));

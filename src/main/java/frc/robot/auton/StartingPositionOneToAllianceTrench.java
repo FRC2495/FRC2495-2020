@@ -62,7 +62,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the alliance trench run to the drop zone
         
-        addParallel(new HingeMoveUp());
+        addParallel(new HingeMoveMidway());
         //Moves Intake to Scoring Position
 
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_DROP_ZONE));
@@ -73,7 +73,7 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
 
         addSequential(new DrivetrainMoveUsingCameraPidController(36));
 
-        addSequential(new GrasperTimedRelease(1));
+        addSequential(new GrasperTimedRelease(2));
         //Delivering the power cells
    
     }
