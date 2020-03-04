@@ -18,7 +18,7 @@ public class StartingPositionThreeToOpponentTrench extends CommandGroup {
 	 */
     final int TURN_DIRECTION = -1;
         //Left is equal to -1
-        //Right is equal to 1
+        //Right is equal to +1
 
 	public StartingPositionThreeToOpponentTrench() {
     
