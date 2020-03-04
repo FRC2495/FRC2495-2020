@@ -46,8 +46,8 @@ public class StartingPositionOneToOpponentTrench extends CommandGroup {
         addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH));
         // Turn to allign with the Opponent Trench 
 
-        addParallel(new GrasperGrasp());
-        //Starts Intake
+        addParallel(new GrasperTimedGrasp(5));
+        //Starts Intake - will stop after 5 secs or explicit stop, whichever comes first
 
         addSequential(new DrivetrainMoveDistance (AutonConstants.DISTANCE_FROM_OPPONENT_TRENCH_TO_OPPONENT_TRENCH_END));
         //Moving foward, all the way to the end of the Opponent Trench  
