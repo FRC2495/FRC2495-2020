@@ -22,10 +22,10 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
 
 	public StartingPositionThreeToAllianceTrench() {
     
-        addSequential(new DrivetrainTurnAngleUsingPidController(AutonConstants.ANGLE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        addSequential(new DrivetrainTurnAngleUsingPidController(AutonConstants.ANGLE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
         //To Turning from starting point 3 to Drop Zone 
 
-        addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_TWO_TO_DROP_ZONE));
+        addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
 
         addSequential(new HingeMoveMidway());
