@@ -5,7 +5,7 @@ import frc.robot.commands.*;
 import frc.robot.auton.AutonConstants;
 
 
-public class StartingPositionOnetoRevPoint extends CommandGroup {
+public class StartingPositionOneToRendezvousPoint extends CommandGroup {
     /**
      * Add your docs here.
      */
@@ -13,7 +13,7 @@ public class StartingPositionOnetoRevPoint extends CommandGroup {
     // Left is equal to 1
     // Right is equal to -1
 
-    public StartingPositionOnetoRevPoint() {
+    public StartingPositionOneToRendezvousPoint() {
 
         addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_ONE_TO_DROP_ZONE));
         //To move from the starting point to the Drop Zone
