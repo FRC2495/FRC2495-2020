@@ -35,6 +35,21 @@ public class StartingPositionOneToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(-24));
         //Moving backwards after delivering 
 
+        /*
+        The following lines are an alternate path staying close to the outer limit of the field, successfully used during the first competition.
+
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
+        //Hard Right turn to become parallel to alliance station
+
+        addSequential(new DrivetrainMoveDistance(66));
+        //Move along alliance station 5.5' towards TA
+
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 90));
+        //Hard Right turn to become parallel to alliance station
+
+        addSequential(new DrivetrainMoveDistance(200));
+        //Move forward 200" to get close to TA*/
+
         addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the drop zone to face the alliance trench run
 
