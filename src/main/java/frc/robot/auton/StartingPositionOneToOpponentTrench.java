@@ -33,6 +33,7 @@ public class StartingPositionOneToOpponentTrench extends CommandGroup {
         //Continues releasing as we pull back
 
         addSequential(new DrivetrainMoveDistance(-24));
+        //Moving backwards after delivering 
 
         addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
         //To Turning from the Drop Zone to the Opponent Trench
