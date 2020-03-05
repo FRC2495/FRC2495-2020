@@ -28,6 +28,8 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
         //Moving from starting point 3 to the drop zone
 
+        // NOTE: THE ROBOT NEEDS TO BE STRAIGHTENED OUT HERE!
+
         addSequential(new HingeMoveMidway());
 
         addSequential(new GrasperTimedRelease(2));
@@ -38,7 +40,7 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(-24));
         //Moving backwards after delivering
         
-        addSequential(new DrivetrainTurnAngleUsingPidController( TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the drop zone to face the alliance trench run
 
         addParallel(new HingeMoveDown());
@@ -46,9 +48,9 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
 
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_DROP_ZONE));
         //Moving from the drop zone to the alliance trench run 
-    
-        addSequential(new DrivetrainTurnAngleUsingPidController(-TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH));
-        //Turning to align with the alliance trench run
+        
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH));
+        // Turning to align with the alliance trench run
 
         addParallel(new GrasperTimedGrasp(5));
         //Starts Intake - will stop after 5 secs or explicit stop, whichever comes first
@@ -62,7 +64,7 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new GrasperStop());
         //Stops Intake
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * 180 + ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH)));
         //Turning from the alliance trench run to the drop zone
     
         addParallel(new HingeMoveMidway());
@@ -71,10 +73,10 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_ALLIANCE_TRENCH_TO_DROP_ZONE));
         //Moving from the alliance trench run to the drop zone
 
-        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION *  AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_ALLIANCE_TRENCH ));
         //Angling towards the drop zone 
 
-        addSequential(new DrivetrainMoveUsingCameraPidController(18));
+        addSequential(new DrivetrainMoveUsingCameraPidController(36));
 
         addSequential(new GrasperTimedRelease(2));
         //Delivering the power cells
