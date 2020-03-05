@@ -28,7 +28,7 @@ public class StartingPositionThreeToAllianceTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistanceWithStallDetection(AutonConstants.DISTANCE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
         //Moving from starting point 3 to the drop zone
 
-        // NOTE: THE ROBOT NEEDS TO BE STRAIGHTENED OUT HERE!
+        addSequential(new DrivetrainTurnAngleUsingPidController(-AutonConstants.ANGLE_FROM_STARTING_POINT_THREE_TO_DROP_ZONE));
 
         addSequential(new HingeMoveMidway());
 
