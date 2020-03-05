@@ -37,17 +37,17 @@ public class StartingPositionTwoToOpponentTrench extends CommandGroup {
 
         addSequential(new DrivetrainMoveDistance(-24));
 
-        addSequential(new DrivetrainTurnAngleUsingPidController( -TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
-        //To Turning from the Drop Zone to the Alliance Trench
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
+        //To Turning from the Drop Zone to the Opponent Trench
 
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_OPPONENT_TRENCH_TO_DROP_ZONE));
-        //To Move from the Drop Zone to the Alliance Trench
-   
+        //To Move from the Drop Zone to the Opponent Trench
+    
         addParallel(new HingeMoveDown());
         //Moves Intake to Intake Position
 
         addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH));
-        // Turn to allign with the Alliance Trench 
+        // Turn to allign with the Opponent Trench 
 
         addParallel(new GrasperTimedGrasp(5));
         //Starts Intake - will stop after 5 secs or explicit stop, whichever comes first
@@ -61,7 +61,7 @@ public class StartingPositionTwoToOpponentTrench extends CommandGroup {
         addSequential(new GrasperStop());
         //Stops Intake
 
-        addSequential(new DrivetrainTurnAngleUsingPidController( TURN_DIRECTION * 180 - ( AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * (180 - AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH)));
         //To Turning to the Drop Zone from the Opponent Trench
 
         addParallel(new HingeMoveMidway());
@@ -70,7 +70,7 @@ public class StartingPositionTwoToOpponentTrench extends CommandGroup {
         addSequential(new DrivetrainMoveDistance(AutonConstants.DISTANCE_FROM_OPPONENT_TRENCH_TO_DROP_ZONE));
         //To Move from the Opponent Trench to the Drop Zone 
 
-        addSequential(new DrivetrainTurnAngleUsingPidController( -TURN_DIRECTION *  AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH ));
+        addSequential(new DrivetrainTurnAngleUsingPidController(TURN_DIRECTION * AutonConstants.ANGLE_BETWEEN_DROP_ZONE_AND_OPPONENT_TRENCH ));
         //Angling towards the Drop Zone 
 
         addSequential(new DrivetrainMoveUsingCameraPidController(18));
