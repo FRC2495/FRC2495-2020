@@ -38,7 +38,7 @@ public class GrasperRelease extends InstantCommand {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		System.out.println("GrasperRelease: initialize");
+		//System.out.println("GrasperRelease: initialize");
 		Robot.grasper.release();
 	}
 }
