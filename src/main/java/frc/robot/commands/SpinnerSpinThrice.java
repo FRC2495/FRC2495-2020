@@ -45,9 +45,9 @@ public class SpinnerSpinThrice extends Command {
 
 		counter = 0;
 
-		Robot.colorSensor.updateColorSensor(); // just in case nobody forced update already
+	/*	Robot.colorSensor.updateColorSensor(); // just in case nobody forced update already
 		previousColor = Robot.colorSensor.getDetectedColor(); //color we are seeing
-
+*/
 		Robot.spinnerWheel.spin();
 	}
 
@@ -55,14 +55,14 @@ public class SpinnerSpinThrice extends Command {
 	@Override
 	protected void execute() {
 
-		Robot.colorSensor.updateColorSensor(); // just in case nobody forced update already
+		/* Robot.colorSensor.updateColorSensor(); // just in case nobody forced update already
 		DetectedColor detectedColor = Robot.colorSensor.getDetectedColor(); //color we are seeing
 
 		if (detectedColor != previousColor)
 		{
 			counter++; // we believe we detected a transition
 			previousColor = detectedColor; // we save the new color as the reference
-		}
+		}*/
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

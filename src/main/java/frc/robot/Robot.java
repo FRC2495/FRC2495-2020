@@ -99,7 +99,7 @@ public class Robot extends TimedRobot {
 
 	public static PressureSensor pressureSensor;
 
-	public static ColorSensor colorSensor;
+	// public static ColorSensor colorSensor;
 	
 	// motorized devices
 	
@@ -209,7 +209,7 @@ public class Robot extends TimedRobot {
 
 		pressureSensor = new PressureSensor();
 
-		colorSensor = new ColorSensor();
+		// colorSensor = new ColorSensor();
 
 
 		// motorized devices
@@ -388,7 +388,7 @@ public class Robot extends TimedRobot {
 		
 		camera.acquireTargets(false);
 
-		colorSensor.updateColorSensor();
+		// colorSensor.updateColorSensor();
 
 		updateToSmartDash();
 	}
@@ -420,7 +420,7 @@ public class Robot extends TimedRobot {
 		
 		camera.acquireTargets(false);
 
-		colorSensor.updateColorSensor();
+		// colorSensor.updateColorSensor();
 
 		updateToSmartDash();
 
@@ -482,10 +482,11 @@ public class Robot extends TimedRobot {
 		//SmartDashboard.putString("Release chosen", releaseChooser.getSelected());
 		SmartDashboard.putString("Auton option", autonOptionChooser.getSelected());
 
-		SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
+		/*SmartDashboard.putNumber("Color Sensor Red", colorSensor.getRed());
 		SmartDashboard.putNumber("Color Sensor Blue", colorSensor.getBlue());
 		SmartDashboard.putNumber("Color Sensor Green", colorSensor.getGreen());
 		SmartDashboard.putString("Color Detected", colorSensor.getDetectedColor().toString());
+		*/
 		SmartDashboard.putString("COLOR TO DETECT",gameData.convertSpecifiedColorToColorToDetect().toString());
 
 		SmartDashboard.putNumber("Winch Encoder Value", winchControl.getEncoderPosition());
