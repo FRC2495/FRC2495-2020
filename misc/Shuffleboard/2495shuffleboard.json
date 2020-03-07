@@ -2267,6 +2267,17 @@
               "Colors/Color when true": "#7CFC00FF",
               "Colors/Color when false": "#8B0000FF"
             }
+          },
+          "6,2": {
+            "size": [
+              1,
+              1
+            ],
+            "content": {
+              "_type": "Text View",
+              "_source0": "network_table:///SmartDashboard/Hinge Enc Position",
+              "_title": "SmartDashboard/Hinge Enc Position"
+            }
           }
         }
       }
